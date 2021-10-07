@@ -22,18 +22,19 @@ ___
 - [x] Religion
 - [x] Denomination
 - [x] Nugget
-- [ ] Doctrine, Religion - Connect to Nugget/Post through Tags
+- [x] Doctrine, Religion, and Denomination connected to Nugget
 
 ## Factories
-- [ ] Users
-- [ ] Faith
-- [ ] Posts
+- [x] Users
+- [x] Faith
+- [x] Posts
 - [ ] Tags
 - [ ] Taggable
-- [ ] Doctrine
-- [ ] Religion
-- [ ] Denomination
+- [x] Doctrine
+- [x] Religion
+- [x] Denomination
 - [ ] Nugget
+- [ ] Nuggetable
 
 ## APIs & Tests
 - [ ] Users
@@ -41,8 +42,11 @@ ___
     - [ ] Retrieve nuggets
     - [ ] Retrieve region, denomination, etc.
 - [ ] Faith
+    - [ ] Retrieve all faiths
+    - [ ] Retrieve current faith
 - [ ] Posts
 - [ ] Tags
+    - [ ] Tags must be added when related objects are initialized, if they don't exist
 - [ ] Taggable
 - [ ] Doctrine
     - [ ] Users from doctrine
@@ -52,5 +56,7 @@ ___
 - [ ] Religion
 - [ ] Denomination
 - [ ] Nugget
+- [ ] Scripture
+    - [ ] Test that Scriptures can not be out of bounds of the books they are referencing
 
 ## Front-end & Authentication

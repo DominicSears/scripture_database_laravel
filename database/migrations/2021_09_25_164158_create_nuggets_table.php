@@ -17,6 +17,7 @@ class CreateNuggetsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->softDeletes();
+            $table->longText('explanation');
             $table->string('scripture_start');
             $table->string('scripture_end')->nullable()->default(null);
             $table->unsignedBigInteger('nugget_type_id');

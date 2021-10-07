@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Religion;
+use App\Models\Nuggetable;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class ReligionFactory extends Factory
+class NuggetableFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Religion::class;
+    protected $model = Nuggetable::class;
 
     /**
      * Define the model's default state.
@@ -22,11 +22,7 @@ class ReligionFactory extends Factory
     public function definition()
     {
         return [
-            'created_at' => now(),
-            'created_by' => 0,
-            'name' => $this->faker->title(),
-            'parent_id' => null,
-            'approved' => true
+            //
         ];
     }
 }

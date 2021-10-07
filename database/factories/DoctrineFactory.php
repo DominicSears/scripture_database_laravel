@@ -22,7 +22,12 @@ class DoctrineFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'created_at' => now(),
+            'created_by' => 0,
+            'description' => $this->faker->sentence(rand(3, 20)),
+            'scriptures' => [rand(01_001_001, 66_022_021)],
+            'religion_id' => 0,
+            'denomination_id' => null
         ];
     }
 }

@@ -22,7 +22,11 @@ class DenominationFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'created_at' => now(),
+            'created_by' => 0,
+            'religion_id' => 0,
+            'parent_id' => null,
+            'approved' => true
         ];
     }
 }
