@@ -13,6 +13,10 @@ class Doctrine extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'scriptures' => 'array'
+    ];
+
     // Relationships
 
     public function religion(): HasOne

@@ -6,7 +6,7 @@ use App\Models\Model;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PostsFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.

@@ -20,7 +20,7 @@ class CreateFaithsTable extends Migration
             $table->unsignedBigInteger('religion_id');
             $table->unsignedBigInteger('denomination_id')->nullable()->default(null);
             $table->date('start_of_faith');
-            $table->date('end_of_faith');
+            $table->date('end_of_faith')->nullable()->default(null);
             $table->unsignedBigInteger('user_id');
             $table->string('note')->nullable()->default(null);
             $table->string('reason_left')->nullable()->default(null);

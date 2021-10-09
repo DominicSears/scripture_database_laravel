@@ -11,6 +11,11 @@ class Faith extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'start_of_faith' => 'datetime',
+        'end_of_faith' => 'datetime'
+    ];
+
     // Relationships
 
     public function user(): HasOne
