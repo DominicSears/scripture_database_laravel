@@ -10,9 +10,11 @@ it('has a factory that can create users', function () {
 });
 
 it('has a factory that can create relationships', function () {
-   $user = User::factory()
-       ->has(Faith::factory()->count(2), 'allFaiths')
-       ->create();
+    $user = User::factory()->create();
 
-    dd($user);
+    Faith::factory()->create(['user_id' => $user->id]);
+
+    $user->load('allFaiths');
+
+    expect($user->allFaiths)->toHaveCount(2);
 });

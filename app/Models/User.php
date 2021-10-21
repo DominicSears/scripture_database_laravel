@@ -55,8 +55,14 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    // Scopes
+    // Attributes
 
+    public function getNameAttribute()
+    {
+        return $this->first_name.' '.$this->last_name;
+    }
+
+    // Scopes
 
 
     // Relationships

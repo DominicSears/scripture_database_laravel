@@ -20,8 +20,8 @@ class UpdateUsersTableFields extends Migration
             $table->string('last_name')->nullable()->default(null);
             $table->string('gender', 1);
             $table->string('username')->unique();
-            $table->integer('country_iso_code');
-            $table->unsignedBigInteger('faith_id');
+            $table->integer('country_iso_code')->default(840);
+            $table->unsignedBigInteger('faith_id')->default(0);
         });
     }
 

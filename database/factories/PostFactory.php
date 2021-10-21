@@ -34,7 +34,7 @@ class PostFactory extends Factory
             'created_at' => now(),
             'created_by' => 0,
             'published_at' => $this->faker->boolean() ? $this->faker->dateTimeBetween() : null,
-            'postable_type' => $type = self::POSTABLE_TYPES[rand(0, sizeof(self::POSTABLE_TYPES))],
+            'postable_type' => $type = self::POSTABLE_TYPES[rand(0, sizeof(self::POSTABLE_TYPES) - 1)],
             'postable_id' => 0,
             'slug' => $this->faker->slug(),
             'title' => $this->faker->words(rand(1, 4), true),
