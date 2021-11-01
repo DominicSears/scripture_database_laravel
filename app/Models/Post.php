@@ -12,6 +12,12 @@ class Post extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'created_at' => 'immutable_datetime',
+        'updated_at' => 'datetime',
+        'published_at' => 'datetime'
+    ];
+
     // Relationships
 
     public function createdBy(): HasOne

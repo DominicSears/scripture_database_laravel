@@ -18,6 +18,7 @@ class CreateDoctrinesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('created_by');
+            $table->string('title');
             $table->longText('description');
             $table->json('scriptures');
             $table->unsignedBigInteger('religion_id');

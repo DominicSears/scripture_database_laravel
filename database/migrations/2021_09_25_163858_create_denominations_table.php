@@ -18,6 +18,7 @@ class CreateDenominationsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->unsignedBigInteger('created_by');
+            $table->string('name');
             $table->unsignedBigInteger('religion_id');
             $table->unsignedBigInteger('parent_id')->nullable()->default(null);
             $table->boolean('approved')->default(false);

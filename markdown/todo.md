@@ -60,3 +60,4 @@ ___
     - [ ] Test that Scriptures can not be out of bounds of the books they are referencing
 
 ## Front-end & Authentication
+- [x] Laravel Fortify initial setup
