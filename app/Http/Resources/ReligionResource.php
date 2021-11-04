@@ -20,9 +20,8 @@ class ReligionResource extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at->format($dateFormat),
             'updated_at' => $this->updated_at?->format($dateFormat),
-            'created_by' => $this->created_by,
             'name' => $this->name,
-            'parent_id' => $this->parent_id,
+            'parent' => ReligionResource::make($this->whenLoaded('parent')),
             'approved' => $this->approved
         ];
     }

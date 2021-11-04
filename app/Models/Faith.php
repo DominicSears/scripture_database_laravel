@@ -30,7 +30,7 @@ class Faith extends Model
 
     public function religion(): HasOne
     {
-        return $this->hasOne(Relgion::class, 'id', 'religion_id');
+        return $this->hasOne(Religion::class, 'id', 'religion_id');
     }
 
     // Inverse Relationships

@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Nugget;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class DoctrineResource extends JsonResource
+class NuggetResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,10 +23,12 @@ class DoctrineResource extends JsonResource
             'updated_at' => $this->updated_at?->format($dateFormat),
             'created_by' => UserResource::make($this->whenLoaded('createdBy')),
             'title' => $this->title,
-            'description' => $this->description,
-            'scriptures' => $this->scriptures,
-            'religion' => ReligionResource::make($this->whenLoaded('religion')),
-            'denomination' => DenominationResource::make($this->whenLoaded('denomination'))
+            'explanation' => $this->explanation,
+            'scripture_start' => $this->scripture_start,
+            'scripture_end' => $this->scripture_end,
+            'agree' => $this->agree,
+            'disagree' => $this->disagree,
+            'nugget_type' => Nugget::NUGGET_TYPES[$this->nugget_type_id],
         ];
     }
 }

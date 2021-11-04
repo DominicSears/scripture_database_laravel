@@ -19,6 +19,16 @@ class Doctrine extends Model
 
     // Relationships
 
+    public function createdBy(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
+    }
+
+    public function updatedBy(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'updated_by');
+    }
+
     public function religion(): HasOne
     {
         return $this->hasOne(Religion::class, 'id', 'religion_id');

@@ -69,12 +69,17 @@ class User extends Authenticatable
 
     public function faith(): HasOne
     {
-        return $this->hasOne(Faith::class);
+        return $this->hasOne(Faith::class, 'id', 'faith_id');
     }
 
     public function allFaiths(): HasMany
     {
         return $this->hasMany(Faith::class, 'user_id');
+    }
+
+    public function scopedFaith(): HasOne
+    {
+        return $this->hasOne(Faith::class, 'id', 'scoped_id');
     }
 
     public function posts(): HasMany
@@ -127,5 +132,15 @@ class User extends Authenticatable
     public function nuggetUpdatedUser(): BelongsTo
     {
         return $this->belongsTo(Nugget::class, 'id', 'updated_by');
+    }
+
+    public function createdByDoctrine(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'created_by');
+    }
+
+    public function updatedByDoctrine(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'updated_by');
     }
 }

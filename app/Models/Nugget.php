@@ -13,16 +13,21 @@ class Nugget extends Model
 {
     use HasFactory;
 
+    const NUGGET_TYPE_REFUTE = 0;
+    const NUGGET_TYPE_SUPPORT = 1;
+    const NUGGET_TYPE_GENERAL = 2;
+
+    const NUGGET_TYPES = [
+        'refute',
+        'support',
+        'general'
+    ];
+
     // Relationships
 
     public function createdBy(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'created_by');
-    }
-
-    public function updatedBy(): HasOne
-    {
-        return $this->hasOne(User::class, 'id', 'updated_by');
     }
 
     public function deletedBy(): HasOne

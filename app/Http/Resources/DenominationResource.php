@@ -20,10 +20,9 @@ class DenominationResource extends JsonResource
             'id' => $this->id,
             'created_at' => $this->created_at->format($dateFormat),
             'updated_at' => $this->updated_at?->format($dateFormat),
-            'created_by' => $this->created_by,
             'name' => $this->name,
-            'religion_id' => $this->religion_id,
-            'parent_id' => $this->parent_id,
+            'religion' => ReligionResource::make($this->whenLoaded('religion')),
+            'parent' => DenominationResource::make($this->whenLoaded('parent')),
             'approved' => $this->approved
         ];
     }
