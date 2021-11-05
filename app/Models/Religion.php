@@ -30,6 +30,11 @@ class Religion extends Model
         return $this->morphToMany(Nugget::class, 'nuggetable');
     }
 
+    public function doctrine(): HasMany
+    {
+        return $this->hasMany(Doctrine::class, 'religion_id');
+    }
+
     // Inverse Relationships
 
     public function religionParent(): BelongsTo

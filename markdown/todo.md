@@ -55,16 +55,15 @@ ___
     - [ ] Tags must be added when related objects are initialized, if they don't exist
 - [ ] Taggable
 - [ ] Doctrine
-    - [ ] Users from doctrine
-    - [ ] Scriptures about doctrine
+    - [x] Users from doctrine
     - [ ] Religion
     - [ ] Tags about doctrine
     - [ ] Posts about doctrine
-    - [ ] Nuggets of doctrine
-      - [ ] Support
-      - [ ] Refute
-      - [ ] General
-      - [ ] All
+    - [x] Nuggets of doctrine
+      - [x] Support
+      - [x] Refute
+      - [x] General
+      - [x] All
 - [x] Religion
     - [x] Current users of religion
     - [x] Previous and/or current users of religion

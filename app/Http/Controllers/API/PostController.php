@@ -6,8 +6,10 @@ use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
@@ -36,7 +38,13 @@ class PostController extends Controller
             ['perPage' => 'integer', 'page' => 'integer']
         );
 
-        $validated = $validator->validated();
+        try {
+            $validated = $validator->validated();
+        } catch (ValidationException) {
+            return new JsonResponse([
+                'errors' => $validator->errors()
+            ], Response::HTTP_BAD_REQUEST);
+        }
 
         // TODO: Get type, change post to have postable to include the type relationship
         return PostResource::collection(

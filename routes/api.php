@@ -7,6 +7,7 @@ use App\Http\Controllers\API;
 Route::get('/denominations', [API\DenominationController::class, 'getDenominations']);
 Route::get('/religions', [API\ReligionController::class, 'getReligions']);
 Route::get('/posts', [API\PostController::class, 'getPosts']);
+Route::get('/nuggets', [API\NuggetController::class, 'getNuggets']);
 
 // User
 Route::group(['prefix' => '/users/{user}'], function () {
@@ -23,6 +24,10 @@ Route::group(['prefix' => '/users/{user}'], function () {
 Route::group(['prefix' => '/doctrines/{doctrine}'], function () {
     Route::get('/', [API\DoctrineController::class, 'getDoctrine']);
     Route::get('/users', [API\DoctrineController::class, 'usersWithDoctrine']);
+    Route::get('/nuggets', [API\DoctrineController::class, 'getNuggets']);
+    Route::get('/nuggets/refutes', [API\DoctrineController::class, 'getRefuteNuggets']);
+    Route::get('/nuggets/support', [API\DoctrineController::class, 'getSupportNuggets']);
+    Route::get('/nuggets/general', [API\DoctrineController::class, 'getGeneralNuggets']);
 });
 
 // Denomination
@@ -55,4 +60,9 @@ Route::group(['prefix' => '/posts'], function () {
 
 Route::group(['prefix' => '/posts/{username}/{slug}'], function () {
     Route::get('/', [API\PostController::class, 'getPost']);
+});
+
+// Nuggets
+Route::group(['prefix' => '/nuggets'], function () {
+    Route::get('/refutes', [API\NuggetController::class, 'getRefuteNuggets']);
 });

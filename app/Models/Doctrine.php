@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -50,4 +51,14 @@ class Doctrine extends Model
     }
 
     // Inverse Relationships
+
+    public function denominationDoctrine(): BelongsTo
+    {
+        return $this->belongsTo(Denomination::class, 'denomination_id');
+    }
+
+    public function religionDoctrine(): BelongsTo
+    {
+        return $this->belongsTo(Religion::class, 'religion_id');
+    }
 }

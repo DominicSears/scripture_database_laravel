@@ -11,23 +11,33 @@ use App\Models\Denomination;
 use App\Models\Doctrine;
 use App\Models\Nugget;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class DenominationController extends Controller
 {
-    public static function getDenomination(Denomination $denomination)
+    public static function getDenomination(Denomination $denomination): JsonResource
     {
         return DenominationResource::make($denomination);
     }
 
-    public function getDenominations(Request $request)
+    public function getDenominations(Request $request): JsonResource|JsonResponse
     {
         $validator = validator(
             $request->all(),
             ['perPage' => 'integer', 'page' => 'integer']
         );
 
-        $validated = $validator->validated();
+        try {
+            $validated = $validator->validated();
+        } catch (ValidationException) {
+            return new JsonResponse([
+                'errors' => $validator->errors()
+            ], Response::HTTP_BAD_REQUEST);
+        }
 
         return DenominationResource::collection(
             Denomination::query()
@@ -41,7 +51,7 @@ class DenominationController extends Controller
         );
     }
 
-    public static function getUsers(Denomination $denomination)
+    public static function getUsers(Denomination $denomination): JsonResource
     {
         return UserResource::collection(
             User::query()
@@ -55,7 +65,7 @@ class DenominationController extends Controller
         );
     }
 
-    public static function getUsersWithCurrentFaith(Denomination $denomination)
+    public static function getUsersWithCurrentFaith(Denomination $denomination): JsonResource
     {
         return UserResource::collection(
             User::query()
@@ -67,7 +77,7 @@ class DenominationController extends Controller
         );
     }
 
-    public static function getDoctrine(Denomination $denomination)
+    public static function getDoctrine(Denomination $denomination): JsonResource
     {
         return DoctrineResource::collection(
             Doctrine::query()
@@ -77,7 +87,7 @@ class DenominationController extends Controller
         );
     }
 
-    public static function getNuggets(Denomination $denomination, ?int $type = null)
+    public static function getNuggets(Denomination $denomination, ?int $type = null): JsonResource
     {
         $query = Nugget::query()
             ->select('nuggets.*', 'nuggetables.*')
@@ -93,22 +103,22 @@ class DenominationController extends Controller
         return NuggetResource::collection($query->get());
     }
 
-    public static function getAllNuggets(Denomination $denomination)
+    public static function getAllNuggets(Denomination $denomination): JsonResource
     {
         return static::getNuggets($denomination);
     }
 
-    public static function getRefuteNuggets(Denomination $denomination)
+    public static function getRefuteNuggets(Denomination $denomination): JsonResource
     {
         return static::getNuggets($denomination, Nugget::NUGGET_TYPE_REFUTE);
     }
 
-    public function getSupportNuggets(Denomination $denomination)
+    public function getSupportNuggets(Denomination $denomination): JsonResource
     {
         return static::getNuggets($denomination, Nugget::NUGGET_TYPE_SUPPORT);
     }
 
-    public function getGeneralNuggets(Denomination $denomination)
+    public function getGeneralNuggets(Denomination $denomination): JsonResource
     {
         return static::getNuggets($denomination, Nugget::NUGGET_TYPE_GENERAL);
     }

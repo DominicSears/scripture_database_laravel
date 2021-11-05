@@ -18,6 +18,15 @@ class Post extends Model
         'published_at' => 'datetime'
     ];
 
+    const POST_TYPES = [
+        'doctrine' => Doctrine::class,
+        'user' => User::class,
+        'religion' => Religion::class,
+        'nugget' => Nugget::class,
+        'faith' => Faith::class,
+        'denomination' => Denomination::class
+    ];
+
     // Relationships
 
     public function createdBy(): HasOne
