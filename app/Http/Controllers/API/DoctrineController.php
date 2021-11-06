@@ -8,6 +8,7 @@ use App\Http\Resources\NuggetResource;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\ReligionResource;
 use App\Http\Resources\UserResource;
+use App\Http\Resources\DenominationResource;
 use App\Models\Doctrine;
 use App\Models\Nugget;
 use App\Models\User;
@@ -30,7 +31,7 @@ class DoctrineController extends Controller
         );
     }
 
-    public static function getPosts(Doctrine $doctrine): JsonResource
+    public static function getPosts(): JsonResource
     {
         // TODO: Implement when postable is implemented
         return PostResource::collection(
@@ -40,10 +41,18 @@ class DoctrineController extends Controller
 
     public static function getReligions(Doctrine $doctrine): JsonResource
     {
+        $doctrine->load('religion');
+
         // TODO: Implement when doctrinable or when a doctrine can apply to more than one religion
-        return ReligionResource::collection(
-            []
-        );
+        return ReligionResource::make($doctrine->getRelation('religion'));
+    }
+
+    public static function getDenominations(Doctrine $doctrine): JsonResource
+    {
+        $doctrine->load('denomination');
+
+        // TODO: Implement when doctrinable or when a doctrine can apply to more than one religion
+        return DenominationResource::make($doctrine->getRelation('denomination'));
     }
 
     public static function getNuggets(Doctrine $doctrine, ?int $type = null): JsonResource

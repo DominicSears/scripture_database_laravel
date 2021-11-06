@@ -55,6 +55,7 @@ ___
     - [ ] Tags must be added when related objects are initialized, if they don't exist
 - [ ] Taggable
 - [ ] Doctrine
+    - [ ] Implement doctrinable for one doctrine can apply to multiple denominations/religions
     - [x] Users from doctrine
     - [ ] Religion
     - [ ] Tags about doctrine

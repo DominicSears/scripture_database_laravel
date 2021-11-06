@@ -67,14 +67,14 @@ class User extends Authenticatable
     public function scopeByDoctrine($query, $id)
     {
         return $query->select('users.*')
-        ->join('faiths', 'faiths.id', '=', 'users.faith_id')
-        ->join('religions', 'religions.id', '=', 'faiths.religion_id')
-        ->leftJoin('denominations', 'denominations.id', '=', 'faiths.denomination_id')
-        ->join('doctrines as doctrine1', 'doctrine1.religion_id', '=', 'religions.id')
-        ->leftJoin('doctrines as doctrine2', 'doctrine2.denomination_id', '=', 'denominations.id')
-        ->where('doctrine1.id', $id)
-        ->orWhere('doctrine2.id', $id)
-        ->groupBy('users.id');
+            ->join('faiths', 'faiths.id', '=', 'users.faith_id')
+            ->join('religions', 'religions.id', '=', 'faiths.religion_id')
+            ->leftJoin('denominations', 'denominations.id', '=', 'faiths.denomination_id')
+            ->join('doctrines as doctrine1', 'doctrine1.religion_id', '=', 'religions.id')
+            ->leftJoin('doctrines as doctrine2', 'doctrine2.denomination_id', '=', 'denominations.id')
+            ->where('doctrine1.id', $id)
+            ->orWhere('doctrine2.id', $id)
+            ->groupBy('users.id');
     }
 
     // Relationships
