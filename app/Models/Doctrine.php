@@ -30,14 +30,14 @@ class Doctrine extends Model
         return $this->hasOne(User::class, 'id', 'updated_by');
     }
 
-    public function religion(): HasOne
+    public function religion(): MorphToMany
     {
-        return $this->hasOne(Religion::class, 'id', 'religion_id');
+        return $this->morphedByMany(Religion::class, 'doctrinable');
     }
 
-    public function denomination(): HasOne
+    public function denomination(): MorphToMany
     {
-        return $this->hasOne(Denomination::class, 'id', 'denomination_id');
+        return $this->morphToMany(Denomination::class, 'doctrinable');
     }
 
     public function tags(): MorphToMany

@@ -43,16 +43,14 @@ class DoctrineController extends Controller
     {
         $doctrine->load('religion');
 
-        // TODO: Implement when doctrinable or when a doctrine can apply to more than one religion
-        return ReligionResource::make($doctrine->getRelation('religion'));
+        return ReligionResource::collection($doctrine->getRelation('religion'));
     }
 
     public static function getDenominations(Doctrine $doctrine): JsonResource
     {
         $doctrine->load('denomination');
 
-        // TODO: Implement when doctrinable or when a doctrine can apply to more than one religion
-        return DenominationResource::make($doctrine->getRelation('denomination'));
+        return DenominationResource::collection($doctrine->getRelation('denomination'));
     }
 
     public static function getNuggets(Doctrine $doctrine, ?int $type = null): JsonResource

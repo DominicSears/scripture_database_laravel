@@ -20,8 +20,6 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('created_by');
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);
             $table->timestamp('published_at')->nullable()->default(null);
-            $table->string('postable_type')->nullable()->default(null);
-            $table->unsignedBigInteger('postable_id')->nullable()->default(null);
             $table->string('slug');
             $table->string('title');
             $table->longText('content');

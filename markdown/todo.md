@@ -57,7 +57,7 @@ ___
 - [ ] Doctrine
     - [ ] Implement doctrinable for one doctrine can apply to multiple denominations/religions
     - [x] Users from doctrine
-    - [ ] Religion
+    - [x] Religion
     - [ ] Tags about doctrine
     - [ ] Posts about doctrine
     - [x] Nuggets of doctrine
