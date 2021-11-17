@@ -55,7 +55,7 @@ Route::group(['prefix' => '/religions/{religion}'], function () {
 
 // Posts
 Route::group(['prefix' => '/posts'], function () {
-    
+    Route::get('/users', [API\ReligionController::class, 'getPostUsers']);
 });
 
 Route::group(['prefix' => '/posts/{username}/{slug}'], function () {

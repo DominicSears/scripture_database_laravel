@@ -10,15 +10,17 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes;
+    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes, HasPermissions;
 
     protected $guarded = false;
 
@@ -66,6 +68,7 @@ class User extends Authenticatable
 
     public function scopeByDoctrine($query, $id)
     {
+        // FIXME: Need to update to include doctrinables, this will not work
         return $query->select('users.*')
             ->join('faiths', 'faiths.id', '=', 'users.faith_id')
             ->join('religions', 'religions.id', '=', 'faiths.religion_id')
@@ -75,6 +78,15 @@ class User extends Authenticatable
             ->where('doctrine1.id', $id)
             ->orWhere('doctrine2.id', $id)
             ->groupBy('users.id');
+    }
+
+    public function scopeFromFaith(Builder $query, Faith $faith)
+    {
+        return $query
+            ->addSelect('users.*', 'faiths.id')
+            ->from('faiths')
+            ->join('users', 'users.id', '=', 'faiths.user_id')
+            ->where('faiths.id', $faith->getKey());
     }
 
     // Relationships

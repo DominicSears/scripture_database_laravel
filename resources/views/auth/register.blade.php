@@ -20,11 +20,35 @@
             </div>
 
             <div class="mt-4">
-                <label for="gender" class="block font-medium text-sm text-gray-700">Gender</label>
-                <select id="gender" name="gender" class="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                <label for="gender" class="block font-medium text-sm text-gray-700">{{ __('Gender') }}</label>
+                <select id="gender" name="gender" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                 </select>
+            </div>
+
+            {{-- TODO: Make livewire component for dynamic denomination dropdown population --}}
+            <div class="mt-4">
+                <label for="religion_id" class="block font-medium text-sm text-gray-700">{{ __('Religion') }}</label>
+                <select id="religion_id" name="religion_id" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    @foreach ($religions as $religion)
+                        <option value="{{ $religion->getKey() }}">{{ $religion->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <label for="denomination_id" class="block font-medium text-sm text-gray-700">{{ __('Denomination') }}</label>
+                <select id="denomination_id" name="denomination_id" class="mt-1 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm">
+                    @foreach ($denominations as $denomination)
+                        <option value="{{ $denomination->getKey() }}">{{ $denomination->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="mt-4">
+                <x-jet-label for="start_of_faith" value="{{ __('Start of faith') }}" />
+                <x-jet-input id="start_of_faith" class="block mt-1 w-full" type="text" name="start_of_faith" :value="old('start_of_faith')" required autofocus autocomplete="start_of_faith" />
             </div>
 
             <div class="mt-4">

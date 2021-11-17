@@ -11,6 +11,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\DenominationResource;
 use App\Models\Doctrine;
 use App\Models\Nugget;
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,11 +32,14 @@ class DoctrineController extends Controller
         );
     }
 
-    public static function getPosts(): JsonResource
+    public static function getPosts(Doctrine $doctrine): JsonResource
     {
-        // TODO: Implement when postable is implemented
         return PostResource::collection(
-            []
+            Post::query()
+                ->join('postables', 'postables.post_id', 'posts.id')
+                ->where('postable_type', Doctrine::class)
+                ->where('postable_id', $doctrine->getKey())
+                ->get()
         );
     }
 

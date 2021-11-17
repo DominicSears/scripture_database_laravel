@@ -5,15 +5,19 @@ namespace App\Http\Controllers\API;
 use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
+use App\Models\Denomination;
+use App\Models\Doctrine;
+use App\Models\Religion;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
 class PostController extends Controller
 {
-    public static function getPost(string $username, string $slug)
+    public static function getPost(string $username, string $slug): JsonResource
     {
         $user = User::query()
             ->where('username', $username)
@@ -31,7 +35,7 @@ class PostController extends Controller
         );
     }
 
-    public static function getPosts(Request $request)
+    public static function getPosts(Request $request, ?string $type = null): JsonResource
     {
         $validator = validator(
             $request->all(),
@@ -46,16 +50,46 @@ class PostController extends Controller
             ], Response::HTTP_BAD_REQUEST);
         }
 
-        // TODO: Get type, change post to have postable to include the type relationship
+        $posts = Post::query()
+            ->with('createdBy', 'updatedBy');
+
+        if (isset($type)) {
+            $posts = $posts->join('postables', 'post_id', 'posts.id')
+                ->where('postable_type', $type);
+        }
+
         return PostResource::collection(
-            Post::query()
-                ->with('createdBy', 'updatedBy')
-                ->paginate(
-                    $validated['perPage'] ?? 10,
-                    ['*'],
-                    'page',
-                    $validated['page'] ?? null
-                )
+            $posts->paginate(
+                $validated['perPage'] ?? 10,
+                ['*'],
+                'page',
+                $validated['page'] ?? null
+            )
         );
+    }
+
+    public static function getPostsUsers(Request $request): JsonResource
+    {
+        return static::getPosts($request, User::class);
+    }
+
+    public static function getPostsDenomination(Request $request): JsonResource
+    {
+        return static::getPosts($request, Denomination::class);
+    }
+
+    public static function getPostsDoctrine(Request $request): JsonResource
+    {
+        return static::getPosts($request, Doctrine::class);
+    }
+
+    public static function getPostsNuggets(Request $request): JsonResource
+    {
+        return static::getPosts($request, Nugget::class);
+    }
+
+    public static function getPostsReligion(Request $request): JsonResource
+    {
+        return static::getPosts($request, Religion::class);
     }
 }

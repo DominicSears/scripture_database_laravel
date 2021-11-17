@@ -10,6 +10,7 @@ use App\Http\Resources\UserResource;
 use App\Models\Denomination;
 use App\Models\Doctrine;
 use App\Models\Nugget;
+use App\Models\Religion;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -81,8 +82,15 @@ class DenominationController extends Controller
     {
         return DoctrineResource::collection(
             Doctrine::query()
-                ->where('denomination_id', $denomination->getKey())
-                ->with(['createdBy', 'religion', 'denomination' => fn($q) => $denomination])
+                ->join('doctrinables', 'doctrinables.doctrine_id', '=', 'doctrines.id')
+                ->where(function ($query) use ($denomination) {
+                    $query->where('doctrinable_type', Denomination::class);
+                    $query->where('doctrinable_id', $denomination->getKey());
+                })
+                ->orWhere(function ($query) use ($denomination) {
+                    $query->where('doctrinable_type', Religion::class);
+                    $query->where('doctrinable_id', $denomination->getAttribute('religion_id'));
+                })
                 ->get()
         );
     }

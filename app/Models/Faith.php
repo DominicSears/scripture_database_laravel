@@ -11,6 +11,8 @@ class Faith extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'start_of_faith' => 'datetime',
         'end_of_faith' => 'datetime'
