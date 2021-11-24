@@ -12,6 +12,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
     Route::group(['prefix' => '/users'], function () {
-        Route::get('/{user}/edit', [Controllers\UserController::class, 'edit'])->name('users.edit');
+        Route::get('/edit/{user?}', [Controllers\UserController::class, 'edit'])->name('users.edit');
     });
 });

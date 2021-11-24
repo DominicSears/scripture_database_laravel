@@ -14,8 +14,10 @@ class UserController extends Controller
         echo $user->name;
     }
 
-    public function edit(User $user)
+    public function edit(Request $request, ?User $user = null)
     {
+        $user ??= $request->user();
+
         $user->load('allFaiths');
 
         return view('users.edit', [

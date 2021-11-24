@@ -99,6 +99,7 @@ ___
 - [ ] Religion
     - [ ] Must create a tag when created, if not created
     - [ ] Must have at least one doctrine when created
+    - [ ] If there are no denominations, then no denominations should show up
 - [ ] Denomination
     - [ ] Can only be created if connected to a religion
     - [ ] Must have at least one doctrine attributed to the denomination
