@@ -18,6 +18,6 @@
                 <x-jet-input class="w-full" type="text" value="{{ $user->last_name }}" />
             </div>
         </div>
+        <livewire:faith.edit-faith :user="$user" :religions="$religions" :faith="$user->allFaiths->last()" />
     </div>
-    <livewire:faith.edit-faith :user="$user" :religions="$religions" :denominations="$denominations" />
 </x-app-layout>
