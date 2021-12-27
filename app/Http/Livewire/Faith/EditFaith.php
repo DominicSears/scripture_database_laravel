@@ -2,8 +2,10 @@
 
 namespace App\Http\Livewire\Faith;
 
-use App\Models\Denomination;
+use App\Models\User;
 use App\Models\Faith;
+use App\Models\Religion;
+use App\Models\Denomination;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -17,13 +19,23 @@ class EditFaith extends ModalComponent
 
     public array $state = [];
 
-    public function mount(Faith $faith, Collection $religions)
+    public User $user;
+
+    protected $listeners = [
+        'updated-faith' => 'updatedFaith'
+    ];
+
+    public function mount(Faith $faith, Collection $religions, User $user)
     {
-        $this->religions = $religions;
+        $this->religions = $religions->isNotEmpty() ? $religions : Religion::query()
+            ->where('approved', true)
+            ->get();
 
         $this->faith = $faith;
 
         $this->state = $faith->toArray();
+
+        $this->user = $user;
 
         $this->denominations = Denomination::query()
             ->where('religion_id', $this->state['religion_id'])
@@ -40,8 +52,17 @@ class EditFaith extends ModalComponent
     public function newFaith()
     {
         $this->emit('openModal', NewFaith::getName(), [
-            'religions' => $this->religions
+            'userInfo' => $this->user
         ]);
+    }
+
+    public function updatedFaith()
+    {
+        $this->state = Faith::query()
+            ->where('user_id', auth()->id())
+            ->latest('id')
+            ->first()
+            ->toArray();
     }
 
     public function render()

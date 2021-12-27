@@ -4,6 +4,10 @@ LABEL maintainer="Taylor Otwell"
 
 ARG WWWGROUP
 
+ARG XDEBUG
+
+ARG XDEBUG_PORT
+
 WORKDIR /var/www/html
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -27,7 +31,17 @@ RUN apt-get update \
        php8.0-xml php8.0-zip php8.0-bcmath php8.0-soap \
        php8.0-intl php8.0-readline php8.0-pcov \
        php8.0-msgpack php8.0-igbinary php8.0-ldap \
-       php8.0-redis php8.0-swoole php8.0-xdebug \
+       php8.0-redis php8.0-swoole php8.0-xdebug 
+
+    RUN if [ "${XDEBUG}" = 'true' ]; then \
+        echo "xdebug.client_port = ${XDEBUG_PORT}" >> /etc/php/8.0/mods-available/xdebug.ini \
+        && echo "xdebug.mode = debug" >> /etc/php/8.0/mods-available/xdebug.ini \
+        # && echo "xdebug.discover_client_host = 1" >> /etc/php/8.0/mods-available/xdebug.ini \
+        && echo "xdebug.start_with_request = yes" >> /etc/php/8.0/mods-available/xdebug.ini \
+        && echo "xdebug.client_host = host.docker.internal" >> /etc/php/8.0/mods-available/xdebug.ini \
+        ;\
+    fi;     
+
     && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs \

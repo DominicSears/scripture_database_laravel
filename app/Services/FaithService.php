@@ -13,7 +13,7 @@ class FaithService
     {
         return User::query()
             ->scopes(['fromFaith' => [$faith]])
-            ->get();
+            ->first();
     }
 
     public static function updateUserFaith(UpdateFaithRequest $request, User $user): Faith
