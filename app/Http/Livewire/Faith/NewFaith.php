@@ -43,7 +43,7 @@ class NewFaith extends ModalComponent
 
     public function mount(array $userInfo)
     {
-        $this->user = new User($userInfo);
+        $this->user = empty($userInfo) ? new User(['first_name' => 'Dom', 'last_name' => 'Sear']) : new User($userInfo);
 
         $this->religions = Religion::query()
             ->where('approved', true)
@@ -76,13 +76,14 @@ class NewFaith extends ModalComponent
         );
 
         Faith::query()
-            ->where('id', auth()->user()->faith_id)
+            ->where('id', $this->user->faith_id)
             ->update($previousData);
 
         $newFaith = Faith::query()
             ->create($this->state);
 
         User::query()
+            ->where('id', $this->user->getKey())
             ->update(['faith_id' => $newFaith->getKey()]);
 
         $this->closeModalWithEvents([

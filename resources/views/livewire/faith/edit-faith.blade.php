@@ -15,7 +15,7 @@
             @endforeach
         </select>
         <x-jet-label for="start_of_faith">{{ __('Start of Faith') }}</x-jet-label>
-        <x-jet-input id="start_of_faith" wire:model.defer="start_of_faith" type="text" value="{{ $state['start_of_faith'] }}" />
+        <x-jet-input id="start_of_faith" wire:model.defer="state.start_of_faith" type="text" value="{{ $state['start_of_faith'] }}" />
     </div>
     <!-- Column 2 -->
     <div class="flex flex-col w-full space-y-2">

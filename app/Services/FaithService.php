@@ -19,7 +19,7 @@ class FaithService
     public static function updateUserFaith(UpdateFaithRequest $request, User $user): Faith
     {
         $faith = Faith::query()
-            ->create($request->except(['end_of_faith']));
+            ->create($request->except(['end_of_faith', 'reason_left']));
 
         Faith::query()
             ->where('faith_id', $user->faith_id)
