@@ -19,6 +19,8 @@ class NewFaith extends ModalComponent
 
     protected FaithService $faithService;
 
+    public int $user_id;
+
     public User $user;
 
     public array $state = [];
@@ -41,22 +43,41 @@ class NewFaith extends ModalComponent
         'state.reason_left.string' => 'Reason for leaving must be a string'
     ];
 
-    public function mount(array $userInfo)
+    public function mount(int $user_id)
     {
-        $this->user = empty($userInfo) ? new User(['first_name' => 'Dom', 'last_name' => 'Sear']) : new User($userInfo);
+        $this->user = User::query()
+            ->with(['allFaiths'])
+            ->find($user_id);
 
         $this->religions = Religion::query()
             ->where('approved', true)
             ->get();
 
-        $this->denominations = $denominations ?? Denomination::query()
+        $this->denominations = Denomination::query()
             ->where('religion_id', $this->religions->first()->getKey())
             ->get();
 
-        $this->faithService = new FaithService();
-
         $this->state['religion_id'] = $this->religions->first()->getKey();
         $this->state['denomination_id'] = $this->denominations?->first()?->getKey() ?? null;
+        $this->state['user_id'] = $this->user_id;
+    }
+
+    protected function getRules()
+    {
+        $rules = $this->rules;
+
+        $denominations = Denomination::query()
+            ->where('religion_id', $this->state['religion_id'])
+            ->get();
+
+        if ($denominations->isNotEmpty()) {
+            $rules['state.denomination_id'] = ['required', 'integer'];
+            
+            $this->messages['state.denomination_id.required'] = 'There must be a denomination for this religion';
+            $this->messages['state.denomination_id.integer'] = 'Denomination must be an ID';
+        }
+
+        return $rules;
     }
 
     public function submit()
@@ -96,6 +117,8 @@ class NewFaith extends ModalComponent
         $this->denominations = Denomination::query()
             ->where('religion_id', $this->state['religion_id'])
             ->get();
+
+        $this->state['denomination_id'] = null;
     }
 
     public function render()

@@ -25,9 +25,9 @@ class EditFaith extends ModalComponent
         'updated-faith' => 'updatedFaith'
     ];
 
-    public function mount(Faith $faith, Collection $religions, User $user)
+    public function mount(Faith $faith, User $user)
     {
-        $this->religions = $religions->isNotEmpty() ? $religions : Religion::query()
+        $this->religions = Religion::query()
             ->where('approved', true)
             ->get();
 
@@ -39,6 +39,7 @@ class EditFaith extends ModalComponent
 
         $this->denominations = Denomination::query()
             ->where('religion_id', $this->state['religion_id'])
+            ->where('approved', true)
             ->get();
     }
 
@@ -52,7 +53,7 @@ class EditFaith extends ModalComponent
     public function newFaith()
     {
         $this->emit('openModal', NewFaith::getName(), [
-            'userInfo' => $this->user
+            'user_id' => $this->user->getKey()
         ]);
     }
 
@@ -63,6 +64,11 @@ class EditFaith extends ModalComponent
             ->latest('id')
             ->first()
             ->toArray();
+    }
+
+    public function showLoad()
+    {
+        $this->showLoad = ! $this->showLoad;
     }
 
     public function render()

@@ -16,7 +16,7 @@
                         {{ $religion->name }}
                     </option>
                 @empty
-                    <option>No religions available</option>
+                    <option selected disabled>No religions available</option>
                 @endforelse
             </select>
             @error('state.religion_id')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
@@ -33,7 +33,7 @@
                         {{ $denomination->name }}
                     </option>
                 @empty
-                    <option>No denominations available</option>
+                    <option selected disabled>No denominations available</option>
                 @endforelse
             </select>
             <x-jet-label for="note">{{ __('Note') }}</x-jet-label>
@@ -55,7 +55,7 @@
             @error('state.reason_left')<span class="text-red-500 text-sm">{{ $message }}</span>@enderror
         </div>
     </div>
-    <div class="flex flex-row space-x-2">
+    <div class="flex flex-row space-x-2 justify-end">
         <button class="px-4 py-2 font-semibold bg-white hover:ring-1 hover:ring-gray-400 cursor-pointer rounded-lg">Cancel</button>
         <button wire:click="submit" class="px-4 py-2 font-semibold hover:bg-gray-800 bg-gray-700 text-white cursor-pointer rounded-lg">Submit</button>
     </div>
