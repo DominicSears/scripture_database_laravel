@@ -3,10 +3,7 @@ FROM ubuntu:21.04
 LABEL maintainer="Taylor Otwell"
 
 ARG WWWGROUP
-
-ARG XDEBUG
-
-ARG XDEBUG_PORT
+ARG NODE_VERSION=16
 
 WORKDIR /var/www/html
 
@@ -31,18 +28,11 @@ RUN apt-get update \
        php8.0-xml php8.0-zip php8.0-bcmath php8.0-soap \
        php8.0-intl php8.0-readline php8.0-pcov \
        php8.0-msgpack php8.0-igbinary php8.0-ldap \
-       php8.0-redis php8.0-swoole php8.0-xdebug
-
-    RUN echo "xdebug.mode=debug" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.client_host=host.docker.internal" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.start_with_request=yes" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.discover_client_host=true" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.max_nesting_level=256" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.client_port=9000" >> /etc/php/8.0/cli/conf.d/20-xdebug.ini
-
-RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
-    && curl -sL https://deb.nodesource.com/setup_16.x | bash - \
+       php8.0-redis php8.0-swoole php8.0-xdebug \
+    && php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
+    && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
     && apt-get install -y nodejs \
+    && npm install -g npm \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
@@ -52,6 +42,8 @@ RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-di
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN update-alternatives --set php /usr/bin/php8.0
 
 RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.0
 
