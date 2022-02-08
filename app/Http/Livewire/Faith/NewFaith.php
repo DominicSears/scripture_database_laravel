@@ -121,6 +121,11 @@ class NewFaith extends ModalComponent
         $this->state['denomination_id'] = null;
     }
 
+    public static function modalMaxWidth(): string
+    {
+        return '4xl';
+    }
+
     public function render()
     {
         return view('livewire.faith.new-faith');

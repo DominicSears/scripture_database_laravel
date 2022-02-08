@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\Faith;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -67,6 +68,15 @@ class UserService
         $user->save();
 
         $user->setRelation('faith', $faith);
+
+        return $user;
+    }
+
+    public static function updateUser(UpdateUserRequest $request, User $user): User
+    {
+        $request->validate();
+
+        $user->update($request->validated());
 
         return $user;
     }

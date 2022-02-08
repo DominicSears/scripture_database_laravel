@@ -35,8 +35,11 @@ RUN echo "xdebug.mode=debug" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.client_host=host.docker.internal" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.start_with_request=yes" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.discover_client_host=true" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
+        && echo "xdebug.remote_handler=dbgp" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.max_nesting_level=256" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
-        && echo "xdebug.client_port=9000" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini
+        && echo "xdebug.idekey=VSCODE" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
+        && echo "xdebug.mode=debug" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
+        && echo "xdebug.client_port=9003" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini
 
 RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
