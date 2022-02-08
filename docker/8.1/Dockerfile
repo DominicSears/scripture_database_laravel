@@ -30,7 +30,6 @@ RUN apt-get update \
        php8.1-ldap \
        php8.1-msgpack php8.1-igbinary php8.1-redis php8.1-swoole \
        php8.1-memcached php8.1-pcov php8.1-xdebug
-
 RUN echo "xdebug.mode=debug" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.client_host=host.docker.internal" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
         && echo "xdebug.start_with_request=yes" >> /etc/php/8.1/cli/conf.d/20-xdebug.ini \
