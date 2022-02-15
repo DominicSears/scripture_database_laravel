@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Faith;
 
+use App\Actions\Faith\UpdateFaith;
 use App\Models\User;
 use App\Models\Faith;
 use App\Models\Religion;
@@ -57,6 +58,17 @@ class EditFaith extends ModalComponent
         ]);
     }
 
+    public function updateFaith(UpdateFaith $updateFaith)
+    {
+        $updateFaith(
+            $this->state,
+            $this->denominations->isNotEmpty(),
+            $this->faith
+        );
+
+        $this->emit('updated-faith');
+    }
+
     public function updatedFaith()
     {
         $this->state = Faith::query()
@@ -64,6 +76,11 @@ class EditFaith extends ModalComponent
             ->latest('id')
             ->first()
             ->toArray();
+
+        $this->denominations = Denomination::query()
+            ->where('approved', true)
+            ->where('religion_id', $this->state['religion_id'])
+            ->get();
     }
 
     public function showLoad()

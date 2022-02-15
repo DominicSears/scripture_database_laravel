@@ -74,7 +74,7 @@ class UserService
 
     public static function updateUser(UpdateUserRequest $request, User $user): User
     {
-        $request->validate();
+        $request->validate($request->rules(), $request->toArray());
 
         $user->update($request->validated());
 

@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -59,9 +58,11 @@ class User extends Authenticatable
 
     // Attributes
 
-    public function getNameAttribute()
+    public function name(): Attribute
     {
-        return $this->first_name.' '.$this->last_name;
+        return new Attribute(
+            get: fn() => $this->first_name.' '.$this->last_name
+        );
     }
 
     // Scopes

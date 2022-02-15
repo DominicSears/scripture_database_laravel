@@ -14,8 +14,8 @@ class Faith extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'start_of_faith' => 'datetime',
-        'end_of_faith' => 'datetime'
+        'start_of_faith' => 'datetime:Y-m-d',
+        'end_of_faith' => 'datetime:Y-m-d'
     ];
 
     // Relationships

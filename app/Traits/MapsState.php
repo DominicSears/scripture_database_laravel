@@ -11,7 +11,10 @@ trait MapsState
         $newArray = [];
 
         foreach ($array as $key => $value) {
-            $key = Str::after('state.', $key);
+            if (Str::contains('state.', $key)) {
+                $key = Str::after('state.', $key);
+            }
+
             $newArray[$key] = $value;
         }
 
@@ -23,7 +26,10 @@ trait MapsState
         $newArray = [];
 
         foreach ($array as $key => $value) {
-            $key = 'state.'.$key;
+            if (! Str::contains('state.', $key)) {
+                $key = 'state.'.$key;
+            }
+
             $newArray[$key] = $value;
         }
 

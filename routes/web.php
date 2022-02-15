@@ -10,7 +10,7 @@ Route::get('/', function () {
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', fn() => view('dashboard'))->name('dashboard');
 
-    Route::group(['prefix' => '/users'], function () {
-        Route::get('/edit/{user?}', [Controllers\UserController::class, 'edit'])->name('users.edit');
+    Route::controller(Controllers\UserController::class)->group(function () {
+        Route::get('/users/edit/{user?}', 'edit')->name('users.edit');
     });
 });

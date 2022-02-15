@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Users;
 
+use App\Contracts\User\UpdatesUser;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
@@ -22,15 +23,13 @@ class EditUser extends Component
         $this->user ??= User::query()
             ->find($userId ?? auth()->id());
 
-        $this->state = $this->user->toArray();
+        $this->state = $this->user->withoutRelations()
+            ->toArray();
     }
 
-    public function submit()
+    public function submit(UpdatesUser $userUpdater)
     {
-        UserService::updateUser(
-            new UpdateUserRequest(request: $this->removeStateKeys($this->state)),
-            $this->user
-        );
+        ($userUpdater)($this->state, $this->user);
     }
     
     public function render()

@@ -10,52 +10,52 @@ Route::get('/posts', [API\PostController::class, 'getPosts']);
 Route::get('/nuggets', [API\NuggetController::class, 'getNuggets']);
 
 // User
-Route::group(['prefix' => '/users/{user}'], function () {
-    Route::get('/', [API\UserController::class, 'getUser']);
-    Route::get('/posts', [API\UserController::class, 'getAllPosts']);
-    Route::get('/updatedPosts', [API\UserController::class, 'getUpdatedByPosts']);
-    Route::get('/nuggets', [API\UserController::class, 'getNuggets']);
-    Route::get('/nuggets/refutes', [API\UserController::class, 'getRefuteNuggets']);
-    Route::get('/nuggets/support', [API\UserController::class, 'getSupportNuggets']);
-    Route::get('/nuggets/general', [API\UserController::class, 'getGeneralNuggets']);
+Route::controller(API\UserController::class)->group(function () {
+    Route::get('/users/{user}/', 'getUser');
+    Route::get('/users/{user}/posts', 'getAllPosts');
+    Route::get('/users/{user}/updatedPosts', 'getUpdatedByPosts');
+    Route::get('/users/{user}/nuggets', 'getNuggets');
+    Route::get('/users/{user}/nuggets/refutes', 'getRefuteNuggets');
+    Route::get('/users/{user}/nuggets/support', 'getSupportNuggets');
+    Route::get('/users/{user}/nuggets/general', 'getGeneralNuggets');
 });
 
 // Doctrine
-Route::group(['prefix' => '/doctrines/{doctrine}'], function () {
-    Route::get('/', [API\DoctrineController::class, 'getDoctrine']);
-    Route::get('/users', [API\DoctrineController::class, 'usersWithDoctrine']);
-    Route::get('/nuggets', [API\DoctrineController::class, 'getNuggets']);
-    Route::get('/nuggets/refutes', [API\DoctrineController::class, 'getRefuteNuggets']);
-    Route::get('/nuggets/support', [API\DoctrineController::class, 'getSupportNuggets']);
-    Route::get('/nuggets/general', [API\DoctrineController::class, 'getGeneralNuggets']);
+Route::controller(API\DoctrineController::class)->group(function () {
+    Route::get('/doctrines/{doctrine}/', 'getDoctrine');
+    Route::get('/doctrines/{doctrine}/users', 'usersWithDoctrine');
+    Route::get('/doctrines/{doctrine}/nuggets', 'getNuggets');
+    Route::get('/doctrines/{doctrine}/nuggets/refutes', 'getRefuteNuggets');
+    Route::get('/doctrines/{doctrine}/nuggets/support', 'getSupportNuggets');
+    Route::get('/doctrines/{doctrine}/nuggets/general', 'getGeneralNuggets');
 });
 
 // Denomination
-Route::group(['prefix' => '/denominations/{denomination}'], function () {
-    Route::get('/users', [API\DenominationController::class, 'getUsers']);
-    Route::get('/users/current', [API\DenominationController::class, 'getUsersWithCurrentFaith']);
-    Route::get('/doctrine', [API\DenominationController::class, 'getDoctrine']);
-    Route::get('/nuggets', [API\DenominationController::class, 'getAllNuggets']);
-    Route::get('/nuggets/refutes', [API\DenominationController::class, 'getRefuteNuggets']);
-    Route::get('/nuggets/support', [API\DenominationController::class, 'getSupportNuggets']);
-    Route::get('/nuggets/general', [API\DenominationController::class, 'getGeneralNuggets']);
+Route::controller(API\DenominationController::class)->group(function() {
+    Route::get('/denominations/{denomination}/users', 'getUsers');
+    Route::get('/denominations/{denomination}/users/current', 'getUsersWithCurrentFaith');
+    Route::get('/denominations/{denomination}/doctrine', 'getDoctrine');
+    Route::get('/denominations/{denomination}/nuggets', 'getAllNuggets');
+    Route::get('/denominations/{denomination}/nuggets/refutes', 'getRefuteNuggets');
+    Route::get('/denominations/{denomination}/nuggets/support', 'getSupportNuggets');
+    Route::get('/denominations/{denomination}/nuggets/general', 'getGeneralNuggets');
 });
 
 // Religion
-Route::group(['prefix' => '/religions/{religion}'], function () {
-    Route::get('/users', [API\ReligionController::class, 'getUsers']);
-    Route::get('/users/current', [API\ReligionController::class, 'getUsersWithCurrentFaith']);
-    Route::get('/doctrine', [API\ReligionController::class, 'getDoctrine']);
-    Route::get('/denominations', [API\ReligionController::class, 'getDenominations']);
-    Route::get('/nuggets', [API\ReligionController::class, 'getAllNuggets']);
-    Route::get('/nuggets/refutes', [API\ReligionController::class, 'getRefuteNuggets']);
-    Route::get('/nuggets/support', [API\ReligionController::class, 'getSupportNuggets']);
-    Route::get('/nuggets/general', [API\ReligionController::class, 'getGeneralNuggets']);
+Route::controller(API\ReligionController::class)->group(function () {
+    Route::get('/religions/{religion}/users', 'getUsers');
+    Route::get('/religions/{religion}/users/current', 'getUsersWithCurrentFaith');
+    Route::get('/religions/{religion}/doctrine', 'getDoctrine');
+    Route::get('/religions/{religion}/denominations', 'getDenominations');
+    Route::get('/religions/{religion}/nuggets', 'getAllNuggets');
+    Route::get('/religions/{religion}/nuggets/refutes', 'getRefuteNuggets');
+    Route::get('/religions/{religion}/nuggets/support', 'getSupportNuggets');
+    Route::get('/religions/{religion}/nuggets/general', 'getGeneralNuggets');
 });
 
 // Posts
 Route::group(['prefix' => '/posts'], function () {
-    Route::get('/users', [API\ReligionController::class, 'getPostUsers']);
+    Route::get('/users', [API\PostController::class, 'getPostUsers']);
 });
 
 Route::group(['prefix' => '/posts/{username}/{slug}'], function () {
