@@ -1,10 +1,5 @@
 <div class="p-8 bg-white rounded-2xl shadow-xl flex flex-col space-y-8">
-    <p class="text-4xl font-bold">New Faith - {{ empty($user->first_name) ? 'Nujll' : $user->name }}</p>
-    @if (empty($user->first_name))
-        <pre>
-            {{ json_encode($user->toArray(), JSON_PRETTY_PRINT) }}
-        </pre>
-    @endif
+    <p class="text-4xl font-bold">New Faith - {{ $user->name }}</p>
     <!-- TODO: Change structure to have rows instead of columns -->
     <div class="w-full h-auto flex flex-row space-x-4">
         <!-- Column 1 -->

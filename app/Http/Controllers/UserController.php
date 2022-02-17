@@ -14,16 +14,17 @@ class UserController extends Controller
         echo $user->name;
     }
 
-    public function edit(Request $request, ?User $user = null)
+    public function edit(Request $request, ?User $user = null, ?int $faith_id = null)
     {
         $user ??= $request->user();
 
-        $user->load('allFaiths');
+        $user->load(['allFaiths.denomination', 'allFaiths.religion']);
 
         return view('users.edit', [
             'user' => $user,
             'religions' => Religion::query()->where('approved', true)->get(),
-            'denominations' => Denomination::query()->where('approved', true)->get()
+            'denominations' => Denomination::query()->where('approved', true)->get(),
+            'faith_id' => $faith_id
         ]);
     }
 }

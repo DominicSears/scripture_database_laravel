@@ -99,7 +99,7 @@ class User extends Authenticatable
 
     public function allFaiths(): HasMany
     {
-        return $this->hasMany(Faith::class, 'user_id');
+        return $this->hasMany(Faith::class, 'user_id', 'id');
     }
 
     public function scopedFaith(): HasOne

@@ -1054,6 +1054,9 @@ select {
 .inline-flex {
   display: inline-flex;
 }
+.table {
+  display: table;
+}
 .grid {
   display: grid;
 }
@@ -1437,6 +1440,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
+}
 .bg-opacity-25 {
   --tw-bg-opacity: 0.25;
 }
@@ -1554,6 +1561,12 @@ select {
 }
 .pb-10 {
   padding-bottom: 2.5rem;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
 }
 .pt-8 {
   padding-top: 2rem;

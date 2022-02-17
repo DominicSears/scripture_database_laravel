@@ -72,7 +72,7 @@ class EditFaith extends ModalComponent
     public function updatedFaith()
     {
         $this->state = Faith::query()
-            ->where('user_id', auth()->id())
+            ->where('user_id', $this->state['user_id'])
             ->latest('id')
             ->first()
             ->toArray();

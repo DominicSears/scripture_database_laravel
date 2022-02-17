@@ -41,4 +41,9 @@ class Faith extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'faith_id');
     }
+
+    public function allFaiths(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'user_id');
+    }
 }
