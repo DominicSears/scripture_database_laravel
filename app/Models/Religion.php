@@ -35,6 +35,11 @@ class Religion extends Model
         return $this->hasMany(Doctrine::class, 'religion_id');
     }
 
+    public function denominations(): HasMany
+    {
+        return $this->hasMany(Denomination::class, 'religion_id');
+    }
+
     // Inverse Relationships
 
     public function religionParent(): BelongsTo

@@ -14,6 +14,8 @@ class Denomination extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     // Relationships
 
     public function parent(): HasOne
@@ -46,5 +48,10 @@ class Denomination extends Model
     public function denominationParent(): BelongsTo
     {
         return $this->belongsTo($this::class, 'id', 'parent_id');
+    }
+
+    public function religionDenomination(): BelongsTo
+    {
+        return $this->belongsTo(Religion::class, 'id', 'denomination_id');
     }
 }

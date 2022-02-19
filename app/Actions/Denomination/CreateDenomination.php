@@ -2,8 +2,8 @@
 
 namespace App\Actions\Denomination;
 
+use App\Contracts\Denomination\CreatesDenomination;
 use App\Contracts\Denomination\ValidatesDenomination;
-use App\Contracts\Denominations\CreatesDenomination;
 use App\Models\Denomination;
 
 final class CreateDenomination implements CreatesDenomination

@@ -17,7 +17,8 @@ class CreateDenominations extends ModalComponent
         $this->state = [
             'religion_id' => $this->religion->getKey(),
             'approved' => false,
-            'created_by' => auth()->id()
+            'created_by' => auth()->id(),
+            'parent_id' => null
         ];
     }
 

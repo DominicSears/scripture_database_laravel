@@ -12,8 +12,9 @@ final class ValidateDenomination implements ValidatesDenomination
         $rules = [
             'name' => ['max:255', 'string', 'required'],
             'religion_id' => ['integer', 'required'],
-            'parent_id' => ['sometimes', 'integer'],
-            'approved' => ['required', 'boolean']
+            'parent_id' => ['sometimes', 'integer', 'nullable'],
+            'approved' => ['required', 'boolean'],
+            'created_by' => ['required', 'integer']
         ];
 
         $messages = [
@@ -23,7 +24,9 @@ final class ValidateDenomination implements ValidatesDenomination
             'religion_id.integer' => 'Religion ID must be an integer',
             'religion_id.required' => 'Religion is required',
             'approved.required' => 'Approval status required',
-            'approved.boolean' => 'Approval status must be true or false'
+            'approved.boolean' => 'Approval status must be true or false',
+            'created_by.required' => 'Must have a creator',
+            'created_by.integer' => 'Created by must be an ID'
         ];
 
         return validator($data, $rules, $messages);
