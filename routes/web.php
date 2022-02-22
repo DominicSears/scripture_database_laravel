@@ -18,5 +18,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Religion
     Route::controller(Controllers\ReligionController::class)->group(function () {
         Route::get('/religions/{religion}/denominations/create', 'createDenomination');
+        Route::get('/religions/{religion}/denominations/edit/{denomination}', 'editDenomination');
+        Route::get('/religions/{religion}/denominations', 'denominations');
     });
 });

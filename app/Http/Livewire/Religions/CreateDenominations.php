@@ -25,6 +25,10 @@ class CreateDenominations extends ModalComponent
     public function submit(CreatesDenomination $createsDenomination)
     {
         $createsDenomination($this->state);
+
+        $this->closeModalWithEvents([
+            'created-denomination'
+        ]);
     }
 
     public function render()

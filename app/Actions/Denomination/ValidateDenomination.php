@@ -22,12 +22,18 @@ final class ValidateDenomination implements ValidatesDenomination
             'name.string' => 'Name must be a string',
             'name.required' => 'Name is required',
             'religion_id.integer' => 'Religion ID must be an integer',
-            'religion_id.required' => 'Religion is required',
+            'religion_id.required' => 'Religion is required for a denomination',
             'approved.required' => 'Approval status required',
             'approved.boolean' => 'Approval status must be true or false',
             'created_by.required' => 'Must have a creator',
             'created_by.integer' => 'Created by must be an ID'
         ];
+
+        if ($isUpdate) {
+            $rules['id'] = ['integer', 'required'];
+            $messages['id.integer'] = 'ID must be an integer';
+            $messages['id.required'] = 'ID is required for updating a denomination';
+        }
 
         return validator($data, $rules, $messages);
     }

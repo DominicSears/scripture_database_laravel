@@ -17,6 +17,7 @@ class ActionServiceProvider extends ServiceProvider
         Contracts\User\UpdatesUser::class => Actions\User\UpdateUser::class,
         Contracts\User\ValidatesUser::class => Actions\User\ValidateUser::class,
         Contracts\Denomination\CreatesDenomination::class => Actions\Denomination\CreateDenomination::class,
+        Contracts\Denomination\UpdatesDenomination::class => Actions\Denomination\UpdateDenomination::class,
         Contracts\Denomination\ValidatesDenomination::class => Actions\Denomination\ValidateDenomination::class
     ];
 }
