@@ -10,7 +10,9 @@ class ListDenominations extends ModalComponent
 {
     public Religion $religion;
 
-    // TODO: Add listener for create and update denomination events
+    protected $listeners = [
+        'updated-denomination' => '$refresh'
+    ];
 
     public function mount()
     {
@@ -25,13 +27,14 @@ class ListDenominations extends ModalComponent
             ->where('id', $id)
             ->update(['approved' => true]);
 
-        $this->emit('updated-denominations');
+        $this->emit('updated-denomination');
     }
 
     public function edit($id)
     {
         $this->emit('openModal', UpdateDenomination::getName(), [
-            'religionData' => $this->religion->withoutRelations()->toArray()
+            'religionData' => $this->religion->withoutRelations()->toArray(),
+            'denominationId' => $id
         ]);
     }
 

@@ -4,11 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Religion;
 use App\Models\Denomination;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Database\Eloquent\Model;
 
 class ReligionController extends Model
 {
+    public function list(Request $request)
+    {
+        $showPending = $request->get('showPending', false);
+
+        $religions = Religion::query();
+
+        if (! $showPending) {
+            $religions = $religions->where('approved', true);
+        }
+
+        return view('religions.list', [
+            'religions' => $religions->get()
+        ]);
+    }
+
     public function createDenomination(Religion $religion)
     {
         $religion->load('denominations');

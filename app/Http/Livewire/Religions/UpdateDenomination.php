@@ -6,6 +6,7 @@ use App\Contracts\Denomination\UpdatesDenomination;
 use App\Models\Denomination;
 use App\Models\Religion;
 use LivewireUI\Modal\ModalComponent;
+use App\Exceptions\Denomination\MismatchUpdateDenominationException;
 
 class UpdateDenomination extends ModalComponent
 {
@@ -17,15 +18,19 @@ class UpdateDenomination extends ModalComponent
 
     public function mount(array $religionData = [], ?int $denominationId = null)
     {
+        if (empty($religion) && empty($religionData)) {
+            throw new MismatchUpdateDenominationException();
+        }
+
         if (! empty($religionData)) {
-            $this->religion = new Religion($religionData);
+            $this->religion = with(new Religion)->newInstance($religionData, true);
 
             $this->religion->load('denominations');
         }
 
-        if (isset($denominationId) && empty($this->denomination)) {
-            $this->denomination = $this->religion->denominations->find($denominationId);
-        }
+        $this->denomination ??= isset($denominationId) && empty($this->denomination) ?
+            $this->religion->denominations->find($denominationId) :
+            $this->religion->denominations->first();
 
         $this->state = $this->denomination->toArray();
     }

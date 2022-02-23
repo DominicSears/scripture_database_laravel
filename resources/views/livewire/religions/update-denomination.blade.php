@@ -1,5 +1,5 @@
 <div class="w-full h-auto p-8 bg-white rounded-2xl shadow-xl flex flex-col space-y-4">
-    <p class="font-bold text-3xl">Edit denomination from: {{ $religionName }}</p>
+    <p class="font-bold text-3xl">Edit denomination from: {{ $religion->name }}</p>
     <!-- Column 1 -->
     <div class="flex flex-col space-y-4">
         <div class="flex flex-col space-y-2">

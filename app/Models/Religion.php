@@ -13,6 +13,8 @@ class Religion extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     // Relationships
 
     public function parent(): HasOne

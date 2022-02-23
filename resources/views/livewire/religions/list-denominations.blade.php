@@ -1,6 +1,5 @@
 <div class="flex flex-col space-y-4 w-full p-8">
     <p class="text-3xl font-semibold">Denominations for {{ $religion->name }}</p>
-    <!-- TODO: Finish building component -->
     <div class="flex flex-col space-y-2">
         @forelse ($religion->denominations as $denomination)
             <div class="flex flex-row justify-between items-center">

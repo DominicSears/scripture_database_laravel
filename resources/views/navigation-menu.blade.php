@@ -18,6 +18,9 @@
                     <x-jet-nav-link href="{{ route('users.edit') }}" :active="request()->routeIs('users.edit')">
                         {{ __('Edit User') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('religions.list') }}" :active="request()->routeIs('religions.list')">
+                        {{ __('Religions') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
