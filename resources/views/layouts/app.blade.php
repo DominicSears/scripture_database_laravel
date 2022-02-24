@@ -18,25 +18,32 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
-
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+    <body class="font-sans antialiased w-full h-full">
+        <div class="min-h-screen h-screen bg-gray-200 w-full">
+            <div class="flex flex-row space-x-4 h-full p-8">
+                <div class="flex flex-col space-y-4 bg-white rounded-2xl shadow-2xl w-1/6 h-full p-8">
+                    <div class="flex justify-center items-center">
+                        <div class="rounded-full h-32 w-32 bg-gray-400"></div>
+                        <div class="flex flex-col space-x-4">
+                            
+                        </div>
                     </div>
-                </header>
-            @endif
-
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                </div>
+                <div class="flex flex-col space-y-2 w-full">
+                    <div class="flex flex-row justify-between items-center">
+                        @if (isset($header))
+                            {{ $header }}
+                        @else
+                            <p class="font-bold text-2xl">Scripture Laravel Resource</p>
+                        @endif
+                        @livewire('navigation-menu')
+                    </div>
+                    <!-- Page Content -->
+                    <main class="w-full h-full overflow-y-auto">
+                        {{ $slot }}
+                    </main>
+                </div>
+            </div>
         </div>
 
         @stack('modals')
