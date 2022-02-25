@@ -13,23 +13,76 @@
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
+        <style>
+            [x-cloak] {
+                display: none;
+            }
+        </style>
+
         @livewireStyles
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased w-full h-full">
-        <div class="min-h-screen h-screen bg-gray-200 w-full">
-            <div class="flex flex-row space-x-4 h-full p-8">
-                <div class="flex flex-col space-y-4 bg-white rounded-2xl shadow-2xl w-1/6 h-full p-8">
-                    <div class="flex justify-center items-center">
-                        <div class="rounded-full h-32 w-32 bg-gray-400"></div>
-                        <div class="flex flex-col space-x-4">
-                            
-                        </div>
+
+        <div class="min-h-screen h-screen bg-gray-200 w-full flex flex-row space-x-8">
+
+            <div class="flex flex-col space-y-4 w-1/6 py-8 pl-8">
+                <div class="flex flex-col space-y-4 bg-white rounded-2xl shadow-2xl h-full py-8">
+                    <div class="flex justify-center items-center px-8">
+                        <a href="{{ route('dashboard') }}">
+                            <div class="rounded-full h-32 w-32 bg-gray-400"></div>
+                        </a>
+                    </div>
+                    <div class="flex flex-col space-y-4 py-2 overflox-y-auto">
+                        <ul class="w-full space-y-4"
+                        x-data="{
+                            showUsers: false,
+                            showReligions: false    
+                        }">
+                            <!-- User -->
+                            <li class="w-full hover:cursor-pointer">
+                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showUsers = !showUsers">
+                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
+                                    <span class="font-semibold text-2xl">Users</span>
+                                </div>
+                                <ul x-show="showUsers" x-cloak x-transition class="my-4 space-y-2 pl-8 hover:bg-gray-100 py-2">
+                                    <a class="font-semibold text-lg" href="{{ route('users.edit') }}"><li>Edit</li></a>
+                                </ul>
+                            </li>
+
+                            <!-- Religions -->
+                            <li class="w-full hover:cursor-pointer">
+                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showReligions = !showReligions">
+                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
+                                    <span class="font-semibold text-2xl">Religions</span>
+                                </div>
+                                <ul x-show="showReligions" x-cloak x-transition class="my-4 space-y-2 pl-8 hover:bg-gray-100 py-2">
+                                    <a class="font-semibold text-lg" href="{{ route('religions.list') }}"><li>List</li></a>
+                                    {{-- <li>
+                                        <a class="font-semibold text-lg" href="{{ route('religions.create-denomination') }}">Create Denomination</a>
+                                    </li> --}}
+                                </ul>
+                            </li>
+                        </ul>
+
+                        
+                        
+
+                        {{--<!-- Religion -->
+                        <a href="{{ route('religions.list') }}">
+                            <div class="flex flex-row space-x-6 items-center pl-8">
+                                <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
+                                <span class="font-semibold text-2xl">Religion</span>
+                            </div>
+                        </a>--}}
                     </div>
                 </div>
-                <div class="flex flex-col space-y-2 w-full">
+            </div>
+
+            <div class="flex flex-col space-y-2 w-full overflow-y-auto justify-between">
+                <div>
                     <div class="flex flex-row justify-between items-center">
                         @if (isset($header))
                             {{ $header }}
@@ -38,11 +91,14 @@
                         @endif
                         @livewire('navigation-menu')
                     </div>
-                    <!-- Page Content -->
-                    <main class="w-full h-full overflow-y-auto">
-                        {{ $slot }}
-                    </main>
+                    <div class="pb-12">
+                        <!-- Page Content -->
+                        <main class="w-full h-full pr-8">
+                            {{ $slot }}
+                        </main>
+                    </div>
                 </div>
+                <p class="text-center font-bold text-sm">© International Christian Churches, Inc.</p>
             </div>
         </div>
 
