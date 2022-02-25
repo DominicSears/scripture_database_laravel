@@ -66,17 +66,6 @@
                                 </ul>
                             </li>
                         </ul>
-
-                        
-                        
-
-                        {{--<!-- Religion -->
-                        <a href="{{ route('religions.list') }}">
-                            <div class="flex flex-row space-x-6 items-center pl-8">
-                                <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
-                                <span class="font-semibold text-2xl">Religion</span>
-                            </div>
-                        </a>--}}
                     </div>
                 </div>
             </div>
@@ -98,7 +87,7 @@
                         </main>
                     </div>
                 </div>
-                <p class="text-center font-bold text-sm">© International Christian Churches, Inc.</p>
+                {{-- <p class="text-center font-bold text-sm"></p> --}}
             </div>
         </div>
 
