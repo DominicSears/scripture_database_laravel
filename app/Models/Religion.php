@@ -39,6 +39,12 @@ class Religion extends Model
 
     public function denominations(): HasMany
     {
+        return $this->hasMany(Denomination::class, 'religion_id')
+            ->where('approved', true);
+    }
+
+    public function allDenominations(): HasMany
+    {
         return $this->hasMany(Denomination::class, 'religion_id');
     }
 

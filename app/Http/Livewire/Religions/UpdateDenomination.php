@@ -25,12 +25,12 @@ class UpdateDenomination extends ModalComponent
         if (! empty($religionData)) {
             $this->religion = with(new Religion)->newInstance($religionData, true);
 
-            $this->religion->load('denominations');
+            $this->religion->load('allDenominations');
         }
 
         $this->denomination ??= isset($denominationId) && empty($this->denomination) ?
-            $this->religion->denominations->find($denominationId) :
-            $this->religion->denominations->first();
+            $this->religion->allDenominations->find($denominationId) :
+            $this->religion->allDenominations->first();
 
         $this->state = $this->denomination->toArray();
     }

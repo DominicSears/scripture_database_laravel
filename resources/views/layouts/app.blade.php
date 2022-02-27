@@ -26,8 +26,8 @@
     </head>
     <body class="font-sans antialiased w-full h-full">
 
-        <div class="min-h-screen h-screen bg-gray-200 w-full flex flex-row space-x-8">
-
+        <div class="min-h-screen h-screen bg-gray-200 w-full flex flex-row">
+            <!-- Sidebar -->
             <div class="flex flex-col space-y-4 w-1/6 py-8 pl-8">
                 <div class="flex flex-col space-y-4 bg-white rounded-2xl shadow-2xl h-full py-8">
                     <div class="flex justify-center items-center px-8">
@@ -47,7 +47,7 @@
                                     <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
                                     <span class="font-semibold text-2xl">Users</span>
                                 </div>
-                                <ul x-show="showUsers" x-cloak x-transition class="my-4 space-y-2 pl-8 hover:bg-gray-100 py-2">
+                                <ul x-show="showUsers" x-cloak x-transition class="flex flex-col my-4 space-y-4 pl-8 hover:bg-gray-100 py-2">
                                     <a class="font-semibold text-lg" href="{{ route('users.edit') }}"><li>Edit</li></a>
                                 </ul>
                             </li>
@@ -58,21 +58,23 @@
                                     <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
                                     <span class="font-semibold text-2xl">Religions</span>
                                 </div>
-                                <ul x-show="showReligions" x-cloak x-transition class="my-4 space-y-2 pl-8 hover:bg-gray-100 py-2">
-                                    <a class="font-semibold text-lg" href="{{ route('religions.list') }}"><li>List</li></a>
-                                    {{-- <li>
-                                        <a class="font-semibold text-lg" href="{{ route('religions.create-denomination') }}">Create Denomination</a>
-                                    </li> --}}
+                                <ul x-show="showReligions" x-cloak x-transition class="flex flex-col my-4 space-y-4 ml-8 py-2">
+                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('religions.list') }}">
+                                        <li>List</li>
+                                    </a>
+                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('denominations.create') }}">
+                                        <li>Create Denomination</li>
+                                    </a>
                                 </ul>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
+            <!-- Content and Copyright -->
             <div class="flex flex-col space-y-2 w-full overflow-y-auto justify-between">
                 <div>
-                    <div class="flex flex-row justify-between items-center">
+                    <div class="flex flex-row justify-between items-center px-8">
                         @if (isset($header))
                             {{ $header }}
                         @else
@@ -82,8 +84,10 @@
                     </div>
                     <div class="pb-12">
                         <!-- Page Content -->
-                        <main class="w-full h-full pr-8">
-                            {{ $slot }}
+                        <main class="w-full h-full">
+                            <div class="px-8">
+                                {{ $slot }}
+                            </div>
                         </main>
                     </div>
                 </div>

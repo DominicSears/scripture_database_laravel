@@ -11,13 +11,14 @@ class ListDenominations extends ModalComponent
     public Religion $religion;
 
     protected $listeners = [
-        'updated-denomination' => '$refresh'
+        'updated-denomination' => '$refresh',
+        'created-denomination' => '$refresh'
     ];
 
     public function mount()
     {
-        if (! $this->religion->relationLoaded('denominations')) {
-            $this->religion->load('denominations');
+        if (! $this->religion->relationLoaded('allDenominations')) {
+            $this->religion->load('allDenominations');
         }
     }
 
@@ -35,6 +36,13 @@ class ListDenominations extends ModalComponent
         $this->emit('openModal', UpdateDenomination::getName(), [
             'religionData' => $this->religion->withoutRelations()->toArray(),
             'denominationId' => $id
+        ]);
+    }
+
+    public function newDenomination()
+    {
+        $this->emit('openModal', CreateDenominations::getName(), [
+            'religionData' => $this->religion->withoutRelations()->toArray()
         ]);
     }
 
