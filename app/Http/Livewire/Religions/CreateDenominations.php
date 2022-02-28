@@ -4,10 +4,13 @@ namespace App\Http\Livewire\Religions;
 
 use App\Contracts\Denomination\CreatesDenomination;
 use App\Models\Religion;
+use App\Traits\ConvertEmptyArrayStrings;
 use LivewireUI\Modal\ModalComponent;
 
 class CreateDenominations extends ModalComponent
 {
+    use ConvertEmptyArrayStrings;
+
     public Religion $religion;
 
     public array $state = [];
@@ -28,7 +31,9 @@ class CreateDenominations extends ModalComponent
 
     public function submit(CreatesDenomination $createsDenomination)
     {
-        $createsDenomination($this->state);
+        $createsDenomination(
+            $this->convertEmptyArrayStrings($this->state)
+        );
 
         $this->closeModalWithEvents([
             'created-denomination'

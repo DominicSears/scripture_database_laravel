@@ -7,9 +7,12 @@ use App\Models\Denomination;
 use App\Models\Religion;
 use LivewireUI\Modal\ModalComponent;
 use App\Exceptions\Denomination\MismatchUpdateDenominationException;
+use App\Traits\ConvertEmptyArrayStrings;
 
 class UpdateDenomination extends ModalComponent
 {
+    use ConvertEmptyArrayStrings;
+
     public ?Religion $religion;
 
     public ?Denomination $denomination;
@@ -37,7 +40,10 @@ class UpdateDenomination extends ModalComponent
 
     public function submit(UpdatesDenomination $updatesDenomination)
     {
-        $updatesDenomination($this->state, $this->denomination);
+        $updatesDenomination(
+            $this->convertEmptyArrayStrings($this->state),
+            $this->denomination
+        );
 
         $this->closeModalWithEvents([
             'updated-denomination'
