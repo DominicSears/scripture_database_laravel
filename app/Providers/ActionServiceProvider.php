@@ -18,6 +18,8 @@ class ActionServiceProvider extends ServiceProvider
         Contracts\User\ValidatesUser::class => Actions\User\ValidateUser::class,
         Contracts\Denomination\CreatesDenomination::class => Actions\Denomination\CreateDenomination::class,
         Contracts\Denomination\UpdatesDenomination::class => Actions\Denomination\UpdateDenomination::class,
-        Contracts\Denomination\ValidatesDenomination::class => Actions\Denomination\ValidateDenomination::class
+        Contracts\Denomination\ValidatesDenomination::class => Actions\Denomination\ValidateDenomination::class,
+        Contracts\Religion\CreatesReligion::class => Actions\Religion\CreateReligion::class,
+        Contracts\Religion\ValidatesReligion::class => Actions\Religion\ValidateReligion::class
     ];
 }

@@ -65,6 +65,9 @@
                                     <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('denominations.create') }}">
                                         <li>Create Denomination</li>
                                     </a>
+                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('religions.create') }}">
+                                        <li>Create Religion</li>
+                                    </a>
                                 </ul>
                             </li>
                         </ul>

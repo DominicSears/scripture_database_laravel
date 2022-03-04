@@ -25,6 +25,11 @@ class ReligionController extends Model
         ]);
     }
 
+    public function create()
+    {
+        return view('religions.create');
+    }
+
     public function createDenomination(Religion $religion)
     {
         $religion->load('denominations');
