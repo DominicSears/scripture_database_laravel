@@ -14,14 +14,8 @@ class ReligionController extends Model
     {
         $showPending = $request->get('showPending', false);
 
-        $religions = Religion::query();
-
-        if (! $showPending) {
-            $religions = $religions->where('approved', true);
-        }
-
         return view('religions.list', [
-            'religions' => $religions->get()
+            'showPending' => $showPending
         ]);
     }
 

@@ -4,12 +4,12 @@
         <!-- Name -->
         <div class="flex flex-col space-y-2 w-full">
             <label for="name">Name</label>
-            <input type="text" id="name" wire.model.defer="state.name">
+            <input type="text" id="name" wire:model.defer="state.name">
         </div>
         <!-- Parent ID -->
         <div class="flex flex-col space-y-2 w-full">
             <label for="parent_id">Parent (If applicable)</label>
-            <select id="parent_id" wire.model.defer="state.parent_id">
+            <select id="parent_id" wire:model.defer="state.parent_id">
                 @forelse ($religions as $religion)
                     <option value="" selected="">Not Applicable</option>
                     <option value="{{ $religion->getKey() }}">{{ $religion->name }}</option>

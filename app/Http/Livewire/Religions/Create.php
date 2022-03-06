@@ -33,6 +33,10 @@ class Create extends ModalComponent
         $createsReligion(
             $this->convertEmptyArrayStrings($this->state)
         );
+
+        $this->closeModalWithEvents([
+            'created-religion'
+        ]);
     }
 
     public function render()

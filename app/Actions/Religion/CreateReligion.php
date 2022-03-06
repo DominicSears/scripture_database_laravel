@@ -6,7 +6,7 @@ use App\Contracts\Religion\CreatesReligion;
 use App\Contracts\Religion\ValidatesReligion;
 use App\Models\Religion;
 
-final class CreateReligion extends CreatesReligion
+final class CreateReligion implements CreatesReligion
 {
     public function __construct(private ValidatesReligion $religionValidator) {}
 

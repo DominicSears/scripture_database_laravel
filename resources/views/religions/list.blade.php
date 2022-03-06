@@ -1,12 +1,6 @@
 <x-app-layout>
-    <div class="flex flex-col space-y-4 p-8 bg-white rounded-2xl">
-        <p class="text-2xl font-bold">Religions: ({{ $religions->count() }})</p>
-        @forelse ($religions as $religion)
-            <a href="{{ route('religions.denominations', ['religion' => $religion->getKey()]) }}">
-                {{ $religion->name . ($religion->approved ? '' : ' - (pending)') }}
-            </a>
-        @empty
-            <p class="font-semibold text-md">There are not available religions</p>
-        @endforelse
+    <x-slot name="header">List Religions</x-slot>
+    <div class="flex flex-col space-y-4 w-full bg-white rounded-2xl shadow-2xl">
+        <livewire:religions.list-religions :showPending="$showPending" />
     </div>
 </x-app-layout>
