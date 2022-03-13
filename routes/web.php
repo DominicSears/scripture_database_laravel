@@ -28,4 +28,9 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::controller(Controllers\DenominationController::class)->group(function() {
         Route::get('/denominations/create', 'createDenomination')->name('denominations.create');
     });
+
+    // Doctrine
+    Route::controller(Controllers\DoctrineController::class)->group(function () {
+        Route::get('/doctrine', 'list')->name('doctrines.list');
+    });
 });

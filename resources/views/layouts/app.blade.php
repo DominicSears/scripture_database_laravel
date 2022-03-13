@@ -39,7 +39,8 @@
                         <ul class="w-full space-y-4"
                         x-data="{
                             showUsers: false,
-                            showReligions: false    
+                            showReligions: false,
+                            showDoctrines: false  
                         }">
                             <!-- User -->
                             <li class="w-full hover:cursor-pointer">
@@ -70,6 +71,19 @@
                                     </a>
                                 </ul>
                             </li>
+
+                            <!-- Doctrines -->
+                            <li class="w-full hover:cursor-pointer">
+                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showDoctrines = !showDoctrines">
+                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
+                                    <span class="font-semibold text-2xl">Doctrine</span>
+                                </div>
+                                <ul x-show="showDoctrines" x-cloak x-transition class="flex flex-col my-4 space-y-4 ml-8 py-2">
+                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.list') }}">
+                                        <li>List</li>
+                                    </a>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -78,11 +92,7 @@
             <div class="flex flex-col space-y-2 w-full overflow-y-auto justify-between">
                 <div>
                     <div class="flex flex-row justify-between items-center px-8">
-                        @if (isset($header))
-                            {{ $header }}
-                        @else
-                            <p class="font-bold text-2xl">Scripture Laravel Resource</p>
-                        @endif
+                        <p class="font-bold text-2xl">{{ $header ?? 'Scripture Laravel Resource' }}</p>
                         @livewire('navigation-menu')
                     </div>
                     <div class="pb-12">

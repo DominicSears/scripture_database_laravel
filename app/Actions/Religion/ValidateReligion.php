@@ -13,7 +13,7 @@ final class ValidateReligion implements ValidatesReligion
             'created_by' => ['required', 'integer'],
             'name' => ['required', 'string', 'max:255'],
             'approved' => ['required', 'bool'],
-            'parent_id' => ['sometimes', 'integer']
+            'parent_id' => ['nullable', 'integer']
         ];
 
         $messages = [

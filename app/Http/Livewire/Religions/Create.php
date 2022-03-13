@@ -34,9 +34,7 @@ class Create extends ModalComponent
             $this->convertEmptyArrayStrings($this->state)
         );
 
-        $this->closeModalWithEvents([
-            'created-religion'
-        ]);
+        $this->closeModal();
     }
 
     public function render()

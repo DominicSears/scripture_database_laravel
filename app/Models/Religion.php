@@ -32,9 +32,9 @@ class Religion extends Model
         return $this->morphToMany(Nugget::class, 'nuggetable');
     }
 
-    public function doctrine(): HasMany
+    public function doctrine(): MorphToMany
     {
-        return $this->hasMany(Doctrine::class, 'religion_id');
+        return $this->morphToMany(Doctrine::class, 'doctrinable');
     }
 
     public function denominations(): HasMany

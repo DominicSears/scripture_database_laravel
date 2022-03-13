@@ -57,8 +57,8 @@ class Doctrine extends Model
         return $this->belongsTo(Denomination::class, 'denomination_id');
     }
 
-    public function religionDoctrine(): BelongsTo
+    public function religionDoctrine(): MorphToMany
     {
-        return $this->belongsTo(Religion::class, 'religion_id');
+        return $this->morphedByMany(Religion::class, 'doctrinable');
     }
 }
