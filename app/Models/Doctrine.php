@@ -52,9 +52,9 @@ class Doctrine extends Model
 
     // Inverse Relationships
 
-    public function denominationDoctrine(): BelongsTo
+    public function denominationDoctrine(): MorphToMany
     {
-        return $this->belongsTo(Denomination::class, 'denomination_id');
+        return $this->morphedByMany(Denomination::class, 'doctrinable');
     }
 
     public function religionDoctrine(): MorphToMany

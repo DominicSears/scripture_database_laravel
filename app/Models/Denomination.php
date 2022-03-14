@@ -38,9 +38,9 @@ class Denomination extends Model
         return $this->morphToMany(Nugget::class, 'nuggetable');
     }
 
-    public function doctrine(): HasMany
+    public function doctrines(): MorphToMany
     {
-        return $this->hasMany(Doctrine::class, 'denomination_id');
+        return $this->morphToMany(Doctrine::class, 'doctrinable');
     }
 
     // Inverse Relationships

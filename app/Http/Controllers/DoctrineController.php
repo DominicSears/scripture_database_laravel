@@ -9,10 +9,8 @@ class DoctrineController extends Controller
 {
     public function list()
     {
-        $relationships = ['doctrine', /*'denominations.doctrine'*/];
-
         $religions = Religion::query()
-            ->with($relationships)
+            ->with(['doctrines', 'denominations.doctrines'])
             ->get();
         
         return view('doctrines.list', [
