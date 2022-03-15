@@ -19,13 +19,13 @@ class ShowDoctrines extends Component
     public function mount(?string $className = null, ?int $id = null)
     {
         if (isset($className)) {
-            if (! in_array($className, self::ALLOWED_CLASSES)) {
+            if (! in_array($className, self::ALLOWED_CLASSES) || is_null($id)) {
                 // TODO: Throw custom exception
             }
 
             $this->entity = $className::query()
                 ->with('doctrines')
-                ->find($id ?? 1);
+                ->find($id);
         }
     }
 

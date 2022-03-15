@@ -21,6 +21,8 @@ class ActionServiceProvider extends ServiceProvider
         Contracts\Denomination\ValidatesDenomination::class => Actions\Denomination\ValidateDenomination::class,
         Contracts\Religion\CreatesReligion::class => Actions\Religion\CreateReligion::class,
         Contracts\Religion\UpdatesReligion::class => Actions\Religion\UpdateReligion::class,
-        Contracts\Religion\ValidatesReligion::class => Actions\Religion\ValidateReligion::class
+        Contracts\Religion\ValidatesReligion::class => Actions\Religion\ValidateReligion::class,
+        Contracts\Doctrine\CreatesDoctrine::class => Actions\Doctrine\CreateDoctrine::class,
+        Contracts\Doctrine\ValidatesDoctrine::class => Actions\Doctrine\ValidateDoctrine::class
     ];
 }
