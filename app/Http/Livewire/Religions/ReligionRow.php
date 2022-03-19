@@ -16,6 +16,14 @@ class ReligionRow extends Component
         ]);
     }
 
+    public function approve()
+    {
+        $this->religion->approved = true;
+        $this->religion->save();
+
+        $this->emit('updated-religion');
+    }
+
     public function render()
     {
         return view('livewire.religions.religion-row');
