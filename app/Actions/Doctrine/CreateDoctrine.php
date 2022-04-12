@@ -2,19 +2,27 @@
 
 namespace App\Actions\Doctrine;
 
+use App\Models\Doctrinable;
 use App\Models\Doctrine;
 use App\Contracts\Doctrine\CreatesDoctrine;
 use App\Contracts\Doctrine\ValidatesDoctrine;
+use Illuminate\Validation\ValidationException;
 
 final class CreateDoctrine implements CreatesDoctrine
 {
     public function __construct(private ValidatesDoctrine $doctrineValidator) {}
 
-    public function __invoke(array $data): Doctrine
+    /**
+     * @throws ValidationException
+     */
+    public function __invoke(array $data): void
     {
-        $validated = ($this->doctrineValidator)($data)->validate();
+        [$doctrineValidator, $doctrinableValidator] = ($this->doctrineValidator)($data);
 
-        // TODO: Create and validate doctrineable
-        return Doctrine::query()->create($validated);
+        $doctrineValidated = $doctrineValidator->validate();
+        $doctrinableValidated = $doctrinableValidator->validate();
+
+        Doctrine::query()->create($doctrineValidated);
+        Doctrinable::query()->create($doctrinableValidated);
     }
 }

@@ -21,7 +21,7 @@ class CreateDoctrinesTable extends Migration
             $table->unsignedBigInteger('updated_by')->nullable()->default(null);
             $table->string('title');
             $table->longText('description');
-            $table->json('scriptures')->nullablle()->default(null);
+            $table->json('scriptures')->nullable()->default(null);
             $table->unsignedBigInteger('religion_id');
             $table->unsignedBigInteger('denomination_id')->nullable()->default(null);
         });
