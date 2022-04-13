@@ -8,12 +8,20 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Builder;
 
 class Religion extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+
+    // Scopes
+
+    public function scopeActive(Builder $query, bool $active = true): Builder
+    {
+        return $query->where('approved', $active);
+    }
 
     // Relationships
 

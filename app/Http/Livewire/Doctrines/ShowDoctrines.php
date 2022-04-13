@@ -25,6 +25,8 @@ class ShowDoctrines extends Component
      */
     public function mount(?string $className = null, ?int $id = null)
     {
+        // TODO: Do not repeat a doctrine if it is already in the children? Or parent?
+
         if (isset($className)) {
             if (! in_array($className, self::ALLOWED_CLASSES) || is_null($id)) {
                 throw new InvalidDoctrineSourceException($className);

@@ -10,6 +10,7 @@ class DoctrineController extends Controller
     public function list(): View
     {
         $religions = Religion::query()
+            ->scopes(['active'])
             ->with(['doctrines', 'denominations.doctrines'])
             ->whereHas('doctrines')
             ->orWhereHas('denominations.doctrines')
