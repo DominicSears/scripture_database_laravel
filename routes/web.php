@@ -32,5 +32,6 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Doctrine
     Route::controller(Controllers\DoctrineController::class)->group(function () {
         Route::get('/doctrine', 'list')->name('doctrines.list');
+        Route::get('/doctrine/create', 'create')->name('doctrines.create');
     });
 });
