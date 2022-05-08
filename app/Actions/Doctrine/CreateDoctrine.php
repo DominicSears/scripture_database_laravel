@@ -17,12 +17,24 @@ final class CreateDoctrine implements CreatesDoctrine
      */
     public function __invoke(array $data): void
     {
+        if (isset($data['religion_id']) || isset($data['denomination_id'])) {
+            $isDenomination = !empty($data['denomination_id']);
+
+            $data['doctrinable_id'] = $isDenomination ? $data['denomination_id'] :
+                $data['religion_id'];
+            
+            $data['doctrinable_type'] = $isDenomination ? Denomination::class : Religion::class;
+
+            // Set a default ID
+            $data['doctrine_id'] = 0;
+        }
+
         [$doctrineValidator, $doctrinableValidator] = ($this->doctrineValidator)($data);
 
         $doctrineValidated = $doctrineValidator->validate();
         $doctrinableValidated = $doctrinableValidator->validate();
 
-        Doctrine::query()->create($doctrineValidated);
+        $doctrine = Doctrine::query()->create($doctrineValidated);
         Doctrinable::query()->create($doctrinableValidated);
     }
 }

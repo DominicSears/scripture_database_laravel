@@ -5,43 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Denomination;
 use App\Models\Religion;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DoctrineController extends Controller
 {
-    /**
-     * Create a doctrinen for type
-     *
-     * @param Request $request
-     * @throws NotFoundHttpException
-     * @return View
-     */
     public function create(Request $request): View
     {
-        /** @var class-string $entityType */
-        $entityType = $this->getEntityType($request->get('type'));
+        $validator = validator(
+            $request->all(),
+            [
+                'denomination_id' => ['integer', 'nullable'],
+                'religion_id' => ['integer', 'nullable']
+            ]
+        );
+
+        try {
+            $values = $validator->validate();
+        } catch (ValidationException) {
+            throw new NotFoundHttpException();
+        }
 
         return view('doctrines.create', [
-            'entityType' => $entityType,
-            'entityId' => $request->get('id')
+            'religion_id' => $values['religion_id'] ?? null,
+            'denomination_id' => $values['denomination_id'] ?? null
         ]);
-    }
-
-    /**
-     * Get type from request and throw error if needed
-     *
-     * @param ?string $type
-     * @throws NotFoundHttpException
-     * @return string
-     */
-    protected function getEntityType(?string $type): string
-    {
-        return match($type) {
-            'religion' => Religion::class,
-            'denomination' => Denomination::class,
-            default => throw new NotFoundHttpException()
-        };
     }
 
     public function list(): View

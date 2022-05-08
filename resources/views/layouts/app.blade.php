@@ -15,7 +15,7 @@
 
         <style>
             [x-cloak] {
-                display: none;
+                display: none !important;
             }
         </style>
 
@@ -79,6 +79,9 @@
                                     <span class="font-semibold text-2xl">Doctrine</span>
                                 </div>
                                 <ul x-show="showDoctrines" x-cloak x-transition class="flex flex-col my-4 space-y-4 ml-8 py-2">
+                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.create') }}">
+                                        <li>Create</li>
+                                    </a>
                                     <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.list') }}">
                                         <li>List</li>
                                     </a>

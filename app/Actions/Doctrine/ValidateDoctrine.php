@@ -19,6 +19,7 @@ final class ValidateDoctrine implements ValidatesDoctrine
             'title' => ['string', 'max:255'],
             'description' => ['string']
         ];
+
         $doctrineMessages = [
             'created_by.integer' => 'Author of doctrine must be an ID',
             'created_by.required' => 'There must be an user who created the doctrine here',
@@ -32,6 +33,7 @@ final class ValidateDoctrine implements ValidatesDoctrine
             'doctrinable_id' => ['required', 'integer'],
             'doctrinable_type' => ['string', 'max:255']
         ];
+
         $doctrinableMessages = [
             'doctrine_id.required' => 'Doctrine ID is required',
             'doctrine_id.integer' => 'Doctrine ID must be an ID',
@@ -40,6 +42,12 @@ final class ValidateDoctrine implements ValidatesDoctrine
             'doctrinable_type.string' => 'Must provide a type to relate',
             'doctrinable_type.max' => 'The type string exceeds the 255 character limit'
         ];
+
+        if ($isUpdate) {
+            $doctrineRules['id'] = ['integer', 'required'];
+            $doctrineMessages['id.integer'] = 'Doctrine ID must be an ID';
+            $doctrineMessages['id.required'] = 'Doctrine ID required for update';
+        }
 
         return [
             validator($data, $doctrineRules, $doctrineMessages),

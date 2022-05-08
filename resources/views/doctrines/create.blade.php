@@ -1,3 +1,4 @@
 <x-app-layout>
-    <livewire:doctrines.create :type="$entityType" :typeId="$entityId" />
+    <x-slot name="header">Create Doctrine</x-slot>
+    <livewire:doctrines.create :religionId="$religion_id" :denominationId="$denomination_id" />
 </x-app-layout>
