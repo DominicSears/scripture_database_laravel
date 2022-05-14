@@ -11,7 +11,7 @@ interface ValidatesDoctrine
      *
      * @param array $data
      * @param boolean $isUpdate
-     * @return Validator[]
+     * @return Validator
      */
-    public function __invoke(array $data, bool $isUpdate = false): array;
+    public function __invoke(array $data, bool $isUpdate = false): Validator;
 }
