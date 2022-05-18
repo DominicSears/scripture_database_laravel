@@ -2,12 +2,14 @@
 
 namespace App\Actions\Doctrine;
 
-use App\Contracts\Doctrinable\ValidatesDoctrinable;
 use App\Models\Doctrinable;
 use App\Models\Doctrine;
 use App\Contracts\Doctrine\CreatesDoctrine;
 use App\Contracts\Doctrine\ValidatesDoctrine;
 use Illuminate\Validation\ValidationException;
+use App\Contracts\Doctrinable\ValidatesDoctrinable;
+use App\Models\Denomination;
+use App\Models\Religion;
 
 final class CreateDoctrine implements CreatesDoctrine
 {
@@ -25,5 +27,9 @@ final class CreateDoctrine implements CreatesDoctrine
         $doctrine = Doctrine::query()->create($doctrineValidated);
 
         $data['doctrine_id'] = $doctrine->getKey();
+
+        $doctrinableValidated = ($this->doctrinableValidator)($data)->validate();
+
+        $doctrinable = Doctrinable::query()->create($doctrinableValidated);
     }
 }

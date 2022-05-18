@@ -13,5 +13,5 @@ interface ValidatesDoctrinable
      * @param boolean $isUpdate
      * @return Validator
      */
-    public function __invoke(array $data, bool $isUpdate): Validator;
+    public function __invoke(array $data, bool $isUpdate = false): Validator;
 }

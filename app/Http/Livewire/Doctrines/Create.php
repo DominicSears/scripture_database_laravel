@@ -14,6 +14,8 @@ class Create extends Component
 {
     use ConvertEmptyArrayStrings;
 
+    // TODO: Make a notification for successful or failures
+
     public array $state = [];
 
     public ?string $type;
@@ -67,8 +69,17 @@ class Create extends Component
         $this->state['created_by'] = auth()->id();
 
         $createDoctrine(
-            $this->convertEmptyArrayStrings($this->state)
+            $this->convertEmptyArrayStrings(
+                array_merge($this->state, [
+                    'doctrinable_type' => empty($this->state['denomination_id']) ?
+                        Religion::class : Denomination::class,
+                    'doctrinable_id' => empty($this->state['denomination_id']) ?
+                        $this->state['religion_id'] : $this->state['denomination_id']
+                ])
+            )
         );
+
+        $this->state = ['religion_id' => $this->religions->first()->getKey(), 'denomination_id' => 0];
     }
 
     public function updatedStateReligionId()

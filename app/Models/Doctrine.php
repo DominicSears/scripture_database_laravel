@@ -14,6 +14,8 @@ class Doctrine extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     protected $casts = [
         'scriptures' => 'array'
     ];
