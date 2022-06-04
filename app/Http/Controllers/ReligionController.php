@@ -47,7 +47,7 @@ class ReligionController extends Model
 
     public function denominations(Religion $religion)
     {
-        $religion->load('allDenominations');
+        $religion->load(['allDenominations', 'doctrines']);
 
         return view('religions.list-denominations', [
             'religion' => $religion

@@ -15,6 +15,8 @@ class ShowDoctrines extends Component
 
     public bool $isReligion;
 
+    public bool $showChildren = true;
+
     protected const ALLOWED_CLASSES = [
         'App\Models\Religion',
         'App\Models\Denomination'
@@ -23,7 +25,7 @@ class ShowDoctrines extends Component
     /**
      * @throws InvalidDoctrineSourceException
      */
-    public function mount(?string $className = null, ?int $id = null)
+    public function mount(?string $className = null, ?int $id = null, bool $showChildren = true)
     {
         // TODO: Do not repeat a doctrine if it is already in the children? Or parent?
 

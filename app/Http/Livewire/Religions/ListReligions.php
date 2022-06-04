@@ -17,14 +17,18 @@ class ListReligions extends ModalComponent
         'updated-religion' => '$refresh'
     ];
 
-    public function mount()
+    public function mount(array $religionIds = [])
     {
         if (is_null($this->religions)) {
             $religions = Religion::query();
 
-            $this->religions = $this->showPending ?
+            if (empty($religionIds)) {
+                $this->religions = $this->showPending ?
                 $religions->get() :
                 $religions->where('approved', true)->get();
+            } else {
+                $this->religions = $religions->whereIn('id', $religionIds)->get();
+            }
         }
     }
 

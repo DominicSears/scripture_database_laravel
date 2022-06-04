@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class NuggetController extends Controller
 {
-    public function all()
+    public function list()
     {
-        return view('nuggets.index', [
+        return view('nuggets.list', [
             'nuggets' => Nugget::all()
         ]);
     }

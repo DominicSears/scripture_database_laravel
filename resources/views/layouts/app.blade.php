@@ -40,7 +40,8 @@
                         x-data="{
                             showUsers: false,
                             showReligions: false,
-                            showDoctrines: false  
+                            showDoctrines: false,
+                            showNuggets: false
                         }">
                             <!-- User -->
                             <li class="w-full hover:cursor-pointer">
@@ -85,6 +86,17 @@
                                     <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.list') }}">
                                         <li>List</li>
                                     </a>
+                                </ul>
+                            </li>
+
+                            <!-- Nuggets -->
+                            <li class="w-full hover:cursor-pointer">
+                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showNuggets = !showNuggets">
+                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
+                                    <span class="font-semibold text-2xl">Nuggets</span>
+                                </div>
+                                <ul x-show="showNuggets" x-cloak x-transition class="flex flex-col my-4 space-y-4 pl-8 hover:bg-gray-100 py-2">
+                                    <a class="font-semibold text-lg" href="{{ route('nuggets.list') }}"><li>List</li></a>
                                 </ul>
                             </li>
                         </ul>
