@@ -21,6 +21,10 @@
             </select>
         </div>
     </div>
+    <div class="flex flex-col space-y-2 w-full">
+        <label for="description">Description</label>
+        <textarea wire:model.defer="state.description" rows="5" id="description"></textarea>
+    </div>
     <div>
         <x-jet-button wire:click="submit">
             <svg wire:loading wire:target="submit" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

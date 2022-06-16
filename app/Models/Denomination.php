@@ -21,7 +21,7 @@ class Denomination extends Model
     {
         return new Attribute(
             get: fn($value, $attributes) => $attributes['name'],
-            set: fn($value, $attributes) => $attribute['name'] = $value
+            set: fn($value, $attributes) => $attributes['name'] = $value
         );
     }
 

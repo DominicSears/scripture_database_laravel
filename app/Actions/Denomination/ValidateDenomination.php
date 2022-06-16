@@ -14,7 +14,8 @@ final class ValidateDenomination implements ValidatesDenomination
             'religion_id' => ['integer', 'required'],
             'parent_id' => ['sometimes', 'integer', 'nullable'],
             'approved' => ['required', 'boolean'],
-            'created_by' => ['required', 'integer']
+            'created_by' => ['required', 'integer'],
+            'description' => ['string', 'min:10', 'nullable']
         ];
 
         $messages = [
@@ -26,7 +27,9 @@ final class ValidateDenomination implements ValidatesDenomination
             'approved.required' => 'Approval status required',
             'approved.boolean' => 'Approval status must be true or false',
             'created_by.required' => 'Must have a creator',
-            'created_by.integer' => 'Created by must be an ID'
+            'created_by.integer' => 'Created by must be an ID',
+            'description.string' => 'Description must be a string',
+            'description.min' => 'Description must have a minimum of 10 characters'
         ];
 
         if ($isUpdate) {

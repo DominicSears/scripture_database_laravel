@@ -40,7 +40,7 @@ class ShowDoctrines extends Component
         }
 
         if (! $this->entity->relationLoaded('doctrines')) {
-            $this->entity->load('doctrines');
+            $this->entity->load('doctrines.nuggets');
         }
 
         if ($this->isReligion = $this->entity instanceof Religion) {

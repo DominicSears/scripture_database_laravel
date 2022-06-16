@@ -35,22 +35,22 @@ class Nugget extends Model
     public function nuggetType(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $this->getNuggetById($attributes['nugget_type_id']),
+            get: fn($value, $attributes) => $this->getNuggetTypeById($attributes['nugget_type_id']),
             set: function ($value, $attributes) {
-                $attributes['nugget_type'] = $this->getNuggetIdByString($value);
+                $attributes['nugget_type'] = $this->getNuggetTypeIdByString($value);
             }
         );
     }
 
     // Helper functions
 
-    protected function getNuggetById(string $nugget): string
+    public static function getNuggetTypeById(string $nugget): string
     {
         return self::NUGGET_TYPES[(int) $nugget] ??
             throw new \Exception('Unknown nugget type');
     }
 
-    protected function getNuggetIdByString(string $nugget): string
+    public static function getNuggetTypeIdByString(string $nugget): string
     {
         return array_flip(self::NUGGET_TYPES)[$nugget] ??
             throw new \Exception('Unknown nugget type');
