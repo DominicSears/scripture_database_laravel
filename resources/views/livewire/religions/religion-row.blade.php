@@ -1,5 +1,5 @@
 <div class="flex flex-row justify-between items-center">
-    <a class="font-semibold text-md" href="{{ route('religions.denominations', ['religion' => $religion->getKey()]) }}">
+    <a class="font-semibold text-md" href="{{ route('religions.show', ['religion' => $religion->getKey()]) }}">
         {{ $religion->name }}@if (! $religion->approved) - (pending)@endif
     </a>
     <div class="flex flex-row space-x-2">

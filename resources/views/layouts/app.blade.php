@@ -24,102 +24,82 @@
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased w-full h-full">
-
-        <div class="min-h-screen h-screen bg-gray-200 w-full flex flex-row">
+    <body class="font-sans antialiased w-full h-screen">
+        <!-- Header Bar -->
+        <div class="flex flex-row justify-between items-center px-8 py-4 w-full border-b border-slate-200" style="height: 10%;">
+            <div class="flex flex-row space-x-4 items-center w-max">
+                <div class="rounded-full w-12 h-12 bg-gray-500"></div>
+                <p class="font-thin text-gray-700 text-xl">Scripture Resource</p>
+            </div>
+            @livewire('search')
+            @livewire('navigation-menu')
+        </div>
+        <!-- Sidebar and Content -->
+        <div class="flex flex-row space-x-4" style="height: 90%;">
             <!-- Sidebar -->
-            <div class="flex flex-col space-y-4 w-1/6 py-8 pl-8">
-                <div class="flex flex-col space-y-4 bg-white rounded-2xl shadow-2xl h-full py-8">
-                    <div class="flex justify-center items-center px-8">
-                        <a href="{{ route('dashboard') }}">
-                            <div class="rounded-full h-32 w-32 bg-gray-400"></div>
-                        </a>
-                    </div>
-                    <div class="flex flex-col space-y-4 py-2 overflox-y-auto">
-                        <ul class="w-full space-y-4"
-                        x-data="{
-                            showUsers: false,
-                            showReligions: false,
-                            showDoctrines: false,
-                            showNuggets: false
-                        }">
-                            <!-- User -->
-                            <li class="w-full hover:cursor-pointer">
-                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showUsers = !showUsers">
-                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
-                                    <span class="font-semibold text-2xl">Users</span>
-                                </div>
-                                <ul x-show="showUsers" x-cloak x-transition class="flex flex-col my-4 space-y-4 pl-8 hover:bg-gray-100 py-2">
-                                    <a class="font-semibold text-lg" href="{{ route('users.edit') }}"><li>Edit</li></a>
-                                </ul>
-                            </li>
+            <div class="w-64 h-full flex flex-col border-r border-slate-200 px-2" x-data="{
+                open: true,
+                sideBarClick() {
+                    for (let icon of document.getElementsByClassName('icon-name')) {
+                        icon.style.display = open ? 'none' : 'block';
+                    }
 
-                            <!-- Religions -->
-                            <li class="w-full hover:cursor-pointer">
-                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showReligions = !showReligions">
-                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
-                                    <span class="font-semibold text-2xl">Religions</span>
-                                </div>
-                                <ul x-show="showReligions" x-cloak x-transition class="flex flex-col my-4 space-y-4 ml-8 py-2">
-                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('religions.list') }}">
-                                        <li>List</li>
-                                    </a>
-                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('denominations.create') }}">
-                                        <li>Create Denomination</li>
-                                    </a>
-                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('religions.create') }}">
-                                        <li>Create Religion</li>
-                                    </a>
-                                </ul>
-                            </li>
+                    for (let chevron of document.getElementsByClassName('menu-extend')) {
+                        chevron.style.display = open ? 'none' : 'block';
+                    }
 
-                            <!-- Doctrines -->
-                            <li class="w-full hover:cursor-pointer">
-                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showDoctrines = !showDoctrines">
-                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
-                                    <span class="font-semibold text-2xl">Doctrine</span>
-                                </div>
-                                <ul x-show="showDoctrines" x-cloak x-transition class="flex flex-col my-4 space-y-4 ml-8 py-2">
-                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.create') }}">
-                                        <li>Create</li>
-                                    </a>
-                                    <a class="font-semibold text-lg hover:bg-gray-100" href="{{ route('doctrines.list') }}">
-                                        <li>List</li>
-                                    </a>
-                                </ul>
-                            </li>
+                    open ? $el.setAttribute('style', 'width: min-content !important') : $el.removeAttribute('style');
 
-                            <!-- Nuggets -->
-                            <li class="w-full hover:cursor-pointer">
-                                <div class="flex flex-row space-x-6 items-center pl-8 hover:bg-gray-100 py-4" @click="showNuggets = !showNuggets">
-                                    <div class="bg-gray-400 w-8 h-8 rounded-full"></div>
-                                    <span class="font-semibold text-2xl">Nuggets</span>
-                                </div>
-                                <ul x-show="showNuggets" x-cloak x-transition class="flex flex-col my-4 space-y-4 pl-8 hover:bg-gray-100 py-2">
-                                    <a class="font-semibold text-lg" href="{{ route('nuggets.list') }}"><li>List</li></a>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
+                    open = !open;
+                }
+            }" id="sidebar">
+                <!-- Hamburget Menu -->
+                <div class="w-full pt-8 pl-2" x-on:click="sideBarClick()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </div>
+                <div class="w-full flex flex-col space-y-6 pt-8">
+                    <!-- Home -->
+                    <a href="{{ route('dashboard') }}">
+                        <x-menu-icon :isSelected="request()->is('dashboard')" :singleItem="true">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                            </svg>
+                            <p class="font-semibold icon-name">Home</p>
+                        </x-menu-icon>
+                    </a>
+                    <!-- Users -->
+                    <x-menu-icon :isSelected="request()->is('users*')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <p class="font-semibold icon-name">Users</p>
+                    </x-menu-icon>
+                    <!-- Religions/Denominations -->
+                    <x-menu-icon :isSelected="request()->is('religions*') || request()->is('denominations*')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <p class="font-semibold icon-name">Religions</p>
+                    </x-menu-icon>
+                    <!-- Doctrines -->
+                    <x-menu-icon :isSelected="request()->is('doctrines*')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                        </svg>
+                        <p class="font-semibold icon-name">Doctrines</p>
+                    </x-menu-icon>
+                    <!-- Nuggets -->
+                    <x-menu-icon :isSelected="request()->is('nuggets*')">
+                        <div class="w-6 h-6 bg-gray-300 rounded-full"></div>
+                        <p class="font-semibold icon-name">Nuggets</p>
+                    </x-menu-icon>
                 </div>
             </div>
-            <!-- Content and Copyright -->
-            <div class="flex flex-col space-y-2 w-full overflow-y-auto justify-between">
-                <div>
-                    <div class="flex flex-row justify-between items-center px-8">
-                        <p class="font-bold text-2xl">{{ $header ?? 'Scripture Laravel Resource' }}</p>
-                        @livewire('navigation-menu')
-                    </div>
-                    <div class="pb-12">
-                        <!-- Page Content -->
-                        <main class="w-full h-full">
-                            <div class="px-8">
-                                {{ $slot }}
-                            </div>
-                        </main>
-                    </div>
-                </div>
-                {{-- <p class="text-center font-bold text-sm"></p> --}}
+            <!-- Content -->
+            <div class="w-full h-full p-8 overflow-y-auto">
+                {{ $slot }}
             </div>
         </div>
 

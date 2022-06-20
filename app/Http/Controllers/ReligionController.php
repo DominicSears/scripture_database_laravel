@@ -45,11 +45,11 @@ class ReligionController extends Model
         ]);
     }
 
-    public function denominations(Religion $religion)
+    public function show(Religion $religion)
     {
         $religion->load(['allDenominations', 'doctrines']);
 
-        return view('religions.list-denominations', [
+        return view('religions.show', [
             'religion' => $religion
         ]);
     }
