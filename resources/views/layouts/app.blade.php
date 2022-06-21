@@ -37,24 +37,24 @@
         <!-- Sidebar and Content -->
         <div class="flex flex-row space-x-4" style="height: 90%;">
             <!-- Sidebar -->
-            <div class="w-64 h-full flex flex-col border-r border-slate-200 px-2" x-data="{
-                open: true,
-                sideBarClick() {
-                    for (let icon of document.getElementsByClassName('icon-name')) {
-                        icon.style.display = open ? 'none' : 'block';
+            <div class="h-full flex flex-col border-r border-slate-200 px-2 w-fit" id="sidebar" x-data="{
+                open: false,
+                openMenu: function () {
+                    for (let text of document.getElementsByClassName('icon-name')) {
+                        text.style.display = this.open ? 'none' : 'block';
                     }
 
-                    for (let chevron of document.getElementsByClassName('menu-extend')) {
-                        chevron.style.display = open ? 'none' : 'block';
+                    for (let chev of document.getElementsByClassName('menu-extend')) {
+                        chev.style.display = this.open ? 'none' : 'block';
                     }
+                    
+                    this.open ? $el.removeAttribute('style') : $el.setAttribute('style', 'width: 16rem !important');
 
-                    open ? $el.setAttribute('style', 'width: min-content !important') : $el.removeAttribute('style');
-
-                    open = !open;
+                    this.open = !this.open;
                 }
-            }" id="sidebar">
+            }">
                 <!-- Hamburget Menu -->
-                <div class="w-full pt-8 pl-2" x-on:click="sideBarClick()">
+                <div class="w-full pt-8 pl-2" x-on:click="openMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -66,7 +66,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                             </svg>
-                            <p class="font-semibold icon-name">Home</p>
+                            <p class="font-semibold icon-name" style="display: none;">Home</p>
                         </x-menu-icon>
                     </a>
                     <!-- Users -->
@@ -74,26 +74,26 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
-                        <p class="font-semibold icon-name">Users</p>
+                        <p class="font-semibold icon-name" style="display: none;">Users</p>
                     </x-menu-icon>
                     <!-- Religions/Denominations -->
                     <x-menu-icon :isSelected="request()->is('religions*') || request()->is('denominations*')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p class="font-semibold icon-name">Religions</p>
+                        <p class="font-semibold icon-name" style="display: none;">Religions</p>
                     </x-menu-icon>
                     <!-- Doctrines -->
                     <x-menu-icon :isSelected="request()->is('doctrines*')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <p class="font-semibold icon-name">Doctrines</p>
+                        <p class="font-semibold icon-name" style="display: none;">Doctrines</p>
                     </x-menu-icon>
                     <!-- Nuggets -->
                     <x-menu-icon :isSelected="request()->is('nuggets*')">
                         <div class="w-6 h-6 bg-gray-300 rounded-full"></div>
-                        <p class="font-semibold icon-name">Nuggets</p>
+                        <p class="font-semibold icon-name" style="display: none;">Nuggets</p>
                     </x-menu-icon>
                 </div>
             </div>
