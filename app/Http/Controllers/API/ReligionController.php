@@ -14,6 +14,9 @@ use App\Http\Resources\NuggetResource;
 use App\Http\Resources\DoctrineResource;
 use App\Http\Resources\ReligionResource;
 use App\Http\Resources\DenominationResource;
+use \Illuminate\Validation\ValidationException;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 
 class ReligionController extends Controller
 {
@@ -24,14 +27,25 @@ class ReligionController extends Controller
         return ReligionResource::make($religion);
     }
 
-    public function getReligions(Request $request)
+    /**
+     * Get a list of all the religions
+     *
+     * @param Request $request
+     * @throws ValidationException
+     * @return JsonResource
+     */
+    public function getReligions(Request $request): JsonResource
     {
         $validator = validator(
             $request->all(),
             ['perPage' => 'integer', 'page' => 'integer']
         );
 
-        $validated = $validator->validated();
+        try {
+            $validated = $validator->validated();
+        } catch (ValidationException) {
+            abort(Response::HTTP_NOT_FOUND);
+        }
 
         return ReligionResource::collection(
             Religion::query()

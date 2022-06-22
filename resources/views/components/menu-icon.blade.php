@@ -1,8 +1,8 @@
 <div @class([
-    'w-full items-start p-2',
+    'w-full items-start p-2 rounded-lg transition',
     'flex flex-col hover:cursor-pointer' => ! $singleItem,
-    'text-slate-500' => ! $isSelected,
-    'bg-sky-100 rounded-lg text-sky-500' => $isSelected
+    'text-slate-500 hover:bg-sky-100 hover:text-sky-500' => ! $isSelected,
+    'bg-sky-100 text-sky-500 hover:bg-sky-600 hover:text-white' => $isSelected
 ]) {{ $attributes }}>
     <div class="items-center flex flex-row justify-between w-full">
         <div class="flex flex-row space-x-4 items-center">

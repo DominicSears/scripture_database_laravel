@@ -119,9 +119,9 @@
                         </svg>
                         <p class="font-semibold icon-name" style="display: none;">Religions</p>
                         <x-slot:children x-show="subMenuOpen.groups">
-                            <x-submenu-link :active="request()->is(route('religions.list'))" url="{{ route('religions.list') }}">Show Religions</x-submenu-link>
-                            <x-submenu-link :active="request()->is(route('religions.create'))" url="{{ route('religions.create') }}">Create Religion</x-submenu-link>
-                            <x-submenu-link :active="request()->is(route('denominations.create'))" url="{{ route('denominations.create') }}">Create Denomination</x-submenu-link>
+                            <x-submenu-link :active="request()->routeIs('religions.list')" url="{{ route('religions.list') }}">Show Religions</x-submenu-link>
+                            <x-submenu-link :active="request()->routeIs('religions.create')" url="{{ route('religions.create') }}">Create Religion</x-submenu-link>
+                            <x-submenu-link :active="request()->routeIs('denominations.create')" url="{{ route('denominations.create') }}">Create Denomination</x-submenu-link>
                         </x-slot:children>
                     </x-menu-icon>
                     <!-- Doctrines -->
