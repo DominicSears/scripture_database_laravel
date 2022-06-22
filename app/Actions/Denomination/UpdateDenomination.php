@@ -9,7 +9,9 @@ use App\Models\Denomination;
 
 final class UpdateDenomination implements UpdatesDenomination
 {
-    public function __construct(private ValidatesDenomination $denominationValidator) {}
+    public function __construct(private ValidatesDenomination $denominationValidator)
+    {
+    }
 
     public function __invoke(array $data, Denomination $denomination): void
     {

@@ -14,7 +14,8 @@ class DoctrineCard extends Component
      */
     public function __construct(
         public Doctrine $doctrine
-    ) {}
+    ) {
+    }
 
     /**
      * Get the view / contents that represent the component.

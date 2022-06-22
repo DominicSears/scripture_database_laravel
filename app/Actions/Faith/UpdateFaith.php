@@ -10,7 +10,9 @@ use App\Exceptions\Faith\InvalidFaithUpdateDataException;
 
 final class UpdateFaith implements UpdatesFaith
 {
-    public function __construct(private ValidatesFaith $validatesFaith) {}
+    public function __construct(private ValidatesFaith $validatesFaith)
+    {
+    }
 
     public function __invoke(array $data, bool $hasDenomination, ?Faith $faith = null, ?int $faith_id = null): void
     {
@@ -22,7 +24,7 @@ final class UpdateFaith implements UpdatesFaith
             }
 
             $faith->update($validated);
-        } else if (isset($faith_id)) {
+        } elseif (isset($faith_id)) {
             Faith::query()
                 ->where('id', $faith_id)
                 ->update($validated);

@@ -9,7 +9,9 @@ use App\Models\Religion;
 
 final class UpdateReligion implements UpdatesReligion
 {
-    public function __construct(private ValidatesReligion $religionValidator) {}
+    public function __construct(private ValidatesReligion $religionValidator)
+    {
+    }
 
     public function __invoke(array $data, Religion $religion): void
     {

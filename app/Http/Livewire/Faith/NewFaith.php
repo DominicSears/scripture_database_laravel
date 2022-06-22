@@ -2,12 +2,9 @@
 
 namespace App\Http\Livewire\Faith;
 
-use App\Http\Requests\UpdateFaithRequest;
-use App\Models\Faith;
 use App\Models\Religion;
 use App\Models\Denomination;
 use App\Models\User;
-use App\Services\FaithService;
 use App\Contracts\Faith\CreatesFaith;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Database\Eloquent\Collection;

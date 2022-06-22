@@ -19,7 +19,13 @@ use Spatie\Permission\Traits\HasPermissions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, HasProfilePhoto, Notifiable, TwoFactorAuthenticatable, SoftDeletes, HasPermissions;
+    use HasApiTokens;
+    use HasFactory;
+    use HasProfilePhoto;
+    use Notifiable;
+    use TwoFactorAuthenticatable;
+    use SoftDeletes;
+    use HasPermissions;
 
     protected $guarded = false;
 
@@ -61,7 +67,7 @@ class User extends Authenticatable
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn() => $this->first_name.' '.$this->last_name
+            get: fn () => $this->first_name.' '.$this->last_name
         );
     }
 

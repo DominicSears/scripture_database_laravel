@@ -17,7 +17,7 @@ class UserService
 
         if ($request->has('allFaiths') && $request->get('allFaiths')) {
             $user->load([
-                'allFaiths' => fn($q) => $q->orderBy('start_of_faith', 'desc'),
+                'allFaiths' => fn ($q) => $q->orderBy('start_of_faith', 'desc'),
                 'allFaiths.religion',
                 'allFaiths.denomination'
             ]);
@@ -38,7 +38,7 @@ class UserService
 
     public static function getUserWithNuggets(User $user): User
     {
-        return $user->load(['nuggets' => fn($q) => $q->orderBy('created_at', 'desc')]);
+        return $user->load(['nuggets' => fn ($q) => $q->orderBy('created_at', 'desc')]);
     }
 
     public static function createUserWithFaith(CreateUserRequest $request): User

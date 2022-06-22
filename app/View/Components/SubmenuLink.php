@@ -11,7 +11,9 @@ class SubmenuLink extends Component
      *
      * @return void
      */
-    public function __construct(public string $url, public bool $active) {}
+    public function __construct(public string $url, public bool $active)
+    {
+    }
 
     /**
      * Get the view / contents that represent the component.

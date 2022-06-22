@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Faith;
 
-use \Illuminate\Contracts\Validation\Validator;
+use Illuminate\Contracts\Validation\Validator;
 
 interface ValidatesFaith
 {

@@ -61,7 +61,7 @@ class DenominationController extends Controller
                 ->join('users', 'users.id', '=', 'faiths.user_id')
                 ->where('faiths.denomination_id', $denomination->getKey())
                 ->distinct()
-                ->with(['scopedFaith.religion', 'scopedFaith.denomination' => fn($q) => $denomination])
+                ->with(['scopedFaith.religion', 'scopedFaith.denomination' => fn ($q) => $denomination])
                 ->get()
         );
     }
@@ -73,7 +73,7 @@ class DenominationController extends Controller
                 ->select('users.*', 'faiths.id as faith_id2', 'faiths.denomination_id')
                 ->join('faiths', 'faiths.id', '=', 'users.faith_id')
                 ->where('faiths.denomination_id', $denomination->getKey())
-                ->with(['faith', 'faith.religion', 'faith.denomination' => fn($q) => $denomination])
+                ->with(['faith', 'faith.religion', 'faith.denomination' => fn ($q) => $denomination])
                 ->get()
         );
     }

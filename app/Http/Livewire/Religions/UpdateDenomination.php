@@ -31,7 +31,7 @@ class UpdateDenomination extends ModalComponent
         }
 
         if (! empty($religionData)) {
-            $this->religion = with(new Religion)->newInstance($religionData, true);
+            $this->religion = with(new Religion())->newInstance($religionData, true);
 
             $this->religion->load('allDenominations');
         }

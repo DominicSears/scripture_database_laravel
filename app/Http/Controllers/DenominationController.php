@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Religion;
-use Illuminate\Http\Request;
 
 class DenominationController extends Controller
 {

@@ -8,14 +8,15 @@ use App\Contracts\Doctrine\CreatesDoctrine;
 use App\Contracts\Doctrine\ValidatesDoctrine;
 use Illuminate\Validation\ValidationException;
 use App\Contracts\Doctrinable\ValidatesDoctrinable;
-use App\Models\Denomination;
-use App\Models\Religion;
 
 final class CreateDoctrine implements CreatesDoctrine
 {
     public function __construct(
         private ValidatesDoctrine $doctrineValidator,
-        private ValidatesDoctrinable $doctrinableValidator) {}
+        private ValidatesDoctrinable $doctrinableValidator
+    )
+    {
+    }
 
     /**
      * @throws ValidationException

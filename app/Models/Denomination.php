@@ -20,12 +20,17 @@ class Denomination extends Model
     public function title(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $attributes['name'],
-            set: fn($value, $attributes) => $attributes['name'] = $value
+            get: fn ($value, $attributes) => $attributes['name'],
+            set: fn ($value, $attributes) => $attributes['name'] = $value
         );
     }
 
     // Relationships
+
+    public function createdBy(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'created_by');
+    }
 
     public function parent(): HasOne
     {

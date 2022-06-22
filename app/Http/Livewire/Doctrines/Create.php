@@ -40,7 +40,7 @@ class Create extends Component
     {
         if (isset($religionId)) {
             $this->entity = Religion::query()->find($religionId);
-        } else if (isset($denominationId)) {
+        } elseif (isset($denominationId)) {
             $this->entity = Denomination::query()->find($denominationId);
         }
 

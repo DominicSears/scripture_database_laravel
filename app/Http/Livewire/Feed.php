@@ -22,15 +22,24 @@ class Feed extends Component
 
     public function mount()
     {
-        $posts = Post::all()->take(10);
+        $posts = Post::with(['createdBy'])
+            ->get()
+            ->take(10);
 
-        $religions = Religion::all()->take(10);
+        $religions = Religion::with(['createdBy'])
+            ->get()
+            ->take(10);
 
-        $denominations = Denomination::all()->take(10);
+        $denominations = Denomination::with(['createdBy'])
+            ->get()
+            ->take(10);
 
-        $nuggets = Nugget::all()->take(10);
+        $nuggets = Nugget::with(['createdBy'])
+            ->get()
+            ->take(10);
 
-        $feedItems = Doctrine::all()
+        $feedItems = Doctrine::with(['createdBy'])
+            ->get()
             ->take(10)
             ->merge($nuggets)
             ->merge($posts)
@@ -52,9 +61,9 @@ class Feed extends Component
         foreach ($collection as $item) {
             $arr[] = [
                 'title' => $item->getAttribute('title'),
-                'created_by' => 'Dominic Sears',
+                'description' => $item->getAttribute('description'),
+                'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
                 'created_at' => $item->getAttribute('created_at')
-                // 'created_by' => $item->getRelation('createdBy')->getAttribute('name')
             ];
         }
 
@@ -67,10 +76,10 @@ class Feed extends Component
             $array = array_keys(
                 array_diff_key($this->filter, array_flip([$filterBy]))
             );
-    
+
             $this->filter[$filterBy] = true;
-    
-            foreach($array as $key) {
+
+            foreach ($array as $key) {
                 $this->filter[$key] = false;
             }
         }
@@ -78,7 +87,7 @@ class Feed extends Component
 
     public function getFilterKey(): string
     {
-        foreach($this->filter as $key => $isFilterKey) {
+        foreach ($this->filter as $key => $isFilterKey) {
             if ($isFilterKey) {
                 return $key;
             }

@@ -53,7 +53,6 @@ class ListReligions extends ModalComponent
 
     public function delete()
     {
-
     }
 
     public function showPending()

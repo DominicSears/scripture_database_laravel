@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     });
 
     // Denomination
-    Route::controller(Controllers\DenominationController::class)->group(function() {
+    Route::controller(Controllers\DenominationController::class)->group(function () {
         Route::get('/denominations/create', 'createDenomination')->name('denominations.create');
     });
 

@@ -9,7 +9,7 @@ interface UpdatesFaith
     /**
      * Updates a current faith instance
      *
-     * 
+     *
      * @throws \Illuminate\Validation\ValidationException
      * @throws App\Exceptions\Faith\InvalidFaithUpdateDataException;
      * @throws App\Excpetions\Faith\MismatchFaithUserException

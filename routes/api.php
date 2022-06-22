@@ -31,7 +31,7 @@ Route::controller(API\DoctrineController::class)->group(function () {
 });
 
 // Denomination
-Route::controller(API\DenominationController::class)->group(function() {
+Route::controller(API\DenominationController::class)->group(function () {
     Route::get('/denominations/{denomination}/users', 'getUsers');
     Route::get('/denominations/{denomination}/users/current', 'getUsersWithCurrentFaith');
     Route::get('/denominations/{denomination}/doctrine', 'getDoctrine');

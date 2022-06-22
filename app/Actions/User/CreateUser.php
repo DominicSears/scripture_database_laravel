@@ -9,7 +9,9 @@ use Illuminate\Validation\ValidationException;
 
 final class CreateUser implements CreatesUser
 {
-    public function __construct(private ValidatesUser $userValidator) {}
+    public function __construct(private ValidatesUser $userValidator)
+    {
+    }
 
     /**
      * @throws ValidationException

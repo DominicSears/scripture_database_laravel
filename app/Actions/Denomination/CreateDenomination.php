@@ -8,7 +8,9 @@ use App\Models\Denomination;
 
 final class CreateDenomination implements CreatesDenomination
 {
-    public function __construct(private ValidatesDenomination $denominationValidator) {}
+    public function __construct(private ValidatesDenomination $denominationValidator)
+    {
+    }
 
     public function __invoke(array $data): Denomination
     {

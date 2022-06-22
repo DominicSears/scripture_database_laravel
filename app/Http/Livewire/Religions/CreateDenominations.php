@@ -18,7 +18,7 @@ class CreateDenominations extends ModalComponent
     public function mount(array $religionData = [])
     {
         if (! empty($religionData)) {
-            $this->religion = with(new Religion)->newInstance($religionData, true);
+            $this->religion = with(new Religion())->newInstance($religionData, true);
         }
 
         $this->state = [

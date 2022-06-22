@@ -45,7 +45,7 @@ class ShowDoctrines extends Component
 
         if ($this->isReligion = $this->entity instanceof Religion) {
             $this->childrenHaveDoctrine = $this->entity->denominations
-                    ->filter(fn($v) => $v->doctrines->isNotEmpty())
+                    ->filter(fn ($v) => $v->doctrines->isNotEmpty())
                     ->isNotEmpty();
         }
     }

@@ -5,26 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Nugget extends Model
 {
     use HasFactory;
 
-    const NUGGET_TYPE_REFUTE = 0;
-    const NUGGET_TYPE_SUPPORT = 1;
-    const NUGGET_TYPE_GENERAL = 2;
+    public const NUGGET_TYPE_REFUTE = 0;
+    public const NUGGET_TYPE_SUPPORT = 1;
+    public const NUGGET_TYPE_GENERAL = 2;
 
-    const NUGGET_TYPES = [
+    public const NUGGET_TYPES = [
         'refute',
         'support',
         'general'
     ];
 
-    const NUGGETS_FROM = [
+    public const NUGGETS_FROM = [
         'religions',
         'denominations',
         'doctrines'
@@ -35,7 +33,7 @@ class Nugget extends Model
     public function nuggetType(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => $this->getNuggetTypeById($attributes['nugget_type_id']),
+            get: fn ($value, $attributes) => $this->getNuggetTypeById($attributes['nugget_type_id']),
             set: function ($value, $attributes) {
                 $attributes['nugget_type'] = $this->getNuggetTypeIdByString($value);
             }

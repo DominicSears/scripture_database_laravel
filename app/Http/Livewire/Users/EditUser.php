@@ -3,9 +3,7 @@
 namespace App\Http\Livewire\Users;
 
 use App\Contracts\User\UpdatesUser;
-use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use App\Services\UserService;
 use App\Traits\MapsState;
 use Livewire\Component;
 
@@ -31,7 +29,7 @@ class EditUser extends Component
     {
         ($userUpdater)($this->state, $this->user);
     }
-    
+
     public function render()
     {
         return view('livewire.users.edit-user');

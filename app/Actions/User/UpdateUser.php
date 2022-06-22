@@ -9,7 +9,9 @@ use App\Models\User;
 
 final class UpdateUser implements UpdatesUser
 {
-    public function __construct(private ValidatesUser $userValidator) {}
+    public function __construct(private ValidatesUser $userValidator)
+    {
+    }
 
     public function __invoke(array $data, ?User $user = null, ?int $user_id = null): void
     {

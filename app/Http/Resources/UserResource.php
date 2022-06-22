@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Faith;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -29,9 +28,9 @@ class UserResource extends JsonResource
 
         if (in_array('faith', $relations)) {
             $data['faith'] = FaithResource::make($this->whenLoaded('faith'));
-        } else if (in_array('scopedFaith', $relations)) {
+        } elseif (in_array('scopedFaith', $relations)) {
             $data['faith'] = FaithResource::make($this->whenLoaded('scopedFaith'));
-        } else if (in_array('allFaiths', $relations) || in_array('scopedFaiths', $relations)) {
+        } elseif (in_array('allFaiths', $relations) || in_array('scopedFaiths', $relations)) {
             $data['faiths'] = FaithResource::collection($this->whenLoaded('allFaiths'));
         }
 
@@ -41,7 +40,7 @@ class UserResource extends JsonResource
 
         if (in_array('posts', $relations)) {
             $data['posts'] = PostResource::collection($this->whenLoaded('posts'));
-        } else if (in_array('updatedPosts', $relations)) {
+        } elseif (in_array('updatedPosts', $relations)) {
             $data['posts'] = PostResource::collection($this->whenLoaded('updatedPosts'));
         }
 

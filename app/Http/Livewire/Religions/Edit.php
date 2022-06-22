@@ -42,7 +42,7 @@ class Edit extends ModalComponent
             $this->convertEmptyArrayStrings($this->state),
             $this->religion
         );
-        
+
         $this->closeModalWithEvents([
             'updated-religion'
         ]);

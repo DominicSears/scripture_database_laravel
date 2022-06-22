@@ -11,7 +11,9 @@ class MenuIcon extends Component
      *
      * @return void
      */
-    public function __construct(public bool $isSelected, public bool $singleItem = false) {}
+    public function __construct(public bool $isSelected, public bool $singleItem = false)
+    {
+    }
 
     /**
      * Get the view / contents that represent the component.

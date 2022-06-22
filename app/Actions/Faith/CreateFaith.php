@@ -2,7 +2,6 @@
 
 namespace App\Actions\Faith;
 
-
 use App\Models\Faith;
 use App\Contracts\Faith\CreatesFaith;
 use App\Contracts\Faith\ValidatesNewFaith;
@@ -12,7 +11,9 @@ use Illuminate\Support\Arr;
 
 final class CreateFaith implements CreatesFaith
 {
-    public function __construct(private ValidatesNewFaith $validatesFaith) {}
+    public function __construct(private ValidatesNewFaith $validatesFaith)
+    {
+    }
 
     public function __invoke(array $data, bool $hasDenomination, ?User $user = null): Faith
     {

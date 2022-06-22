@@ -8,7 +8,9 @@ use App\Models\Doctrinable;
 
 final class CreateDoctrinable implements CreatesDoctrinable
 {
-    public function __construct(protected ValidatesDoctrinable $doctrinableValidator) {}
+    public function __construct(protected ValidatesDoctrinable $doctrinableValidator)
+    {
+    }
 
     /**
      * Create a doctrinable entry

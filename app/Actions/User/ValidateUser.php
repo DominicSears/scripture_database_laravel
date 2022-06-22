@@ -31,7 +31,7 @@ final class ValidateUser implements ValidatesUser
             $messages['id.required'] = 'User ID required for editing';
             $messages['id.integer'] = 'User ID must be an ID';
         }
-        
+
         return validator($data, $rules, $messages);
     }
 }

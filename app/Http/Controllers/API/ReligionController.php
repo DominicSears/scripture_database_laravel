@@ -14,7 +14,7 @@ use App\Http\Resources\NuggetResource;
 use App\Http\Resources\DoctrineResource;
 use App\Http\Resources\ReligionResource;
 use App\Http\Resources\DenominationResource;
-use \Illuminate\Validation\ValidationException;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -64,7 +64,7 @@ class ReligionController extends Controller
         return DenominationResource::collection(
             Denomination::query()
                 ->where('religion_id', $religion->getKey())
-                ->with(['parent', 'religion' => fn() => $religion])
+                ->with(['parent', 'religion' => fn () => $religion])
                 ->get()
         );
     }
@@ -78,7 +78,7 @@ class ReligionController extends Controller
                 ->join('users', 'users.id', '=', 'faiths.user_id')
                 ->where('faiths.religion_id', $religion->getKey())
                 ->distinct()
-                ->with(['scopedFaith.denomination', 'scopedFaith.religion' => fn() => $religion])
+                ->with(['scopedFaith.denomination', 'scopedFaith.religion' => fn () => $religion])
                 ->get()
         );
     }
@@ -90,7 +90,7 @@ class ReligionController extends Controller
                 ->select('users.*', 'faiths.id as faith_id2', 'faiths.religion_id')
                 ->join('faiths', 'faiths.id', '=', 'users.faith_id')
                 ->where('faiths.religion_id', $religion->getKey())
-                ->with(['faith', 'faith.denomination', 'faith.religion' => fn() => $religion])
+                ->with(['faith', 'faith.denomination', 'faith.religion' => fn () => $religion])
                 ->get()
         );
     }
@@ -101,7 +101,7 @@ class ReligionController extends Controller
             Doctrine::query()
                 ->where('religion_id', $religion->getKey())
                 ->where('denomination_id', null)
-                ->with(['createdBy', 'religion', 'religion' => fn() => $religion])
+                ->with(['createdBy', 'religion', 'religion' => fn () => $religion])
                 ->get()
         );
     }
