@@ -15,8 +15,8 @@
         @endif
     </div>
    @if (isset($children))
-        <div {{ $children->attributes }} x-cloak>
-            <div class="flex flex-col space-y-2 justify-start pt-4 pl-10">
+        <div {{ $children->attributes }} class="pt-4 w-full" x-cloak>
+            <div class="flex flex-col space-y-4 justify-center w-full">
                 {{ $children }}
             </div>
         </div>
