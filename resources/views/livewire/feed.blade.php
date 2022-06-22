@@ -24,8 +24,18 @@
         </button>
     </div>
     <div class="flex flex-col space-y-6 pb-6">
-        @for ($i = 0; $i < 5; $i++)
-            <div class="w-full h-96 border border-gray-300 rounded-xl"></div>
-        @endfor
+        <!-- Feed Items -->
+        @forelse ($feedItems as $item)
+            <div class="w-full h-96 border border-gray-300 rounded-xl flex flex-col p-8 justify-between">
+                <div class="flex flex-col space-y-2">
+                    <p class="font-semibold text-2xl text-sky-500">{{ $item['title'] }}</p>
+                    <small class="font-thin text-sm text-sky-400">Created By: {{ $item['created_by'] }} - {{ $item['created_at']->diffForHumans() }}</small>
+                </div>
+            </div>
+        @empty
+            <div class="w-full h-96 border border-gray-300 rounded-xl flex justify-center items-center">
+                <p class="font-bold text-xl text-sky-500">No Feed Items Available.</p>
+            </div>
+        @endforelse
     </div>
 </div>
