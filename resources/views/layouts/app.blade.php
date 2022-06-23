@@ -109,6 +109,7 @@
                         </svg>
                         <p class="font-semibold icon-name" style="display: none;">Users</p>
                         <x-slot:children x-show="subMenuOpen.users">
+                            <x-submenu-link :active="request()->is(route('users.index'))" url="{{ route('users.index') }}">View Users</x-submenu-link>
                             <x-submenu-link :active="request()->is(route('users.edit'))" url="{{ route('users.edit') }}">Edit User</x-submenu-link>
                         </x-slot:children>
                     </x-menu-icon>

@@ -9,9 +9,11 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function viewUser(User $user)
+    public function users()
     {
-        echo $user->name;
+        return view('users.index', [
+            'users' => User::with(['faith.religion', 'faith.denomination'])->simplePaginate(10)
+        ]);
     }
 
     public function edit(Request $request, ?User $user = null, ?int $faith_id = null)

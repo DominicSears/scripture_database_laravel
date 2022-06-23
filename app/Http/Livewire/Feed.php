@@ -76,10 +76,10 @@ class Feed extends Component
             $array = array_keys(
                 array_diff_key($this->filter, array_flip([$filterBy]))
             );
-
+    
             $this->filter[$filterBy] = true;
-
-            foreach ($array as $key) {
+    
+            foreach($array as $key) {
                 $this->filter[$key] = false;
             }
         }
@@ -87,7 +87,7 @@ class Feed extends Component
 
     public function getFilterKey(): string
     {
-        foreach ($this->filter as $key => $isFilterKey) {
+        foreach($this->filter as $key => $isFilterKey) {
             if ($isFilterKey) {
                 return $key;
             }
