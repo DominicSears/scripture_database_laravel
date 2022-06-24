@@ -13,19 +13,21 @@ class Nugget extends Model
     use HasFactory;
 
     public const NUGGET_TYPE_REFUTE = 0;
+
     public const NUGGET_TYPE_SUPPORT = 1;
+
     public const NUGGET_TYPE_GENERAL = 2;
 
     public const NUGGET_TYPES = [
         'refute',
         'support',
-        'general'
+        'general',
     ];
 
     public const NUGGETS_FROM = [
         'religions',
         'denominations',
-        'doctrines'
+        'doctrines',
     ];
 
     // Attributes

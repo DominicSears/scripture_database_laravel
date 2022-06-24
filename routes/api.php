@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API;
+use Illuminate\Support\Facades\Route;
 
 // All of models
 Route::get('/denominations', [API\DenominationController::class, 'getDenominations']);

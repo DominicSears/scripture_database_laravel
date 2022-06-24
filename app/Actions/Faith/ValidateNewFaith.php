@@ -15,7 +15,7 @@ final class ValidateNewFaith implements ValidatesNewFaith
             'user_id' => ['required', 'integer'],
             'note' => ['string', 'max:255'],
             'reason_left' => ['string', 'max:255'],
-            'end_of_faith' => ['required', 'date']
+            'end_of_faith' => ['required', 'date'],
         ];
 
         $messages = [
@@ -30,7 +30,7 @@ final class ValidateNewFaith implements ValidatesNewFaith
             'reason_left.string' => 'Reason left must be a string',
             'reason_left.max' => 'Max length of 255 characters exceeded',
             'end_of_faith.required' => 'End of previous faith is required to start a new one',
-            'end_of_faith.date' => 'End of previous faith must be a date'
+            'end_of_faith.date' => 'End of previous faith must be a date',
         ];
 
         if ($hasDenomination) {

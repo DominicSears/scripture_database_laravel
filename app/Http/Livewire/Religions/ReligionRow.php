@@ -12,7 +12,7 @@ class ReligionRow extends Component
     public function edit()
     {
         $this->emit('openModal', Edit::getName(), [
-            'religionId' => $this->religion->getKey()
+            'religionId' => $this->religion->getKey(),
         ]);
     }
 

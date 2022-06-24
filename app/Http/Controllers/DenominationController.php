@@ -10,7 +10,7 @@ class DenominationController extends Controller
     {
         return view('denominations.create-denomination', [
             'religion' => Religion::query()->find(2),
-            'religions' => Religion::all()
+            'religions' => Religion::all(),
         ]);
     }
 }

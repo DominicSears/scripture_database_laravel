@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Religion;
 use App\Models\Denomination;
+use App\Models\Religion;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Database\Eloquent\Model;
 
 class ReligionController extends Model
 {
@@ -15,7 +15,7 @@ class ReligionController extends Model
         $showPending = $request->get('showPending', false);
 
         return view('religions.list', [
-            'showPending' => $showPending
+            'showPending' => $showPending,
         ]);
     }
 
@@ -29,7 +29,7 @@ class ReligionController extends Model
         $religion->load('denominations');
 
         return view('religions.create-denomination', [
-            'religion' => $religion
+            'religion' => $religion,
         ]);
     }
 
@@ -41,7 +41,7 @@ class ReligionController extends Model
 
         return view('livewire.religions.update-denomination', [
             'religion' => $religion,
-            'denomination' => $denomination
+            'denomination' => $denomination,
         ]);
     }
 
@@ -50,7 +50,7 @@ class ReligionController extends Model
         $religion->load(['allDenominations', 'doctrines']);
 
         return view('religions.show', [
-            'religion' => $religion
+            'religion' => $religion,
         ]);
     }
 }

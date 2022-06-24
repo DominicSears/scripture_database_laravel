@@ -11,7 +11,7 @@ class NuggetController extends Controller
         $nuggets = Nugget::with(['religions', 'denominations', 'doctrines'])->get();
 
         return view('nuggets.list', [
-            'nuggets' => $nuggets
+            'nuggets' => $nuggets,
         ]);
     }
 }

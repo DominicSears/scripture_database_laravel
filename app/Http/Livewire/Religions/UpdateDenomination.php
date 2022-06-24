@@ -3,13 +3,13 @@
 namespace App\Http\Livewire\Religions;
 
 use App\Contracts\Denomination\UpdatesDenomination;
+use App\Exceptions\Denomination\MismatchUpdateDenominationException;
 use App\Models\Denomination;
 use App\Models\Religion;
+use App\Traits\ConvertEmptyArrayStrings;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use LivewireUI\Modal\ModalComponent;
-use App\Exceptions\Denomination\MismatchUpdateDenominationException;
-use App\Traits\ConvertEmptyArrayStrings;
 
 class UpdateDenomination extends ModalComponent
 {
@@ -54,7 +54,7 @@ class UpdateDenomination extends ModalComponent
         );
 
         $this->closeModalWithEvents([
-            'updated-denomination'
+            'updated-denomination',
         ]);
     }
 

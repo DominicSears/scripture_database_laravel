@@ -14,7 +14,7 @@ class ListReligions extends ModalComponent
 
     protected $listeners = [
         'created-religion' => '$refresh',
-        'updated-religion' => '$refresh'
+        'updated-religion' => '$refresh',
     ];
 
     public function mount(array $religionIds = [])

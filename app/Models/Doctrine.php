@@ -14,7 +14,7 @@ class Doctrine extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'scriptures' => 'array'
+        'scriptures' => 'array',
     ];
 
     // Relationships

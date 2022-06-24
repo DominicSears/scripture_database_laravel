@@ -25,67 +25,62 @@
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased w-full h-screen">
-        <!-- Header Bar -->
-        <div class="flex flex-row justify-between items-center px-8 py-4 w-full border-b border-slate-200" style="height: 10%;">
-            <div class="flex flex-row space-x-4 items-center w-max">
-                <div class="rounded-full w-12 h-12 bg-gray-500"></div>
-                <p class="font-thin text-gray-700 text-xl">Scripture Resource</p>
-            </div>
-            @livewire('search')
-            @livewire('navigation-menu')
-        </div>
         <!-- Sidebar and Content -->
-        <div class="flex flex-row space-x-4" style="height: 90%;">
+        <div class="flex flex-row h-full">
             <!-- Sidebar -->
-            <div class="h-full flex flex-col border-r border-slate-200 px-2 w-fit overflow-y-auto" id="sidebar" x-data="{
-                open: false,
-                opendSubMenu: false,
-                subMenuOpen: {
-                    users: false,
-                    groups: false,
-                    doctrines: false,
-                    nuggets: false
-                },
-                openMenu() {
-                    for (let text of document.getElementsByClassName('icon-name')) {
-                        text.style.display = this.open ? 'none' : 'block';
-                    }
-
-                    for (let chev of document.getElementsByClassName('menu-extend')) {
-                        chev.style.display = this.open ? 'none' : 'block';
-                    }
-                    
-                    this.open ? $el.removeAttribute('style') : $el.setAttribute('style', 'width: 16rem !important');
-
-                    if (this.openedSubMenu) {
-                        this.actionSubMenu(false);
-                    }
-
-                    this.open = !this.open;
-                },
-                actionSubMenu(open) {
-                    for (let menu in this.subMenuOpen) {
-                        this.subMenuOpen[menu] = open;
-                    }
-                },
-                openSubMenu(name) {
-                    if (!this.open) {
-                        this.openMenu();
-                    }
-
-                    this.subMenuOpen[name] = !this.subMenuOpen[name];
-                    this.openedSubMenu = this.checkOpened();
-                },
-                checkOpened() {
-                    for (let menu in this.subMenuOpen) {
-                        if (this.subMenuOpen[menu]) {
-                            return true;
+            <div class="h-full flex flex-col border-r border-slate-200 p-4 w-fit overflow-y-auto position-fixed items-center justify-start"
+                id="sidebar" x-transition x-data="{
+                    open: false,
+                    opendSubMenu: false,
+                    subMenuOpen: {
+                        users: false,
+                        groups: false,
+                        doctrines: false,
+                        nuggets: false
+                    },
+                    openMenu() {
+                        for (let text of document.getElementsByClassName('icon-name')) {
+                            text.style.display = this.open ? 'none' : 'block';
                         }
-                    }
 
-                    return false;
-                }
-            }" x-transition>
+                        for (let chev of document.getElementsByClassName('menu-extend')) {
+                            chev.style.display = this.open ? 'none' : 'block';
+                        }
+                        
+                        this.open ? $el.removeAttribute('style') : $el.setAttribute('style', 'width: 16rem !important');
+
+                        if (this.openedSubMenu) {
+                            this.actionSubMenu(false);
+                        }
+
+                        this.open = !this.open;
+                    },
+                    actionSubMenu(open) {
+                        for (let menu in this.subMenuOpen) {
+                            this.subMenuOpen[menu] = open;
+                        }
+                    },
+                    openSubMenu(name) {
+                        if (!this.open) {
+                            this.openMenu();
+                        }
+
+                        this.subMenuOpen[name] = !this.subMenuOpen[name];
+                        this.openedSubMenu = this.checkOpened();
+                    },
+                    checkOpened() {
+                        for (let menu in this.subMenuOpen) {
+                            if (this.subMenuOpen[menu]) {
+                                return true;
+                            }
+                        }
+
+                        return false;
+                    }
+                }">
+                <div class="w-full">
+                    <div class="rounded-full w-10 h-10 bg-gray-500"></div>
+                </div>
                 <!-- Hamburget Menu -->
                 <div class="w-full pt-8 pl-2" x-on:click="openMenu()">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500 hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -146,9 +141,27 @@
                     </x-menu-icon>
                 </div>
             </div>
-            <!-- Content -->
-            <div class="w-full h-full p-8 overflow-y-auto">
-                {{ $slot }}
+            <!-- Header & Content -->
+            <div class="w-full overflow-y-auto px-6 h-full">
+                <!-- Header Bar -->
+                <div class="flex flex-row justify-between items-center w-full pt-2" style="height: 10%;">
+                    <livewire:search />
+                    <div class="flex flex-row space-x-4 items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <div class="flex flex-col justify-center items-start">
+                            <p class="text-md font-semibold">{{ Auth::user()->name }}</p>
+                            <p class="text-sm">{{ Auth::user()->email }}</p>
+                        </div>
+                        <div>
+                            <livewire:navigation-menu />
+                        </div>
+                    </div>
+                </div>
+                <div class="w-full py-8" style="height: 90%;">
+                    {{ $slot }}
+                </div>
             </div>
         </div>
 

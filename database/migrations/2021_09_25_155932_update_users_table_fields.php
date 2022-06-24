@@ -36,8 +36,8 @@ class UpdateUsersTableFields extends Migration
             $table->string('name');
 
             $table->dropColumn([
-               'first_name', 'last_name', 'gender', 'username',
-               'country_iso_code', 'faith_id'
+                'first_name', 'last_name', 'gender', 'username',
+                'country_iso_code', 'faith_id',
             ]);
         });
     }

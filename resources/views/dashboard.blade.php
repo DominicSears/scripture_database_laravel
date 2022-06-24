@@ -30,7 +30,7 @@
             </div>
         </div>
         <!-- Col 2 -->
-        <div class="w-2/4 flex flex-col space-y-4 h-full">
+        <div class="w-2/4 flex flex-col space-y-4 h-full overflow-y-auto px-4">
             <livewire:feed />
         </div>
         <!-- Col 3 -->

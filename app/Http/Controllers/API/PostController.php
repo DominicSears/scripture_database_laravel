@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Post;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Models\Denomination;
 use App\Models\Doctrine;
+use App\Models\Post;
 use App\Models\Religion;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -46,7 +46,7 @@ class PostController extends Controller
             $validated = $validator->validated();
         } catch (ValidationException) {
             return new JsonResponse([
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
 

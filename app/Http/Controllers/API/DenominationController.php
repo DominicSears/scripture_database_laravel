@@ -36,7 +36,7 @@ class DenominationController extends Controller
             $validated = $validator->validated();
         } catch (ValidationException) {
             return new JsonResponse([
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], Response::HTTP_BAD_REQUEST);
         }
 

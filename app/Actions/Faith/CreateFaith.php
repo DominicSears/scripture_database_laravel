@@ -2,10 +2,10 @@
 
 namespace App\Actions\Faith;
 
-use App\Models\Faith;
 use App\Contracts\Faith\CreatesFaith;
 use App\Contracts\Faith\ValidatesNewFaith;
 use App\Exceptions\Faith\MismatchFaithUserException;
+use App\Models\Faith;
 use App\Models\User;
 use Illuminate\Support\Arr;
 
@@ -36,7 +36,7 @@ final class CreateFaith implements CreatesFaith
             ->where('id', $user->faith_id)
             ->update([
                 'end_of_faith' => $validated['end_of_faith'],
-                'reason_left' => $validated['reason_left']
+                'reason_left' => $validated['reason_left'],
             ]);
 
         // Save new key to user

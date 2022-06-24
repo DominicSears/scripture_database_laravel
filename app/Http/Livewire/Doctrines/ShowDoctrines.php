@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Doctrines;
 
-use Livewire\Component;
-use App\Models\Religion;
-use App\Models\Denomination;
 use App\Exceptions\Doctrine\InvalidDoctrineSourceException;
+use App\Models\Denomination;
+use App\Models\Religion;
+use Livewire\Component;
 
 class ShowDoctrines extends Component
 {
@@ -19,7 +19,7 @@ class ShowDoctrines extends Component
 
     protected const ALLOWED_CLASSES = [
         'App\Models\Religion',
-        'App\Models\Denomination'
+        'App\Models\Denomination',
     ];
 
     /**

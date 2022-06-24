@@ -30,7 +30,7 @@ class FaithFactory extends Factory
                 $this->faker->dateTimeBetween($start->format('Y-m-d')) : null,
             'user_id' => 0,
             'note' => $this->faker->boolean() ? $this->faker->sentences(2) : null,
-            'reason_left' => is_null($end) ? null : $this->faker->sentences(5)
+            'reason_left' => is_null($end) ? null : $this->faker->sentences(5),
         ];
     }
 }

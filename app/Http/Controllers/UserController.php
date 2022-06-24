@@ -12,7 +12,7 @@ class UserController extends Controller
     public function users()
     {
         return view('users.index', [
-            'users' => User::with(['faith.religion', 'faith.denomination'])->simplePaginate(10)
+            'users' => User::with(['faith.religion', 'faith.denomination'])->simplePaginate(10),
         ]);
     }
 
@@ -26,7 +26,7 @@ class UserController extends Controller
             'user' => $user,
             'religions' => Religion::query()->where('approved', true)->get(),
             'denominations' => Denomination::query()->where('approved', true)->get(),
-            'faith_id' => $faith_id
+            'faith_id' => $faith_id,
         ]);
     }
 }

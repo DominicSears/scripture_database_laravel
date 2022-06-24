@@ -25,7 +25,7 @@ class CreateDenominations extends ModalComponent
             'religion_id' => $this->religion->getKey(),
             'approved' => false,
             'created_by' => auth()->id(),
-            'parent_id' => null
+            'parent_id' => null,
         ];
     }
 
@@ -36,7 +36,7 @@ class CreateDenominations extends ModalComponent
         );
 
         $this->closeModalWithEvents([
-            'created-denomination'
+            'created-denomination',
         ]);
     }
 

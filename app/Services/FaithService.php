@@ -41,7 +41,7 @@ class FaithService
                 'start_of_faith' => $data['start_of_faith'],
                 'end_of_faith' => $data['end_of_faith'] ?? null,
                 'user_id' => $data['user_id'],
-                'note' => $data['note']
+                'note' => $data['note'],
             ]);
     }
 
@@ -54,7 +54,7 @@ class FaithService
                 'denomination_id' => ['somtimes', 'integer'],
                 'start_of_faith' => ['required', 'date'],
                 'note' => ['string', 'max:255'],
-                'reason_left' => ['string', 'max:255']
+                'reason_left' => ['string', 'max:255'],
             ]
         );
     }

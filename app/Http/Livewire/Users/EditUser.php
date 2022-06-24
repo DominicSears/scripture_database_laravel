@@ -15,7 +15,6 @@ class EditUser extends Component
 
     public array $state = [];
 
-
     public function mount(?int $userId = null)
     {
         $this->user ??= User::query()

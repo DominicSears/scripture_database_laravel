@@ -2,12 +2,12 @@
 
 namespace App\Actions\Fortify;
 
-use App\Models\User;
 use App\Models\Faith;
-use Laravel\Jetstream\Jetstream;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use Laravel\Jetstream\Jetstream;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -41,7 +41,7 @@ class CreateNewUser implements CreatesNewUsers
             'username' => $input['username'],
             'gender' => $input['gender'],
             'email' => $input['email'],
-            'password' => Hash::make($input['password'])
+            'password' => Hash::make($input['password']),
         ]);
 
         $faith = Faith::create([
@@ -49,7 +49,7 @@ class CreateNewUser implements CreatesNewUsers
             'denomination_id' => $input['denomination_id'] ?? null,
             'start_of_faith' => $input['start_of_faith'],
             'user_id' => $user->getKey(),
-            'note' => $input['note'] ?? null
+            'note' => $input['note'] ?? null,
         ]);
 
         $user->faith_id = $faith->getKey();

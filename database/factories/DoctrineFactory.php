@@ -27,7 +27,7 @@ class DoctrineFactory extends Factory
             'description' => $this->faker->sentence(rand(3, 20)),
             'scriptures' => [rand(01_001_001, 66_022_021)],
             'religion_id' => 0,
-            'denomination_id' => null
+            'denomination_id' => null,
         ];
     }
 }

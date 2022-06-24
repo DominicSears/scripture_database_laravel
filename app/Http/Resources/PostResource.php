@@ -25,7 +25,7 @@ class PostResource extends JsonResource
             'published_at' => $this->published_at?->format($dateFormat),
             'slug' => $this->slug,
             'title' => $this->title,
-            'content' => $this->content
+            'content' => $this->content,
         ];
     }
 }

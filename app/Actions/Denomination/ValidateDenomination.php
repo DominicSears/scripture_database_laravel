@@ -15,7 +15,7 @@ final class ValidateDenomination implements ValidatesDenomination
             'parent_id' => ['sometimes', 'integer', 'nullable'],
             'approved' => ['required', 'boolean'],
             'created_by' => ['required', 'integer'],
-            'description' => ['string', 'min:10', 'nullable']
+            'description' => ['string', 'min:10', 'nullable'],
         ];
 
         $messages = [
@@ -29,7 +29,7 @@ final class ValidateDenomination implements ValidatesDenomination
             'created_by.required' => 'Must have a creator',
             'created_by.integer' => 'Created by must be an ID',
             'description.string' => 'Description must be a string',
-            'description.min' => 'Description must have a minimum of 10 characters'
+            'description.min' => 'Description must have a minimum of 10 characters',
         ];
 
         if ($isUpdate) {

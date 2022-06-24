@@ -26,7 +26,7 @@ class DenominationFactory extends Factory
             'created_by' => 0,
             'religion_id' => 0,
             'parent_id' => null,
-            'approved' => true
+            'approved' => true,
         ];
     }
 }

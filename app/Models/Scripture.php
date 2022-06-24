@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Scripture extends Model
 {
     public const BIBLE_VERSIONS = [
-      'kjv', 'asv', 'bbe', 'web', 'ylt'
+        'kjv', 'asv', 'bbe', 'web', 'ylt',
     ];
 
     public function __construct(array $attributes = [])

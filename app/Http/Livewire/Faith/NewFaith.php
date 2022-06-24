@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Faith;
 
-use App\Models\Religion;
-use App\Models\Denomination;
-use App\Models\User;
 use App\Contracts\Faith\CreatesFaith;
-use LivewireUI\Modal\ModalComponent;
+use App\Models\Denomination;
+use App\Models\Religion;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use LivewireUI\Modal\ModalComponent;
 
 class NewFaith extends ModalComponent
 {
@@ -47,7 +47,7 @@ class NewFaith extends ModalComponent
         $createsFaith($this->state, $this->denominations->isNotEmpty(), $this->user);
 
         $this->closeModalWithEvents([
-            'updated-faith'
+            'updated-faith',
         ]);
     }
 

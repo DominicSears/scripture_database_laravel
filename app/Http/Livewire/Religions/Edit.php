@@ -44,7 +44,7 @@ class Edit extends ModalComponent
         );
 
         $this->closeModalWithEvents([
-            'updated-religion'
+            'updated-religion',
         ]);
     }
 

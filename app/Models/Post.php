@@ -15,7 +15,7 @@ class Post extends Model
     protected $casts = [
         'created_at' => 'immutable_datetime',
         'updated_at' => 'datetime',
-        'published_at' => 'datetime'
+        'published_at' => 'datetime',
     ];
 
     public const POST_TYPES = [
@@ -24,7 +24,7 @@ class Post extends Model
         'religion' => Religion::class,
         'nugget' => Nugget::class,
         'faith' => Faith::class,
-        'denomination' => Denomination::class
+        'denomination' => Denomination::class,
     ];
 
     // Relationships

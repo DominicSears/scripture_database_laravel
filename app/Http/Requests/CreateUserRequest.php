@@ -39,7 +39,7 @@ class CreateUserRequest extends FormRequest
             'religion_id' => ['required', 'integer'],
             'denomination_id' => ['integer', 'sometimes'],
             'start_of_faith' => ['date', 'required'],
-            'note' => ['sometimes', 'string']
+            'note' => ['sometimes', 'string'],
         ];
     }
 }

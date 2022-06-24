@@ -23,7 +23,7 @@ final class ValidateUser implements ValidatesUser
             'last_name.required' => 'Last name is required',
             'gender.required' => 'Gender is required',
             'gender.max' => 'Gender can only be on letter',
-            'country_iso_code' => 'Country ISO code must be an integer'
+            'country_iso_code' => 'Country ISO code must be an integer',
         ];
 
         if ($isUpdate) {

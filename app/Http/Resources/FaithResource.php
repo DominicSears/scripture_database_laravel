@@ -26,7 +26,7 @@ class FaithResource extends JsonResource
             'end_of_faith' => $this->end_of_faith?->format($dateFormat),
             'user_id' => $this->user_id,
             'note' => $this->note,
-            'reason_left' => $this->reason_left
+            'reason_left' => $this->reason_left,
         ];
     }
 }

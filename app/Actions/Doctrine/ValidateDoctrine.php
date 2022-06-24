@@ -17,7 +17,7 @@ final class ValidateDoctrine implements ValidatesDoctrine
         $doctrineRules = [
             'created_by' => ['integer', 'required'],
             'title' => ['string', 'max:255'],
-            'description' => ['string']
+            'description' => ['string'],
         ];
 
         $doctrineMessages = [
@@ -25,7 +25,7 @@ final class ValidateDoctrine implements ValidatesDoctrine
             'created_by.required' => 'There must be an user who created the doctrine here',
             'title.string' => 'Title must be a string',
             'title.max' => 'You are beyond the 255 character limit',
-            'description.string' => 'Description must be a string'
+            'description.string' => 'Description must be a string',
         ];
 
         if ($isUpdate) {

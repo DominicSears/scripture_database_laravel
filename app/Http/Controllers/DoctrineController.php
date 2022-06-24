@@ -17,7 +17,7 @@ class DoctrineController extends Controller
             $request->all(),
             [
                 'denomination_id' => ['integer', 'nullable'],
-                'religion_id' => ['integer', 'nullable']
+                'religion_id' => ['integer', 'nullable'],
             ]
         );
 
@@ -29,7 +29,7 @@ class DoctrineController extends Controller
 
         return view('doctrines.create', [
             'religion_id' => $values['religion_id'] ?? null,
-            'denomination_id' => $values['denomination_id'] ?? null
+            'denomination_id' => $values['denomination_id'] ?? null,
         ]);
     }
 
@@ -46,7 +46,7 @@ class DoctrineController extends Controller
 
         return view('doctrines.list', [
             'religions' => $religions,
-            'empty' => $empty
+            'empty' => $empty,
         ]);
     }
 
@@ -70,7 +70,7 @@ class DoctrineController extends Controller
         return view('doctrines.by-religion', [
             'religion' => $religion,
             'empty' => $empty,
-            'denominationEmpty' => $denominationEmpty
+            'denominationEmpty' => $denominationEmpty,
         ]);
     }
 
@@ -82,7 +82,7 @@ class DoctrineController extends Controller
 
         return view('doctrines.by-denomination', [
             'denomination' => $denomination,
-            'empty' => $empty
+            'empty' => $empty,
         ]);
     }
 }

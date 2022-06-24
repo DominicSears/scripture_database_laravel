@@ -12,7 +12,7 @@ class ListDenominations extends ModalComponent
 
     protected $listeners = [
         'updated-denomination' => '$refresh',
-        'created-denomination' => '$refresh'
+        'created-denomination' => '$refresh',
     ];
 
     public function mount()
@@ -35,14 +35,14 @@ class ListDenominations extends ModalComponent
     {
         $this->emit('openModal', UpdateDenomination::getName(), [
             'religionData' => $this->religion->withoutRelations()->toArray(),
-            'denominationId' => $id
+            'denominationId' => $id,
         ]);
     }
 
     public function newDenomination()
     {
         $this->emit('openModal', CreateDenominations::getName(), [
-            'religionData' => $this->religion->withoutRelations()->toArray()
+            'religionData' => $this->religion->withoutRelations()->toArray(),
         ]);
     }
 

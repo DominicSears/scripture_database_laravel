@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\User;
-use App\Models\Nugget;
-use App\Models\Doctrine;
-use App\Models\Religion;
-use App\Models\Denomination;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
-use App\Http\Resources\NuggetResource;
-use App\Http\Resources\DoctrineResource;
-use App\Http\Resources\ReligionResource;
 use App\Http\Resources\DenominationResource;
-use Illuminate\Validation\ValidationException;
+use App\Http\Resources\DoctrineResource;
+use App\Http\Resources\NuggetResource;
+use App\Http\Resources\ReligionResource;
+use App\Http\Resources\UserResource;
+use App\Models\Denomination;
+use App\Models\Doctrine;
+use App\Models\Nugget;
+use App\Models\Religion;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class ReligionController extends Controller
 {

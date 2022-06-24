@@ -28,7 +28,7 @@ class MakeFaithRequest extends FormRequest
             'denomination_id' => ['somtimes', 'integer'],
             'start_of_faith' => ['required', 'date'],
             'note' => ['string', 'max:255'],
-            'reason_left' => ['string', 'max:255']
+            'reason_left' => ['string', 'max:255'],
         ];
     }
 }

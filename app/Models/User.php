@@ -167,11 +167,11 @@ class User extends Authenticatable
 
     public function createdByDoctrine(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'created_by');
+        return $this->belongsTo(self::class, 'id', 'created_by');
     }
 
     public function updatedByDoctrine(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'id', 'updated_by');
+        return $this->belongsTo(self::class, 'id', 'updated_by');
     }
 }

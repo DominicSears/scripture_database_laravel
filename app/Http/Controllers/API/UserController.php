@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use Countable;
-use App\Models\User;
-use App\Models\Nugget;
-use Illuminate\Http\Request;
-use App\Services\UserService;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
+use App\Models\Nugget;
+use App\Models\User;
+use App\Services\UserService;
+use Countable;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends Controller

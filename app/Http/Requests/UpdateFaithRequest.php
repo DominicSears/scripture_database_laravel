@@ -28,7 +28,7 @@ class UpdateFaithRequest extends FormRequest
             'start_of_faith' => ['required', 'date'],
             'end_of_faith' => ['sometimes', 'date'],
             'note' => ['string', 'max:255'],
-            'reason_left' => ['string', 'max:255']
+            'reason_left' => ['string', 'max:255'],
         ];
     }
 }

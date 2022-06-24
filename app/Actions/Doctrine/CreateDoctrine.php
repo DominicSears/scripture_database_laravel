@@ -2,20 +2,19 @@
 
 namespace App\Actions\Doctrine;
 
-use App\Models\Doctrinable;
-use App\Models\Doctrine;
+use App\Contracts\Doctrinable\ValidatesDoctrinable;
 use App\Contracts\Doctrine\CreatesDoctrine;
 use App\Contracts\Doctrine\ValidatesDoctrine;
+use App\Models\Doctrinable;
+use App\Models\Doctrine;
 use Illuminate\Validation\ValidationException;
-use App\Contracts\Doctrinable\ValidatesDoctrinable;
 
 final class CreateDoctrine implements CreatesDoctrine
 {
     public function __construct(
         private ValidatesDoctrine $doctrineValidator,
         private ValidatesDoctrinable $doctrinableValidator
-    )
-    {
+    ) {
     }
 
     /**

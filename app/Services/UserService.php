@@ -19,7 +19,7 @@ class UserService
             $user->load([
                 'allFaiths' => fn ($q) => $q->orderBy('start_of_faith', 'desc'),
                 'allFaiths.religion',
-                'allFaiths.denomination'
+                'allFaiths.denomination',
             ]);
         } else {
             $user->load(['faith', 'faith.religion', 'faith.denomination']);
@@ -60,7 +60,7 @@ class UserService
                 'denomination_id' => $request->get('denomination_id'),
                 'user_id' => $user->getKey(),
                 'start_of_faith' => $request->get('start_of_faith'),
-                'note' => $request->get('note')
+                'note' => $request->get('note'),
             ]);
 
         $user->faith_id = $faith->getKey();

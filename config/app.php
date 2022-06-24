@@ -179,7 +179,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         // Actions
-        App\Providers\ActionServiceProvider::class
+        App\Providers\ActionServiceProvider::class,
     ],
 
     /*

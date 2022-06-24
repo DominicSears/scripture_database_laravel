@@ -16,7 +16,7 @@ class Faith extends Model
 
     protected $casts = [
         'start_of_faith' => 'datetime:Y-m-d',
-        'end_of_faith' => 'datetime:Y-m-d'
+        'end_of_faith' => 'datetime:Y-m-d',
     ];
 
     // Attributes
@@ -28,11 +28,11 @@ class Faith extends Model
                 $title = $this->religion->name;
 
                 if (isset($this->denomination)) {
-                    $title .= ' (' . $this->denomination->name . ')';
+                    $title .= ' ('.$this->denomination->name.')';
                 }
 
                 return $title;
-            }   
+            }
         );
     }
 

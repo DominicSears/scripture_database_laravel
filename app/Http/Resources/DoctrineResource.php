@@ -25,7 +25,7 @@ class DoctrineResource extends JsonResource
             'description' => $this->description,
             'scriptures' => $this->scriptures,
             'religion' => ReligionResource::make($this->whenLoaded('religion')),
-            'denomination' => DenominationResource::make($this->whenLoaded('denomination'))
+            'denomination' => DenominationResource::make($this->whenLoaded('denomination')),
         ];
     }
 }

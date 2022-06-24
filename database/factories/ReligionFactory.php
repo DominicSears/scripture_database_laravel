@@ -26,7 +26,7 @@ class ReligionFactory extends Factory
             'created_by' => 0,
             'name' => $this->faker->title(),
             'parent_id' => null,
-            'approved' => true
+            'approved' => true,
         ];
     }
 }

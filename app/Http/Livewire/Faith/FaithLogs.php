@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Faith;
 
 use App\Models\Faith;
-use Livewire\Component;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Component;
 
 class FaithLogs extends Component
 {
@@ -17,12 +17,12 @@ class FaithLogs extends Component
     public function mount()
     {
         $this->faiths ??= Faith::query()
-            ->where('user_id', $this->userId ??  auth()->id())
+            ->where('user_id', $this->userId ?? auth()->id())
             ->get();
     }
 
     protected $listeners = [
-        'updated-faith' => 'updatedFaith'
+        'updated-faith' => 'updatedFaith',
     ];
 
     public function updatedFaith()

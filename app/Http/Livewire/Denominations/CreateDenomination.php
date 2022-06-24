@@ -25,7 +25,7 @@ class CreateDenomination extends ModalComponent
 
         $this->state = [
             'religion_id' => $this->religion->getKey(),
-            'approved' => false
+            'approved' => false,
         ];
     }
 

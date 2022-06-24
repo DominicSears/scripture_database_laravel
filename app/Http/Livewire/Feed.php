@@ -7,18 +7,18 @@ use App\Models\Doctrine;
 use App\Models\Nugget;
 use App\Models\Post;
 use App\Models\Religion;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use Illuminate\Support\Collection;
 
 class Feed extends Component
 {
     public array $filter = [
         'browse_all' => true,
         'recent' => false,
-        'following' => false
+        'following' => false,
     ];
 
-    public Collection $feedItems;
+    public array $feedItems;
 
     public function mount()
     {
@@ -43,7 +43,8 @@ class Feed extends Component
             ->take(10)
             ->merge($nuggets)
             ->merge($posts)
-            ->merge($denominations);
+            ->merge($denominations)
+            ->sortByDesc('created_at');
 
         $this->setFeedItems($feedItems);
     }
@@ -54,7 +55,7 @@ class Feed extends Component
      * @param Collection<\Illuminate\Database\Eloquent\Model> $collection
      * @return void
      */
-    public function setFeedItems(Collection $collection)
+    public function setFeedItems(Collection $collection): void
     {
         $arr = [];
 
@@ -63,11 +64,11 @@ class Feed extends Component
                 'title' => $item->getAttribute('title'),
                 'description' => $item->getAttribute('description'),
                 'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
-                'created_at' => $item->getAttribute('created_at')
+                'created_at' => $item->getAttribute('created_at'),
             ];
         }
 
-        $this->feedItems = collect($arr);
+        $this->feedItems = $arr;
     }
 
     public function filter(string $filterBy)
@@ -76,10 +77,10 @@ class Feed extends Component
             $array = array_keys(
                 array_diff_key($this->filter, array_flip([$filterBy]))
             );
-    
+
             $this->filter[$filterBy] = true;
-    
-            foreach($array as $key) {
+
+            foreach ($array as $key) {
                 $this->filter[$key] = false;
             }
         }
@@ -87,7 +88,7 @@ class Feed extends Component
 
     public function getFilterKey(): string
     {
-        foreach($this->filter as $key => $isFilterKey) {
+        foreach ($this->filter as $key => $isFilterKey) {
             if ($isFilterKey) {
                 return $key;
             }

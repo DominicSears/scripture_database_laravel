@@ -24,7 +24,7 @@ class Create extends ModalComponent
 
         $this->state = [
             'approved' => false,
-            'created_by' => auth()->id()
+            'created_by' => auth()->id(),
         ];
     }
 

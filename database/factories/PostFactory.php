@@ -20,7 +20,7 @@ class PostFactory extends Factory
         'App\Models\Doctrine',
         'App\Models\Denomination',
         'App\Models\Religion',
-        'App\Models\Nugget'
+        'App\Models\Nugget',
     ];
 
     /**
@@ -34,11 +34,11 @@ class PostFactory extends Factory
             'created_at' => now(),
             'created_by' => 0,
             'published_at' => $this->faker->boolean() ? $this->faker->dateTimeBetween() : null,
-            'postable_type' => $type = self::POSTABLE_TYPES[rand(0, sizeof(self::POSTABLE_TYPES) - 1)],
+            'postable_type' => $type = self::POSTABLE_TYPES[rand(0, count(self::POSTABLE_TYPES) - 1)],
             'postable_id' => 0,
             'slug' => $this->faker->slug(),
             'title' => $this->faker->words(rand(1, 4), true),
-            'content' => $this->faker->randomHtml()
+            'content' => $this->faker->randomHtml(),
         ];
     }
 }

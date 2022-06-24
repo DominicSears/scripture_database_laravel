@@ -14,7 +14,7 @@ final class ValidateReligion implements ValidatesReligion
             'name' => ['required', 'string', 'max:255'],
             'approved' => ['required', 'bool'],
             'parent_id' => ['nullable', 'integer'],
-            'description' => ['string', 'min:10', 'nullable']
+            'description' => ['string', 'min:10', 'nullable'],
         ];
 
         $messages = [
@@ -26,7 +26,7 @@ final class ValidateReligion implements ValidatesReligion
             'approved.required' => 'Approval status is required',
             'approved.bool' => 'Approval must be a boolean',
             'parent_id.integer' => 'Parent ID must be an ID',
-            'description.min' => 'Description must have a minimum of 10 characters'
+            'description.min' => 'Description must have a minimum of 10 characters',
         ];
 
         if ($isUpdate) {

@@ -3,12 +3,12 @@
 namespace App\Http\Livewire\Faith;
 
 use App\Actions\Faith\UpdateFaith;
-use App\Models\User;
+use App\Models\Denomination;
 use App\Models\Faith;
 use App\Models\Religion;
-use App\Models\Denomination;
-use LivewireUI\Modal\ModalComponent;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
+use LivewireUI\Modal\ModalComponent;
 
 class EditFaith extends ModalComponent
 {
@@ -23,7 +23,7 @@ class EditFaith extends ModalComponent
     public User $user;
 
     protected $listeners = [
-        'updated-faith' => 'updatedFaith'
+        'updated-faith' => 'updatedFaith',
     ];
 
     public function mount(Faith $faith, User $user)
@@ -54,7 +54,7 @@ class EditFaith extends ModalComponent
     public function newFaith()
     {
         $this->emit('openModal', NewFaith::getName(), [
-            'user_id' => $this->user->getKey()
+            'user_id' => $this->user->getKey(),
         ]);
     }
 
