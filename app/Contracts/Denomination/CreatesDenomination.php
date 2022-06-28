@@ -9,9 +9,10 @@ interface CreatesDenomination
     /**
      * Action that creates denominations
      *
-     * @throws \Illuminate\Validation\ValidationException
-     * @param array $data
+     * @param  array  $data
      * @return Denomination
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
     public function __invoke(array $data): Denomination;
 }

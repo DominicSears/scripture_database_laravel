@@ -30,9 +30,10 @@ class ReligionController extends Controller
     /**
      * Get a list of all the religions
      *
-     * @param Request $request
-     * @throws ValidationException
+     * @param  Request  $request
      * @return JsonResource
+     *
+     * @throws ValidationException
      */
     public function getReligions(Request $request): JsonResource
     {

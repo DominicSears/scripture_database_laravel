@@ -31,10 +31,11 @@ class Create extends Component
     /**
      * Constructor for Livewire component
      *
-     * @param ?string $type
-     * @param ?int $typeId
-     * @throws NotFoundHttpException
+     * @param  ?string  $type
+     * @param  ?int  $typeId
      * @return void
+     *
+     * @throws NotFoundHttpException
      */
     public function mount(?int $religionId = null, ?int $denominationId = null)
     {

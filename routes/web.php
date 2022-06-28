@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::controller(Controllers\DoctrineController::class)->group(function () {
         Route::get('/doctrines', 'list')->name('doctrines.list');
         Route::get('/doctrines/create', 'create')->name('doctrines.create');
+        Route::get('/doctrines/{doctrine}', 'show')->name('doctrines.show');
     });
 
     // Nuggets

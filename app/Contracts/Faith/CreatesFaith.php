@@ -10,12 +10,13 @@ interface CreatesFaith
     /**
      * Creates a faith log
      *
+     * @param  array  $data
+     * @param  bool  $hasDenomination
+     * @param  User|null  $user
+     * @return Faith
+     *
      * @throws App\Exceptions\Faith\MismatchFaithUserException
      * @throws \Illuminate\Validation\ValidationException
-     * @param array $data
-     * @param bool $hasDenomination
-     * @param User|null $user
-     * @return Faith
      */
     public function __invoke(array $data, bool $hasDenomination, ?User $user = null): Faith;
 }

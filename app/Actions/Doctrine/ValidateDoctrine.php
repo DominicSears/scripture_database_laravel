@@ -8,8 +8,8 @@ use Illuminate\Contracts\Validation\Validator;
 final class ValidateDoctrine implements ValidatesDoctrine
 {
     /**
-     * @param array $data
-     * @param bool $isUpdate
+     * @param  array  $data
+     * @param  bool  $isUpdate
      * @return Validator[]
      */
     public function __invoke(array $data, bool $isUpdate = false): Validator

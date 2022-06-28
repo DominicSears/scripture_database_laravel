@@ -9,7 +9,7 @@ interface CreatesReligion
     /**
      * Creates a religion
      *
-     * @param array $data
+     * @param  array  $data
      * @return Religion
      */
     public function __invoke(array $data): Religion;

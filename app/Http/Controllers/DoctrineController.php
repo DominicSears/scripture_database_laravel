@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Denomination;
+use App\Models\Doctrine;
 use App\Models\Religion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -83,6 +84,13 @@ class DoctrineController extends Controller
         return view('doctrines.by-denomination', [
             'denomination' => $denomination,
             'empty' => $empty,
+        ]);
+    }
+
+    public function show(Doctrine $doctrine): View
+    {
+        return view('doctrines.show', [
+            'doctrine' => $doctrine
         ]);
     }
 }

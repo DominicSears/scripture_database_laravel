@@ -9,8 +9,8 @@ interface ValidatesReligion
     /**
      * Religions validator
      *
-     * @param array $data
-     * @param bool $isUpdate
+     * @param  array  $data
+     * @param  bool  $isUpdate
      * @return Validator
      */
     public function __invoke(array $data, bool $isUpdate = false): Validator;

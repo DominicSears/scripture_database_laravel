@@ -15,9 +15,10 @@ final class CreateDoctrinable implements CreatesDoctrinable
     /**
      * Create a doctrinable entry
      *
-     * @param array $data
-     * @throws Illuminate\Validation\ValidationException
+     * @param  array  $data
      * @return void
+     *
+     * @throws Illuminate\Validation\ValidationException
      */
     public function __invoke(array $data): void
     {

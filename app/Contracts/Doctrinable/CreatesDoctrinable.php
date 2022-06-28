@@ -7,7 +7,7 @@ interface CreatesDoctrinable
     /**
      * Create a doctrinable
      *
-     * @param array $data
+     * @param  array  $data
      * @return void
      */
     public function __invoke(array $data): void;

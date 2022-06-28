@@ -9,12 +9,13 @@ interface UpdatesDenomination
     /**
      * Action to update a denomination
      *
+     * @param  array  $data
+     * @param  Denomination  $denomination
+     * @return void
+     *
      * @throws App\Exceptions\Denomination\MismatchUpdateDenominationException
      * @throws App\Exceptions\Denomination\MismatchDenominationReligionException
      * @throws \Illuminate\Validation\ValidationException
-     * @param array $data
-     * @param Denomination $denomination
-     * @return void
      */
     public function __invoke(array $data, Denomination $denomination): void;
 }

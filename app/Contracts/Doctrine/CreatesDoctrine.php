@@ -7,7 +7,7 @@ interface CreatesDoctrine
     /**
      * Creates a doctrine object along with doctrinable
      *
-     * @param array $data
+     * @param  array  $data
      * @return void
      */
     public function __invoke(array $data): void;

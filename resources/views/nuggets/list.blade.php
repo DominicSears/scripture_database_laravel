@@ -5,9 +5,11 @@
             <p>{{ $nugget->title }}</p>
             <p>{{ $nugget->explanation }}</p>
             <hr>
-            @foreach ($nugget->availableNuggetableRelations() as $relation)
-                <p>{{ ucfirst($nugget->nuggetType) }} for {{ $nugget->getRelation($relation)->implode('title', ', ') }}</p>
-            @endforeach
+            <span>
+                @foreach ($nugget->nuggetTypeStatement($nugget->availableNuggetableRelations()) as $statement)
+                    {!! $statement !!}
+                @endforeach
+            </span>
         @empty
             <p>No nuggets available</p>
         @endforelse
