@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Denomination;
 use App\Models\Doctrine;
 use App\Models\Religion;
+use Illuminate\View\View;
+use App\Models\Denomination;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DoctrineController extends Controller
@@ -90,7 +90,7 @@ class DoctrineController extends Controller
     public function show(Doctrine $doctrine): View
     {
         return view('doctrines.show', [
-            'doctrine' => $doctrine
+            'doctrine' => $doctrine,
         ]);
     }
 }

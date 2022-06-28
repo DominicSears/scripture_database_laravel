@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Doctrines;
 
-use App\Exceptions\Doctrine\InvalidDoctrineSourceException;
-use App\Models\Denomination;
-use App\Models\Religion;
 use Livewire\Component;
+use App\Models\Religion;
+use App\Models\Denomination;
+use App\Exceptions\Doctrine\InvalidDoctrineSourceException;
 
 class ShowDoctrines extends Component
 {

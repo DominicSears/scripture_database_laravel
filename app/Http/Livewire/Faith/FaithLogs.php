@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Faith;
 
 use App\Models\Faith;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Collection;
 
 class FaithLogs extends Component
 {

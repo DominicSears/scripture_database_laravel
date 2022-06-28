@@ -2,9 +2,9 @@
 
 namespace App\Actions\Religion;
 
+use App\Models\Religion;
 use App\Contracts\Religion\UpdatesReligion;
 use App\Contracts\Religion\ValidatesReligion;
-use App\Models\Religion;
 
 final class UpdateReligion implements UpdatesReligion
 {

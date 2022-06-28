@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Models\Denomination;
 use App\Models\Religion;
+use App\Models\Denomination;
 use LivewireUI\Modal\ModalComponent;
 
 class ListDenominations extends ModalComponent

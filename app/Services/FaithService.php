@@ -2,9 +2,9 @@
 
 namespace App\Services;
 
-use App\Http\Requests\UpdateFaithRequest;
-use App\Models\Faith;
 use App\Models\User;
+use App\Models\Faith;
+use App\Http\Requests\UpdateFaithRequest;
 use Illuminate\Support\Facades\Validator;
 
 class FaithService

@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Doctrines;
 
-use App\Contracts\Doctrine\CreatesDoctrine;
-use App\Models\Denomination;
-use App\Models\Religion;
-use App\Traits\ConvertEmptyArrayStrings;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use App\Models\Religion;
+use App\Models\Denomination;
+use App\Traits\ConvertEmptyArrayStrings;
+use App\Contracts\Doctrine\CreatesDoctrine;
+use Illuminate\Database\Eloquent\Collection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Create extends Component

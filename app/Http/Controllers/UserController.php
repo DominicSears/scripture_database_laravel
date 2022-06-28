@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Denomination;
-use App\Models\Religion;
 use App\Models\User;
+use App\Models\Religion;
+use App\Models\Denomination;
 use Illuminate\Http\Request;
 
 class UserController extends Controller

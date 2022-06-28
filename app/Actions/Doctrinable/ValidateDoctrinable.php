@@ -2,8 +2,8 @@
 
 namespace App\Actions\Doctrinable;
 
-use App\Contracts\Doctrinable\ValidatesDoctrinable;
 use Illuminate\Contracts\Validation\Validator;
+use App\Contracts\Doctrinable\ValidatesDoctrinable;
 
 final class ValidateDoctrinable implements ValidatesDoctrinable
 {

@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
-use App\Http\Resources\DenominationResource;
-use App\Http\Resources\DoctrineResource;
-use App\Http\Resources\NuggetResource;
-use App\Http\Resources\PostResource;
-use App\Http\Resources\ReligionResource;
-use App\Http\Resources\UserResource;
-use App\Models\Doctrine;
-use App\Models\Nugget;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Nugget;
+use App\Models\Doctrine;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\PostResource;
+use App\Http\Resources\UserResource;
+use App\Http\Resources\NuggetResource;
+use App\Http\Resources\DoctrineResource;
+use App\Http\Resources\ReligionResource;
+use App\Http\Resources\DenominationResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DoctrineController extends Controller

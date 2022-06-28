@@ -2,8 +2,8 @@
 
 namespace App\Actions\Denomination;
 
-use App\Contracts\Denomination\ValidatesDenomination;
 use Illuminate\Contracts\Validation\Validator;
+use App\Contracts\Denomination\ValidatesDenomination;
 
 final class ValidateDenomination implements ValidatesDenomination
 {

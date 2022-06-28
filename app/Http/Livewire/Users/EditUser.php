@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Users;
 
-use App\Contracts\User\UpdatesUser;
 use App\Models\User;
-use App\Traits\MapsState;
 use Livewire\Component;
+use App\Traits\MapsState;
+use App\Contracts\User\UpdatesUser;
 
 class EditUser extends Component
 {

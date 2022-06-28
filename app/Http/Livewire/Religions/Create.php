@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Contracts\Religion\CreatesReligion;
 use App\Models\Religion;
-use App\Traits\ConvertEmptyArrayStrings;
-use Illuminate\Database\Eloquent\Collection;
 use LivewireUI\Modal\ModalComponent;
+use App\Traits\ConvertEmptyArrayStrings;
+use App\Contracts\Religion\CreatesReligion;
+use Illuminate\Database\Eloquent\Collection;
 
 class Create extends ModalComponent
 {

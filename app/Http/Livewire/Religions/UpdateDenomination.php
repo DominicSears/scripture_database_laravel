@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Contracts\Denomination\UpdatesDenomination;
-use App\Exceptions\Denomination\MismatchUpdateDenominationException;
-use App\Models\Denomination;
 use App\Models\Religion;
+use Illuminate\View\View;
+use App\Models\Denomination;
+use LivewireUI\Modal\ModalComponent;
 use App\Traits\ConvertEmptyArrayStrings;
 use Illuminate\Validation\ValidationException;
-use Illuminate\View\View;
-use LivewireUI\Modal\ModalComponent;
+use App\Contracts\Denomination\UpdatesDenomination;
+use App\Exceptions\Denomination\MismatchUpdateDenominationException;
 
 class UpdateDenomination extends ModalComponent
 {

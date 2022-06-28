@@ -2,11 +2,11 @@
 
 namespace App\Actions\Faith;
 
+use App\Models\Faith;
 use App\Contracts\Faith\UpdatesFaith;
 use App\Contracts\Faith\ValidatesFaith;
-use App\Exceptions\Faith\InvalidFaithUpdateDataException;
 use App\Exceptions\Faith\MismatchFaithUserException;
-use App\Models\Faith;
+use App\Exceptions\Faith\InvalidFaithUpdateDataException;
 
 final class UpdateFaith implements UpdatesFaith
 {

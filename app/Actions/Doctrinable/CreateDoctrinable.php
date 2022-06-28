@@ -2,9 +2,9 @@
 
 namespace App\Actions\Doctrinable;
 
+use App\Models\Doctrinable;
 use App\Contracts\Doctrinable\CreatesDoctrinable;
 use App\Contracts\Doctrinable\ValidatesDoctrinable;
-use App\Models\Doctrinable;
 
 final class CreateDoctrinable implements CreatesDoctrinable
 {

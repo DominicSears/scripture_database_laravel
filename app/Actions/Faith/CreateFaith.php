@@ -2,12 +2,12 @@
 
 namespace App\Actions\Faith;
 
+use App\Models\User;
+use App\Models\Faith;
+use Illuminate\Support\Arr;
 use App\Contracts\Faith\CreatesFaith;
 use App\Contracts\Faith\ValidatesNewFaith;
 use App\Exceptions\Faith\MismatchFaithUserException;
-use App\Models\Faith;
-use App\Models\User;
-use Illuminate\Support\Arr;
 
 final class CreateFaith implements CreatesFaith
 {

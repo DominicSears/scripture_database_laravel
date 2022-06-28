@@ -3,8 +3,8 @@
 namespace App\Http\Livewire\Religions;
 
 use App\Models\Religion;
-use Illuminate\Database\Eloquent\Collection;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Database\Eloquent\Collection;
 
 class ListReligions extends ModalComponent
 {

@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Denomination;
-use App\Models\Doctrine;
-use App\Models\Nugget;
 use App\Models\Post;
-use App\Models\Religion;
-use Illuminate\Database\Query\Builder;
+use App\Models\Nugget;
 use Livewire\Component;
+use App\Models\Doctrine;
+use App\Models\Religion;
+use App\Models\Denomination;
+use Illuminate\Database\Query\Builder;
 
 class Feed extends Component
 {

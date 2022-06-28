@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Faith;
 
-use App\Actions\Faith\UpdateFaith;
-use App\Models\Denomination;
+use App\Models\User;
 use App\Models\Faith;
 use App\Models\Religion;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Denomination;
+use App\Actions\Faith\UpdateFaith;
 use LivewireUI\Modal\ModalComponent;
+use Illuminate\Database\Eloquent\Collection;
 
 class EditFaith extends ModalComponent
 {

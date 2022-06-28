@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Denomination;
 use App\Models\Religion;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Denomination;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Database\Eloquent\Model;
 
 class ReligionController extends Model
 {

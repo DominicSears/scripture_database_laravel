@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
-use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Nugget extends Model
 {
@@ -20,6 +20,8 @@ class Nugget extends Model
     public const NUGGET_TYPE_SUPPORT = 1;
 
     public const NUGGET_TYPE_GENERAL = 2;
+
+    public const NUGGET_TYPE_CONTRADICTION = 3;
 
     public const NUGGET_TYPES = [
         'refute',
@@ -191,8 +193,8 @@ class Nugget extends Model
             'multiple items';
 
         return $singleType ?
-            ucfirst(self::getNuggetTypeById($types->first())).' Nugget for ' . $for :
-            'Mixed Nugget type for ' . $for;
+            ucfirst(self::getNuggetTypeById($types->first())).' Nugget for '.$for :
+            'Mixed Nugget type for '.$for;
     }
 
     // Relationships

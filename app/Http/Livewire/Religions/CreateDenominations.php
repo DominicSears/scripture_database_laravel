@@ -2,10 +2,10 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Contracts\Denomination\CreatesDenomination;
 use App\Models\Religion;
-use App\Traits\ConvertEmptyArrayStrings;
 use LivewireUI\Modal\ModalComponent;
+use App\Traits\ConvertEmptyArrayStrings;
+use App\Contracts\Denomination\CreatesDenomination;
 
 class CreateDenominations extends ModalComponent
 {

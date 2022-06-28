@@ -2,10 +2,10 @@
 
 namespace App\Actions\User;
 
+use App\Models\User;
 use App\Contracts\User\UpdatesUser;
 use App\Contracts\User\ValidatesUser;
 use App\Exceptions\User\MismatchUpdateUserException;
-use App\Models\User;
 
 final class UpdateUser implements UpdatesUser
 {

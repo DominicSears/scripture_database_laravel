@@ -2,8 +2,8 @@
 
 namespace App\Contracts\Faith;
 
-use App\Models\Faith;
 use App\Models\User;
+use App\Models\Faith;
 
 interface CreatesFaith
 {

@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Contracts\Religion\UpdatesReligion;
 use App\Models\Religion;
-use App\Traits\ConvertEmptyArrayStrings;
-use Illuminate\Database\Eloquent\Collection;
 use LivewireUI\Modal\ModalComponent;
+use App\Traits\ConvertEmptyArrayStrings;
+use App\Contracts\Religion\UpdatesReligion;
+use Illuminate\Database\Eloquent\Collection;
 
 class Edit extends ModalComponent
 {

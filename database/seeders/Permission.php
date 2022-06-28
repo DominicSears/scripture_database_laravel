@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use Silber\Bouncer\Bouncer;
+use Illuminate\Database\Seeder;
 
 class Permission extends Seeder
 {

@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Doctrine extends Model
@@ -24,9 +24,9 @@ class Doctrine extends Model
     public function linkTitle(): Attribute
     {
         return new Attribute(
-            get: fn($value, $attributes) => '<a href="' .
-                route('doctrines.show', [$this->getKey()]) .
-                '">' . $attributes['title'] . '</a>'
+            get: fn ($value, $attributes) => '<a href="'.
+                route('doctrines.show', [$this->getKey()]).
+                '">'.$attributes['title'].'</a>'
         );
     }
 

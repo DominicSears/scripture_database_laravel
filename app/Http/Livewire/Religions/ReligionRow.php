@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Religions;
 
-use App\Models\Religion;
 use Livewire\Component;
+use App\Models\Religion;
 
 class ReligionRow extends Component
 {

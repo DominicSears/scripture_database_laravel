@@ -2,12 +2,12 @@
 
 namespace App\Http\Livewire\Faith;
 
-use App\Contracts\Faith\CreatesFaith;
-use App\Models\Denomination;
-use App\Models\Religion;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Collection;
+use App\Models\Religion;
+use App\Models\Denomination;
 use LivewireUI\Modal\ModalComponent;
+use App\Contracts\Faith\CreatesFaith;
+use Illuminate\Database\Eloquent\Collection;
 
 class NewFaith extends ModalComponent
 {
