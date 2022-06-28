@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Denomination extends Model
@@ -55,6 +56,21 @@ class Denomination extends Model
     public function doctrines(): MorphToMany
     {
         return $this->morphToMany(Doctrine::class, 'doctrinable');
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    public function votes(): MorphMany
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
+
+    public function follows(): MorphMany
+    {
+        return $this->morphMany(Follow::class, 'followable');
     }
 
     // Inverse Relationships

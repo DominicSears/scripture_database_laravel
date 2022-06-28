@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Religion extends Model
@@ -70,6 +71,11 @@ class Religion extends Model
     public function allDenominations(): HasMany
     {
         return $this->hasMany(Denomination::class, 'religion_id');
+    }
+
+    public function follows(): MorphMany
+    {
+        return $this->morphMany(Follow::class, 'followable');
     }
 
     // Inverse Relationships

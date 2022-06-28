@@ -180,6 +180,8 @@ return [
         App\Providers\JetstreamServiceProvider::class,
         // Actions
         App\Providers\ActionServiceProvider::class,
+        // Bouncer
+        \Silber\Bouncer\BouncerServiceProvider::class,
     ],
 
     /*

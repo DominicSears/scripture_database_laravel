@@ -4,21 +4,21 @@
         <button wire:click="filter('browse_all')" @class([
             'text-sky-300 rounded-lg px-4',
             'hover:bg-sky-50' => ! $filter['browse_all'],
-            'bg-white text-sky-400 hover:bg-sky-200' => $filter['browse_all']
+            'bg-white text-sky-400 hover:bg-sky-200 font-bold' => $filter['browse_all']
         ])>
             Browse All
         </button>
         <button wire:click="filter('recent')" @class([
             'text-sky-300 rounded-lg py-2 px-4',
             'hover:bg-sky-50' => ! $filter['recent'],
-            'bg-white hover:bg-sky-200' => $filter['recent']
+            'bg-white text-sky-400 hover:bg-sky-200 font-bold' => $filter['recent']
         ])>
             Recent
         </button>
         <button wire:click="filter('following')" @class([
             'text-sky-300 rounded-lg py-2 px-4',
             'hover:bg-sky-50' => ! $filter['following'],
-            'bg-white hover:bg-sky-200' => $filter['following']
+            'bg-white text-sky-400 hover:bg-sky-200 font-bold' => $filter['following']
         ])>
             Following
         </button>
@@ -30,6 +30,7 @@
                 <div class="flex flex-col space-y-2">
                     <p class="font-semibold text-2xl text-sky-500">{{ $item['title'] }}</p>
                     <small class="font-thin text-sm text-sky-400">Created By: {{ $item['created_by'] }} - {{ $item['created_at']->diffForHumans() }}</small>
+                    <small class="font-thin text-sm text-sky-400">Type: {{ $item['type'] }}</small>
                 </div>
             </div>
         @empty

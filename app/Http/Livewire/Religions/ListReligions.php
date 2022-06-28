@@ -20,7 +20,7 @@ class ListReligions extends ModalComponent
     public function mount(array $religionIds = [])
     {
         if (is_null($this->religions)) {
-            $religions = Religion::query();
+            $religions = Religion::query()->with('follows');
 
             if (empty($religionIds)) {
                 $this->religions = $this->showPending ?
