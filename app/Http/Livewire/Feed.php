@@ -49,7 +49,7 @@ class Feed extends Component
      */
     public function setFeedItems(): void
     {
-        /*$posts = Post::with(['createdBy', 'votes'])
+        $posts = Post::with(['createdBy', 'votes'])
             ->get()
             ->take(10);
 
@@ -72,11 +72,7 @@ class Feed extends Component
             ->merge($nuggets)
             ->merge($posts)
             ->merge($denominations)
-            ->sortByDesc('created_at');*/
-
-        $feedItems = Doctrine::with(['createdBy', 'votes'])
-            ->whereIn('id', [12])
-            ->get();
+            ->sortByDesc('created_at');
 
         $arr = [];
 
