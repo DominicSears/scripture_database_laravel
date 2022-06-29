@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Support\Arr;
+use App\Contracts\Vote\Votable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -11,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Nugget extends Model
+class Nugget extends Model implements Votable
 {
     use HasFactory;
 
@@ -43,6 +45,13 @@ class Nugget extends Model
     ];
 
     // Attributes
+
+    public function description(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value, $attributes) => $attributes['explanation']
+        );
+    }
 
     public function nuggetType(): Attribute
     {
@@ -126,6 +135,9 @@ class Nugget extends Model
         };
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function getNuggetTypeIdByString(string $nugget): string
     {
         return array_flip(self::NUGGET_TYPES)[$nugget] ??
@@ -178,23 +190,55 @@ class Nugget extends Model
         ?int $id = null,
         bool $all = false
     ): string {
-        /** @var \Illuminate\Database\Eloquent\Collection $relation */
+        /** @var Collection $relation */
         $relation = $this->getRelation($relationName);
-        /** @var \Illuminate\Database\Eloquent\Collection $nuggetables */
+
+        /** @var Collection $nuggetables */
         $nuggetables = $this->getRelation('nuggetable');
+
         $types = $nuggetables->where(
             'nuggetable_type',
             array_flip(self::NUGGET_FROM_CLASS_MAP)[$relationName]
         )->pluck('nugget_type_id')->unique();
+
         $singleType = $types->count() === 1;
 
-        $for = $relation->count() === 1 ?
-            $relation->first()->getAttribute('link_title') :
-            'multiple items';
+        $for = $this->nuggetStatementFor($relation, $singleType);
 
         return $singleType ?
             ucfirst(self::getNuggetTypeById($types->first())).' Nugget for '.$for :
             'Mixed Nugget type for '.$for;
+    }
+
+    /**
+     * @throws \Exception
+     */
+    protected function nuggetStatementFor(Collection $models, bool $singleType): string
+    {
+        $models = $models->collect();
+
+        $count = $models->count();
+
+        if ($count === 1) {
+            return $models[0]->getAttribute('link_title');
+        } elseif ($count === 2) {
+            return $models[0]->getAttribute('link_title').' & '.
+                $models[1]->getAttribute('link_title');
+        } elseif ($count > 2) {
+            $str = '';
+
+            for ($i = 0; $i < $count; $i++) {
+                if ($i !== $i - 1) {
+                    $str .= $models[$i]->getAttribute('link_title').', ';
+                } else {
+                    $str .= 'and '.$models[$i]->getAttribute('link_title');
+                }
+            }
+
+            return $str;
+        } else {
+            throw new \Exception('Empty models in relationship');
+        }
     }
 
     // Relationships

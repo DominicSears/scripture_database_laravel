@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Vote\Votable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Query\Builder;
 use Laravel\Jetstream\HasProfilePhoto;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements Votable
 {
     use HasApiTokens;
     use HasFactory;

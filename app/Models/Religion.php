@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Vote\Votable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Religion extends Model
+class Religion extends Model implements Votable
 {
     use HasFactory;
 
@@ -76,6 +77,11 @@ class Religion extends Model
     public function follows(): MorphMany
     {
         return $this->morphMany(Follow::class, 'followable');
+    }
+
+    public function votes(): MorphMany
+    {
+        return $this->morphMany(Vote::class, 'votable');
     }
 
     // Inverse Relationships

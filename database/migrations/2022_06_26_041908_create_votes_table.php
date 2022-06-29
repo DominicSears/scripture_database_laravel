@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('amount');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('votable_id');
-            $table->unsignedBigInteger('votable_type');
+            $table->string('votable_type');
         });
     }
 

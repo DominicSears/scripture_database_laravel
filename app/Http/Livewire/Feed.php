@@ -24,6 +24,8 @@ class Feed extends Component
 
     public function mount()
     {
+        // TODO: Eagerload votables and commentables here instead of N+1
+
         $this->setFeedItems();
     }
 
@@ -47,29 +49,34 @@ class Feed extends Component
      */
     public function setFeedItems(): void
     {
-        $posts = Post::with(['createdBy'])
+        /*$posts = Post::with(['createdBy', 'votes'])
             ->get()
             ->take(10);
 
-        $religions = Religion::with(['createdBy'])
+        $religions = Religion::with(['createdBy', 'votes'])
             ->get()
             ->take(10);
 
-        $denominations = Denomination::with(['createdBy'])
+        $denominations = Denomination::with(['createdBy', 'votes'])
             ->get()
             ->take(10);
 
-        $nuggets = Nugget::with(['createdBy'])
+        // Should be nuggetable for the different possible entries
+        $nuggets = Nugget::with(['createdBy', 'votes'])
             ->get()
             ->take(10);
 
-        $feedItems = Doctrine::with(['createdBy'])
+        $feedItems = Doctrine::with(['createdBy', 'votes'])
             ->get()
             ->take(10)
             ->merge($nuggets)
             ->merge($posts)
             ->merge($denominations)
-            ->sortByDesc('created_at');
+            ->sortByDesc('created_at');*/
+
+        $feedItems = Doctrine::with(['createdBy', 'votes'])
+            ->whereIn('id', [12])
+            ->get();
 
         $arr = [];
 
@@ -80,6 +87,11 @@ class Feed extends Component
                 'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
                 'created_at' => $item->getAttribute('created_at'),
                 'type' => $item->getAttribute('feed_item_type') ?? ucfirst(substr(strrchr($item::class, '\\'), 1)),
+                'content' => $item->getAttribute('description'),
+                'votes_number' => $item->getRelation('votes')->sum('amount'),
+                'comments_number' => $item->comments->count(),
+                'model_type' => $item::class,
+                'model_id' => $item->getKey(),
             ];
         }
 

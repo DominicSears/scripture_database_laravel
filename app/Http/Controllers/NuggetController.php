@@ -14,4 +14,10 @@ class NuggetController extends Controller
             'nuggets' => $nuggets,
         ]);
     }
+
+    public function create()
+    {
+        // Search for doctrine, religion, denomination, etc. to attach to
+        return view('nuggets.create');
+    }
 }

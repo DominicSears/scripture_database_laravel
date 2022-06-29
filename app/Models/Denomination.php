@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Vote\Votable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -10,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Denomination extends Model
+class Denomination extends Model implements Votable
 {
     use HasFactory;
 
