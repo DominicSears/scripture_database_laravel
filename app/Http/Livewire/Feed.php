@@ -7,11 +7,14 @@ use App\Models\Nugget;
 use Livewire\Component;
 use App\Models\Doctrine;
 use App\Models\Religion;
+use App\Traits\MapsModels;
 use App\Models\Denomination;
 use Illuminate\Database\Query\Builder;
 
 class Feed extends Component
 {
+    use MapsModels;
+
     public array $filter = [
         'browse_all' => true,
         'recent' => false,
@@ -77,16 +80,18 @@ class Feed extends Component
         $arr = [];
 
         foreach ($feedItems as $item) {
+            $type = $this->mapToCodeName($item::class);
+
             $arr[] = [
                 'title' => $item->getAttribute('title'),
                 'description' => $item->getAttribute('description'),
                 'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
                 'created_at' => $item->getAttribute('created_at'),
-                'type' => $item->getAttribute('feed_item_type') ?? ucfirst(substr(strrchr($item::class, '\\'), 1)),
+                'type' => $feedItemType = $item->getAttribute('feed_item_type') ?? ucfirst($type),
                 'content' => $item->getAttribute('description'),
                 'votes_number' => $item->getRelation('votes')->sum('amount'),
                 'comments_number' => $item->comments->count(),
-                'model_type' => $item::class,
+                'model_type' => $type,
                 'model_id' => $item->getKey(),
             ];
         }

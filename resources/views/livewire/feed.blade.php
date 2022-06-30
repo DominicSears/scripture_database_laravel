@@ -40,7 +40,7 @@
                 <!-- Footer -->
                 <div class="flex flex-row space-x-4 items-center">
                     <!-- Votes -->
-                    <x-item-votes :votable="$item" />
+                    <livewire:item-votes :votable="$item" />
                     <!-- Comments -->
                     <div class="flex flex-row space-x-2">
                         <!-- Comment icon -->
