@@ -8,16 +8,11 @@ use Illuminate\Database\Eloquent\Collection;
 
 class Search extends Component
 {
-    public array $state = [];
+    public array $state = [
+        'search' => '',
+    ];
 
     public array $searchResults = [];
-
-    public function mount()
-    {
-        $this->state = [
-            'search' => ''
-        ];
-    }
 
     public function search()
     {
@@ -31,12 +26,13 @@ class Search extends Component
 
     public function updatingStateSearch(string $value)
     {
+        // Update and get search query and clear old results
         $this->state['search'] = $value;
-
         $query = $value;
 
         $this->clearSearchResults();
 
+        // Prepare the searchable models and collection
         $searchable = [
             \App\Models\Doctrine::class,
             \App\Models\Denomination::class,
@@ -49,17 +45,19 @@ class Search extends Component
         $models = new Collection();
 
         if (! empty($query)) {
+            // Query the searchable models and add to collection
             foreach ($searchable as $type) {
                 /** @var Collection $searchModels */
                 $searchModels = call_user_func([$type, 'query'])
                     ->scopes(['search' => [$query]])
                     ->get();
-    
+
                 if ($searchModels->isNotEmpty()) {
                     $models = $models->union($searchModels);
                 }
             }
-    
+
+            // Push deconstructed model to array
             $models->each(function (Model $item) {
                 $this->searchResults[] = [
                     'title' => $item->title,
