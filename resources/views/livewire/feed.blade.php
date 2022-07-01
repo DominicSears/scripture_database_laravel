@@ -42,7 +42,7 @@
                     <!-- Votes -->
                     <livewire:item-votes :votable="$item" />
                     <!-- Comments -->
-                    <x-item-comments :commentable="$item" />
+                    <livewire:item-comments :commentable="$item" />
                 </div>
             </div>
         @empty

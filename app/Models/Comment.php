@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -21,7 +20,7 @@ class Comment extends Model
 
     // Relationships
 
-    public function user(): HasOne
+    public function createdBy(): HasOne
     {
         return $this->hasOne(User::class, 'id', 'user_id');
     }

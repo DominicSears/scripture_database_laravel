@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Vote\Votable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Query\Builder;
 use Laravel\Jetstream\HasProfilePhoto;
 use Illuminate\Notifications\Notifiable;
@@ -19,7 +20,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements Votable
+class User extends Authenticatable implements Votable, Commentable
 {
     use HasApiTokens;
     use HasFactory;
@@ -141,6 +142,11 @@ class User extends Authenticatable implements Votable
     }
 
     public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function commentsWithReplies(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }

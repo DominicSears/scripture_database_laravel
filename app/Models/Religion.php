@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Vote\Votable;
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Religion extends Model implements Votable
+class Religion extends Model implements Votable, Commentable
 {
     use HasFactory;
 
@@ -72,6 +73,16 @@ class Religion extends Model implements Votable
     public function allDenominations(): HasMany
     {
         return $this->hasMany(Denomination::class, 'religion_id');
+    }
+
+    public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function commentsWithReplies(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function follows(): MorphMany

@@ -22,11 +22,16 @@ class Vote extends Model
 
     // Helper
 
-    public function vote(bool $upvote): void
+    public function vote(bool $upvote, bool $switch = false): void
     {
         $amount = $upvote ? 1 : -1;
 
         $this->attributes['amount'] += $amount;
+
+        // Must add again when switching to upvote/downvote
+        if ($switch) {
+            $this->vote($upvote, false);
+        }
     }
 
     public function resetVote(): void

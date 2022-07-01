@@ -1,11 +1,11 @@
 <?php
 
-namespace App\View\Components;
+namespace App\Http\Livewire;
 
-use Illuminate\View\Component;
-use App\Contracts\Comment\Commentable;
 use App\Models\Comment;
+use Livewire\Component;
 use App\Traits\MapsModels;
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Collection;
 
 class ItemComments extends Component
@@ -14,16 +14,18 @@ class ItemComments extends Component
 
     public ?int $modelId = null;
 
+    public ?string $type = null;
+
     public int $commentAmount;
 
     /**
      * Create a new component instance.
-     * 
+     *
      * @param  Commentable|array  $item
      * @param  ?Collection  $votes
      * @return void
      */
-    public function __construct(Commentable|array|null $commentable = null, $comments = null)
+    public function mount(Commentable|array|null $commentable = null, $comments = null)
     {
         // TODO: Might need to be a livewire component to emit events to parent component?
         if (! isset($comments) || ($comments instanceof Collection && $comments->isEmpty())) {
@@ -33,8 +35,10 @@ class ItemComments extends Component
                     ->where('commentable_id', $commentable['model_id'])
                     ->get() :
                 $commentable->comments()->get();
-            
+
             $this->modelId = $commentable['model_id'];
+
+            $this->type = $commentable['model_type'];
         }
 
         // Note: Comments can't be commentable types.
@@ -45,6 +49,14 @@ class ItemComments extends Component
         $this->modelId ??= $comments->first()->commentable_id;
     }
 
+    public function openComments()
+    {
+        $this->emit('openModal', CommentModal::getName(), [
+            'modelId' => $this->modelId,
+            'type' => $this->type,
+        ]);
+    }
+
     /**
      * Get the view / contents that represent the component.
      *
@@ -52,6 +64,6 @@ class ItemComments extends Component
      */
     public function render()
     {
-        return view('components.item-comments');
+        return view('livewire.item-comments');
     }
 }

@@ -1,17 +1,17 @@
-<?php
+ <?php
 
 namespace App\Http\Livewire;
 
 use App\Models\Vote;
 use Livewire\Component;
-use App\Contracts\Vote\Votable;
 use App\Traits\MapsModels;
+use App\Contracts\Vote\Votable;
 use Illuminate\Database\Eloquent\Collection;
 
 class ItemVotes extends Component
 {
     use MapsModels;
-    
+
     public int $voteAmount;
 
     public int $votesFromUser;
@@ -76,12 +76,12 @@ class ItemVotes extends Component
                     'amount' => 1,
                     'user_id' => auth()->id(),
                     'votable_type' => $this->mapToClassName($this->type),
-                    'votable_id' => $this->modelId
+                    'votable_id' => $this->modelId,
                 ]);
 
-                $this->setVoteType($upvote);
+            $this->setVoteType($upvote);
 
-                $this->voteAmount = $upvote ?
+            $this->voteAmount = $upvote ?
                     $this->voteAmount + 1 :
                     $this->voteAmount - 1;
         } else {
@@ -96,13 +96,26 @@ class ItemVotes extends Component
                 $vote->save();
                 $this->setVoteType($upvote);
             } else {
-                $this->voteAmount = $upvote ?
-                    $this->voteAmount - 1 :
-                    $this->voteAmount + 1;
+                $switch = ($this->upvoted && ! $upvote) || ($this->downvoted && $upvote);
 
-                $vote->resetVote();
+                if ($switch) {
+                    $this->voteAmount = $upvote ?
+                        $this->voteAmount + 2 :
+                        $this->voteAmount - 2;
+
+                    $vote->vote($upvote, true);
+                } else {
+                    $this->voteAmount = $upvote ?
+                        $this->voteAmount - 1 :
+                        $this->voteAmount + 1;
+
+                    $vote->resetVote();
+                }
+
                 $vote->save();
-                $this->setVoteNeutral();
+
+                // Set vote type
+                $switch ? $this->setVoteType($upvote) : $this->setVoteNeutral();
             }
         }
     }

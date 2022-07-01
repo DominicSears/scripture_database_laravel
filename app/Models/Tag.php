@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Tag extends Model
+class Tag extends Model implements Votable, Commentable
 {
     // Custom Attributes
 
@@ -22,6 +23,11 @@ class Tag extends Model
     // Relationships
 
     public function comments(): MorphMany
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
+    }
+
+    public function commentsWithReplies(): MorphMany
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
