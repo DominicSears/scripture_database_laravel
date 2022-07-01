@@ -6,6 +6,7 @@ use Illuminate\Support\Arr;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -80,6 +81,14 @@ class Nugget extends Model implements Votable, Commentable
                 }
             }
         );
+    }
+
+    // Scopes
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('title', 'LIKE', '%'.$search.'%')
+            ->orWhere('explanation', 'LIKE', '%'.$search.'%');
     }
 
     // Helper functions

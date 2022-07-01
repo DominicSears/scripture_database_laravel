@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,7 +19,7 @@ class Denomination extends Model implements Votable, Commentable
 
     protected $guarded = [];
 
-    // Custom Attributes
+    // Attributes
 
     public function title(): Attribute
     {
@@ -26,6 +27,14 @@ class Denomination extends Model implements Votable, Commentable
             get: fn ($value, $attributes) => $attributes['name'],
             set: fn ($value, $attributes) => $attributes['name'] = $value
         );
+    }
+
+    // Scopes
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('name', 'LIKE', '%'.$search.'%')
+            ->orWhere('description', 'LIKE', '%'.$search.'%');
     }
 
     // Relationships

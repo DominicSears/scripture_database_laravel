@@ -20,7 +20,7 @@ class Religion extends Model implements Votable, Commentable
 
     protected $guarded = [];
 
-    // Custom Attributes
+    // Attributes
 
     public function title(): Attribute
     {
@@ -35,6 +35,12 @@ class Religion extends Model implements Votable, Commentable
     public function scopeActive(Builder $query, bool $active = true): Builder
     {
         return $query->where('approved', $active);
+    }
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('name', 'LIKE', '%'.$search.'%')
+            ->orWhere('description', 'LIKE', '%'.$search.'%');
     }
 
     // Relationships

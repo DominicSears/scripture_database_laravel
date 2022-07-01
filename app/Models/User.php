@@ -99,6 +99,13 @@ class User extends Authenticatable implements Votable, Commentable
             ->where('faiths.id', $faith->getKey());
     }
 
+    public function scopeSearch($query, string $search)
+    {
+        return $query->where('first_name', 'LIKE', '%'.$search.'%')
+            ->orWhere('last_name', 'LIKE', '%'.$search.'%')
+            ->orWhere('username', 'LIKE', '%'.$search.'%');
+    }
+
     // Relationships
 
     public function faith(): HasOne

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,6 +39,15 @@ class Post extends Model implements Votable, Commentable
         return new Attribute(
             get: fn ($value, $attributes) => strip_tags($attributes['content'])
         );
+    }
+
+    // Scopes
+
+    public function scopeSearch(Builder $query, string $search)
+    {
+        return $query->where('title', 'LIKE', '%'.$search.'%')
+            ->orWhere('slug', 'LIKE', '%'.$search.'%')
+            ->orWhere('content');
     }
 
     // Relationships
