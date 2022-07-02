@@ -14,8 +14,7 @@ final class CreateDoctrine implements CreatesDoctrine
     public function __construct(
         private ValidatesDoctrine $doctrineValidator,
         private ValidatesDoctrinable $doctrinableValidator
-    )
-    {
+    ) {
     }
 
     /**

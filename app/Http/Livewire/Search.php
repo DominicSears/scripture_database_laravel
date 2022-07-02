@@ -12,6 +12,8 @@ class Search extends Component
         'search' => '',
     ];
 
+    public const LIMIT = 5;
+
     public array $searchResults = [];
 
     public function search()
@@ -51,6 +53,7 @@ class Search extends Component
                 /** @var Collection $searchModels */
                 $searchModels = call_user_func([$type, 'query'])
                     ->scopes(['search' => [$query]])
+                    ->take(self::LIMIT)
                     ->get();
 
                 if ($searchModels->isNotEmpty()) {
@@ -62,6 +65,7 @@ class Search extends Component
             $models->each(function (Model $item) {
                 $this->searchResults[] = [
                     'title' => $item->title,
+                    'link_title' => $item->link_title,
                 ];
             });
         }

@@ -56,7 +56,7 @@ class Create extends Component
             $this->entity->religion_id :
             $this->religions->first()->getKey();
 
-        if (!$hasId) {
+        if (! $hasId) {
             $this->entity = Religion::query()->find($religionId);
         }
 

@@ -1,6 +1,5 @@
-<div class="w-full flex flex-col space-y-2 items-center max-w-3xl" x-data="{
-    
-}">
+<div class="w-full flex flex-col items-center max-w-3xl relative">
+    <!-- Search Bar -->
     <div class="w-full flex flex-row items-center">
         <!-- Search Icon and Text Field -->
         <div class="flex flex-row space-x-2 items-center bg-slate-100 rounded-tl-lg rounded-bl-lg w-11/12 py-2 pl-4">
@@ -18,11 +17,14 @@
         </button>
     </div>
     @if (! empty($state['search']))
-        <div class="relative inline-block w-full h-64 p-4 rounded-2xl shadow-2xl bg-white" x-on:click="$el.remove()">
+        <!-- Results -->
+        <div x-data @click.away="$el.remove()" style="margin-top: 4.5rem;" class="origin-center absolute w-full rounded-md bg-white ring-1 ring-slate-400 divide-y divide-slate-500 focus:outline-none py-2 space-y-4 oerflow-y-auto max-h-64" tab-index="1">
             <div class="flex flex-col space-y-2">
                 @forelse ($searchResults as $result)
                     <div class="flex flex-row justify-between px-2">
-                        <p class="text-md text-slate-500">{{ $result['title'] }}</p>
+                        <span class="text-md text-slate-500">
+                            {!! $result['link_title'] ?? $result['title'] !!}
+                        </span>
                     </div>
                 @empty
                     <div class="flex justify-center items-center w-full h-full">
