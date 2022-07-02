@@ -1,6 +1,6 @@
 <div class="bg-white p-8 flex flex-col w-full space-y-4 rounded-2xl shadow-2xl">
     @if (isset($entity))
-        <p class="font-bold text-3xl">{{ $entity->name }}</p>
+        <p class="font-bold text-3xl">{{ $entity->title }}</p>
     @endif
 
     <div class="flex flex-row space-x-4 w-full">
@@ -17,7 +17,7 @@
 
         <div class="flex flex-col space-y-2">
             <label for="denomination_id" class="font-semibold text-xl">Denomination</label>
-            <select id="denomination_id" wire:model.defer="state.denomination_id" class="w-full">
+            <select id="denomination_id" wire:model="state.denomination_id" class="w-full">
                 <option value="0" selected>None</option>
                 @foreach ($denominations ?? [] as $denomination)
                     <option value="{{ $denomination->getKey() }}">{{ $denomination->name }}</option>

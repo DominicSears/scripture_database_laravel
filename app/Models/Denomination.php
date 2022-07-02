@@ -24,7 +24,14 @@ class Denomination extends Model implements Votable, Commentable
     public function title(): Attribute
     {
         return new Attribute(
-            get: fn ($value, $attributes) => $attributes['name'],
+            get: function ($value, $attributes) {
+                if (isset($this->relations['religion'])) {
+                    return $attributes['name'].' ('.
+                        $this->relations['religion']->name.')';
+                }
+
+                return $attributes['name'];
+            },
             set: fn ($value, $attributes) => $attributes['name'] = $value
         );
     }

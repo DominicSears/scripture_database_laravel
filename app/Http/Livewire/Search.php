@@ -26,6 +26,7 @@ class Search extends Component
 
     public function updatingStateSearch(string $value)
     {
+        // TODO: Move search functionality to action
         // Update and get search query and clear old results
         $this->state['search'] = $value;
         $query = $value;
