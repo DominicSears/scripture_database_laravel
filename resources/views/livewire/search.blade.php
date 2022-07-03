@@ -19,18 +19,32 @@
     @if (! empty($state['search']))
         <!-- Results -->
         <div x-data @click.away="$el.remove()" style="margin-top: 4.5rem;" class="origin-center absolute w-full rounded-md bg-white ring-1 ring-slate-400 divide-y divide-slate-500 focus:outline-none py-2 space-y-4 oerflow-y-auto max-h-64" tab-index="1">
-            <div class="flex flex-col space-y-2">
-                @forelse ($searchResults as $result)
-                    <div class="flex flex-row justify-between px-2">
-                        <span class="text-md text-slate-500">
-                            {!! $result['link_title'] ?? $result['title'] !!}
-                        </span>
+            <div class="flex flex-col space-between space-y-2">
+                @if (! empty($searchResults))
+                    <!-- Search Items -->
+                    <div class="flex flex-col space-y-2">
+                        @foreach ($searchResults as $result)
+                            <div class="flex flex-row justify-between px-2">
+                                <span class="text-md text-slate-500">
+                                    {!! $result['link_title'] ?? $result['title'] !!}
+                                </span>
+                            </div>
+                        @endforeach
                     </div>
-                @empty
+                    <!-- Link for search page -->
+                    <div class="flex flex-row items-center justify-end space-x-2 px-2 text-sky-500 hover:text-sky-700">
+                        <a class="text-sm font-semibold" href="#">
+                            <span>See More</span>
+                        </a>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </div>
+                @else
                     <div class="flex justify-center items-center w-full h-full">
-                        <p class="font-semibold text-md text-slate-500">No Results (Click to remove)</p>
+                        <p class="font-semibold text-md text-slate-500">No Results</p>
                     </div>
-                @endforelse
+                @endif
             </div>
         </div>
     @endif
