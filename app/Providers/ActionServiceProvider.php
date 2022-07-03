@@ -32,5 +32,8 @@ class ActionServiceProvider extends ServiceProvider
         // Doctriables
         Contracts\Doctrinable\CreatesDoctrinable::class => Actions\Doctrinable\CreateDoctrinable::class,
         Contracts\Doctrinable\ValidatesDoctrinable::class => Actions\Doctrinable\ValidateDoctrinable::class,
+        // Comments
+        Contracts\Comment\CreatesComment::class => Actions\Comment\CreateComment::class,
+        Contracts\Comment\ValidatesComment::class => Actions\Comment\ValidateComment::class,
     ];
 }

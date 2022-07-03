@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Comment;
 use App\Traits\MapsModels;
 use LivewireUI\Modal\ModalComponent;
+use App\Contracts\Comment\CreatesComment;
 
 class CommentModal extends ModalComponent
 {
@@ -17,6 +18,11 @@ class CommentModal extends ModalComponent
     public array $comments;
 
     public int $totalVotes;
+
+    public array $state = [
+        'comment' => '',
+        'parent_id' => null,
+    ];
 
     /**
      * Initialize Livewire components
@@ -67,6 +73,19 @@ class CommentModal extends ModalComponent
             // TODO: Custom exception
             throw new \Exception('Model type is not commentable');
         }
+    }
+
+    public function post(CreatesComment $createComment)
+    {
+        $createComment([
+            'user_id' => auth()->id(),
+            'commentable_id' => $this->model['id'],
+            'commentable_type' => $this->mapToClassName($this->model['model_type']),
+            'content' => $this->state['comment'],
+            'parent_id' => $this->state['parent_id'],
+        ]);
+
+        $this->closeModal();
     }
 
     public function render()
