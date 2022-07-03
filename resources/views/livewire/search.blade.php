@@ -33,7 +33,7 @@
                     </div>
                     <!-- Link for search page -->
                     <div class="flex flex-row items-center justify-end space-x-2 px-2 text-sky-500 hover:text-sky-700">
-                        <a class="text-sm font-semibold" href="#">
+                        <a class="text-sm font-semibold" href="{{ route('search.results', ['q' => urlencode($state['search'])]) }}">
                             <span>See More</span>
                         </a>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
