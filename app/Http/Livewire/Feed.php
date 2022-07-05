@@ -2,13 +2,9 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Post;
-use App\Models\Nugget;
 use Livewire\Component;
-use App\Models\Doctrine;
-use App\Models\Religion;
 use App\Traits\MapsModels;
-use App\Models\Denomination;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Query\Builder;
 
 class Feed extends Component
@@ -24,6 +20,8 @@ class Feed extends Component
     public array $feedItems;
 
     protected array $followedItems;
+
+    public int $limit = 10;
 
     public function mount()
     {
@@ -52,34 +50,32 @@ class Feed extends Component
      */
     public function setFeedItems(): void
     {
-        $posts = Post::with(['createdBy', 'votes'])
-            ->get()
-            ->take(10);
+        $feedable = [
+            \App\Models\Doctrine::class,
+            \App\Models\Denomination::class,
+            \App\Models\Religion::class,
+            \App\Models\Post::class,
+            \App\Models\Nugget::class,
+        ];
 
-        $religions = Religion::with(['createdBy', 'votes'])
-            ->get()
-            ->take(10);
+        $feedItems = new Collection();
 
-        $denominations = Denomination::with(['createdBy', 'votes'])
-            ->get()
-            ->take(10);
+        foreach ($feedable as $feedItem) {
+            /** @var Collection $feedModel */
+            $feedModel = call_user_func([$feedItem, 'query'])
+                ->with(['createdBy', 'votes'])
+                ->take($this->limit)
+                ->get()
+                ->collect();
 
-        // Should be nuggetable for the different possible entries
-        $nuggets = Nugget::with(['createdBy', 'votes'])
-            ->get()
-            ->take(10);
-
-        $feedItems = Doctrine::with(['createdBy', 'votes'])
-            ->get()
-            ->take(10)
-            ->merge($nuggets)
-            ->merge($posts)
-            ->merge($denominations)
-            ->sortByDesc('created_at');
+            if ($feedModel->isNotEmpty()) {
+                $feedItems = $feedItems->merge($feedModel);
+            }
+        }
 
         $arr = [];
 
-        foreach ($feedItems as $item) {
+        foreach ($feedItems->sortByDesc('created_at') as $item) {
             $type = $this->mapToCodeName($item::class);
 
             $arr[] = [

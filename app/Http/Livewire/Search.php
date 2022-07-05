@@ -3,8 +3,8 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Collection;
 
 class Search extends Component
 {
@@ -41,7 +41,6 @@ class Search extends Component
             \App\Models\Denomination::class,
             \App\Models\Religion::class,
             \App\Models\Post::class,
-            \App\Models\Doctrine::class,
             \App\Models\User::class,
         ];
 
@@ -54,10 +53,11 @@ class Search extends Component
                 $searchModels = call_user_func([$type, 'query'])
                     ->scopes(['search' => [$query]])
                     ->take(self::LIMIT)
-                    ->get();
+                    ->get()
+                    ->collect();
 
                 if ($searchModels->isNotEmpty()) {
-                    $models = $models->union($searchModels);
+                    $models = $models->merge($searchModels);
                 }
             }
 
