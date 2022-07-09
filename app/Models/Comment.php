@@ -18,6 +18,25 @@ class Comment extends Model
         'deleted_at' => 'datetime',
     ];
 
+    // Helpers
+
+    public function mapToCommentArray(): array
+    {
+        return [
+            'id' => $this->attributes['id'],
+            'user_id' => $this->attributes['user_id'],
+            'parent_id' => $this->attributes['parent_id'],
+            'created_by' => $this->relations['createdBy']->username,
+            'created_at' => $this->getAttribute('created_at')->diffForHumans(),
+            'updated_at' => $this->getAttribute('updated_at')?->diffForHumans(),
+            'content' => $this->attributes['content'],
+            'votes' => $this->relations['votes'],
+            'replies' => $this->relations['replies']->map(function (Comment $reply) {
+                return $reply->mapToCommentArray();
+            })
+        ];
+    }
+
     // Relationships
 
     public function createdBy(): HasOne
@@ -37,7 +56,7 @@ class Comment extends Model
 
     public function replies(): HasMany
     {
-        return $this->hasMany(self::class, 'parent_id', 'id');
+        return $this->hasMany(self::class, 'parent_id', 'id')->with('replies');
     }
 
     // Inverse Relationships

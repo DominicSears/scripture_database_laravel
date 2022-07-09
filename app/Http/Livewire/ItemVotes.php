@@ -32,7 +32,7 @@ class ItemVotes extends Component
      */
     public function mount(Votable|array|null $votable = null, $votes = null)
     {
-        if (! isset($votes) || ($votes instanceof Collection && $votes->isEmpty())) {
+        if (! isset($votes)) {
             $votes = is_array($votable) ?
                 Vote::query()
                     ->where('votable_type', $this->mapToClassName($votable['model_type']))

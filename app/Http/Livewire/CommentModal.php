@@ -6,6 +6,8 @@ use App\Models\Comment;
 use App\Traits\MapsModels;
 use LivewireUI\Modal\ModalComponent;
 use App\Contracts\Comment\CreatesComment;
+use Generator;
+use Illuminate\View\Compilers\BladeCompiler;
 
 class CommentModal extends ModalComponent
 {
@@ -40,21 +42,20 @@ class CommentModal extends ModalComponent
                 ->with([
                     'votes',
                     'createdBy',
-                    'commentsWithReplies',
                     'commentsWithReplies.votes',
+                    'commentsWithReplies.replies',
                     'commentsWithReplies.createdBy',
+                    'commentsWithReplies.replies.votes',
+                    'commentsWithReplies.replies.createdBy',
                 ])->find($modelId);
 
-            $model->comments->each(function (Comment $comment) {
-                $this->comments[] = [
-                    'id' => $comment->getKey(),
-                    'user_id' => $comment->user_id,
-                    'parent_id' => $comment->parent_id,
-                    'created_by' => $comment->createdBy->username,
-                    'created_at' => $comment->created_at->diffForHumans(),
-                    'updated_at' => $comment->updated_at?->diffForHumans(),
-                    'content' => $comment->content,
-                ];
+            // Comments are sorted by parent_id
+            // Display differently when it has children
+            // and display the children differently
+            $model->commentsWithReplies->each(function (Comment $comment) {
+                if (empty($comment->parent_id)) {
+                    $this->comments[] = $comment->mapToCommentArray();
+                }
             });
 
             $this->model = [
