@@ -54,7 +54,7 @@ class CommentModal extends ModalComponent
             // and display the children differently
             $model->commentsWithReplies->each(function (Comment $comment) {
                 if (empty($comment->parent_id)) {
-                    $this->comments[] = $comment->mapToCommentArray();
+                    $this->comments[$comment->getKey()] = $comment->mapToCommentArray();
                 }
             });
 
@@ -87,6 +87,19 @@ class CommentModal extends ModalComponent
         ]);
 
         $this->closeModal();
+    }
+
+    public function reply(int $id)
+    {
+        // TODO: Find recursive reply IDs
+        if (in_array($id, array_keys($this->comments))) {
+            $this->state['parent_id'] = $id;
+        }
+    }
+
+    public function cancelReply()
+    {
+        $this->state['paren_id'] = null;
     }
 
     public function render()
