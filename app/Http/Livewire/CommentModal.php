@@ -89,10 +89,37 @@ class CommentModal extends ModalComponent
         $this->closeModal();
     }
 
+    protected function getRecursiveIds(bool $flat = true)
+    {
+        $arr = array_map(
+            fn($arr) => [$arr['id'], ...array_map(
+                fn($child) => $child['id'],
+                $arr['replies']
+            )],
+            $this->comments
+        );
+
+        return $flat ? array_values(...$arr) : $arr;
+    }
+
+    public function getComment($id)
+    {
+        if (in_array($id, array_keys($this->comments))) {
+            return $this->comments[$id];
+        }
+
+        $structure = $this->getRecursiveIds(false);
+
+        $commentIds = [];
+
+        foreach ($structure as $key => $descendant) {
+            
+        }
+    }
+
     public function reply(int $id)
     {
-        // TODO: Find recursive reply IDs
-        if (in_array($id, array_keys($this->comments))) {
+        if (in_array($id, $this->getRecursiveIds())) {
             $this->state['parent_id'] = $id;
         }
     }

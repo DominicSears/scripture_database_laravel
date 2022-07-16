@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
+use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Tag extends Model implements Votable, Commentable
 {
+    use HasComments;
+
     // Custom Attributes
 
     public function title(): Attribute
@@ -31,16 +34,6 @@ class Tag extends Model implements Votable, Commentable
     }
 
     // Relationships
-
-    public function comments(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
-    }
-
-    public function commentsWithReplies(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable');
-    }
 
     public function votes(): MorphMany
     {

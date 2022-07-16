@@ -25,8 +25,11 @@
         @if (isset($state['parent_id']))
             <div class="w-full flex flex-row space-x-2 py-2 bg-slate-200 p-4 rounded-lg items-center">
                 <div class="flex flex-col space-y-2 w-full">
-                    <p class="text-md font-bold text-slate-600">Reply to: {{ $comments[$state['parent_id']]['created_by'] }}</p>
-                    <p class="text-md font-semibold text-slate-400">{{ $comments[$state['parent_id']]['content'] }}</p>
+                    @php
+                        $comment = $this->getComment($state['parent_id']);
+                    @endphp
+                    <p class="text-md font-bold text-slate-600">Reply to: {{ $comment['created_by'] }}</p>
+                    <p class="text-md font-semibold text-slate-400">{{ $comment['content'] }}</p>
                 </div>
                 <button wire:click="cancelReply" class="w-3 h-3 rounded-full p-1 flex justify-center items-center bg-white>
                     <span class="font-semibold">X</span>

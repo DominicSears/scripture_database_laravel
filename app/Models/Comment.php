@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Contracts\Comment\Commentable;
+use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Comment extends Model
+class Comment extends Model implements Commentable
 {
+    use HasComments;
+
     protected $guarded = false;
 
     protected $casts = [
@@ -44,19 +48,14 @@ class Comment extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
-    public function comments(): MorphMany
+    public function replies(): HasMany
     {
-        return $this->morphMany(self::class, 'commentable');
+        return $this->hasMany(self::class, 'parent_id', 'id')->with('replies');
     }
 
     public function votes(): MorphMany
     {
         return $this->morphMany(Vote::class, 'votable');
-    }
-
-    public function replies(): HasMany
-    {
-        return $this->hasMany(self::class, 'parent_id', 'id')->with('replies');
     }
 
     // Inverse Relationships

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Support\Arr;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
+use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Nugget extends Model implements Votable, Commentable
 {
-    use HasFactory;
+    use HasFactory, HasComments;
 
     public const NUGGET_TYPE_REFUTE = 0;
 
@@ -281,16 +282,6 @@ class Nugget extends Model implements Votable, Commentable
     public function doctrines(): MorphToMany
     {
         return $this->morphedByMany(Doctrine::class, 'nuggetable');
-    }
-
-    public function comments(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable')->whereNull('parent_id');
-    }
-
-    public function commentsWithReplies(): MorphMany
-    {
-        return $this->morphMany(Comment::class, 'commentable');
     }
 
     public function votes(): MorphMany
