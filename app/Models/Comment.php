@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Contracts\Comment\Commentable;
 use App\Traits\HasComments;
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,9 +35,9 @@ class Comment extends Model implements Commentable
             'updated_at' => $this->getAttribute('updated_at')?->diffForHumans(),
             'content' => $this->attributes['content'],
             'votes' => $this->relations['votes'],
-            'replies' => $this->relations['replies']->map(function (Comment $reply) {
-                return $reply->mapToCommentArray();
-            })
+            'replies' => $this->relations['repliesWithEssentials']->mapWithKeys(function ($item) {
+                return [$item->getKey() => $item->mapToCommentArray];
+            }),
         ];
     }
 
@@ -51,6 +51,12 @@ class Comment extends Model implements Commentable
     public function replies(): HasMany
     {
         return $this->hasMany(self::class, 'parent_id', 'id')->with('replies');
+    }
+
+    public function repliesWithEssentials(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id', 'id')
+                ->with(['repliesWithEssentials', 'votes', 'createdBy']);
     }
 
     public function votes(): MorphMany

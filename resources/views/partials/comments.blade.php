@@ -16,12 +16,11 @@
                     <livewire:item-votes :votes="$comment['votes']" type="Comment" :modelId="$comment['id']"  wire:key="{{ $loop->index . $comment['id'] }}" />
                     <p class="text-sm text-slate-500 hover:text-slate-600 hover:underline cursor-pointer" wire:click="reply({{ $comment['id'] }})">Reply</p>
                 </div>
+                @include('partials.comments', [
+                    'comments' => $comment['replies'],
+                    'level' => isset($level) ? $level + 1 : 1
+                ])
             </div>
-            
-            @include('partials.comments', [
-                'comments' => $comment['replies'],
-                'level' => isset($level) ? $level + 1 : 1
-            ])
         @endforeach
     </div>
 @endif

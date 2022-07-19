@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\HasComments;
 use Illuminate\Support\Arr;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
-use App\Traits\HasComments;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

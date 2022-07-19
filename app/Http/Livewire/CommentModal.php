@@ -6,8 +6,6 @@ use App\Models\Comment;
 use App\Traits\MapsModels;
 use LivewireUI\Modal\ModalComponent;
 use App\Contracts\Comment\CreatesComment;
-use Generator;
-use Illuminate\View\Compilers\BladeCompiler;
 
 class CommentModal extends ModalComponent
 {
@@ -43,10 +41,8 @@ class CommentModal extends ModalComponent
                     'votes',
                     'createdBy',
                     'commentsWithReplies.votes',
-                    'commentsWithReplies.replies',
                     'commentsWithReplies.createdBy',
-                    'commentsWithReplies.replies.votes',
-                    'commentsWithReplies.replies.createdBy',
+                    'commentsWithReplies.repliesWithEssentials',
                 ])->find($modelId);
 
             // Comments are sorted by parent_id
@@ -89,17 +85,22 @@ class CommentModal extends ModalComponent
         $this->closeModal();
     }
 
-    protected function getRecursiveIds(bool $flat = true)
+    protected function getRecursiveIds(?array $root = null, bool $flat = true): array
     {
-        $arr = array_map(
-            fn($arr) => [$arr['id'], ...array_map(
-                fn($child) => $child['id'],
-                $arr['replies']
-            )],
-            $this->comments
-        );
+        $arr = [];
 
-        return $flat ? array_values(...$arr) : $arr;
+        foreach (($root ?? $this->comments) as $comment) {
+            if ($flat) {
+                $arr[$comment['id']] = [
+                    $comment['id'],
+                    ...$this->getRecursiveIds($comment['replies']),
+                ];
+            } else {
+                $arr[$comment['id']] = $this->getRecursiveIds($comment['replies'], $flat);
+            }
+        }
+
+        return $flat && ! empty($arr) ? array_values(...$arr) : $arr;
     }
 
     public function getComment($id)
@@ -108,18 +109,36 @@ class CommentModal extends ModalComponent
             return $this->comments[$id];
         }
 
-        $structure = $this->getRecursiveIds(false);
+        $structure = $this->getRecursiveIds(flat: false);
 
         $commentIds = [];
 
-        foreach ($structure as $key => $descendant) {
-            
+        $commentIds[] = key($structure);
+
+        do {
+            $curr = current($structure);
+
+            if ($pass = ! empty($structure)) {
+                $commentIds[] = key($curr);
+            }
+
+            next($structure);
+        } while (! $pass);
+
+        $comment = null;
+
+        foreach ($commentIds as $id) {
+            $comment = $this->comments['replies'][$id];
         }
+
+        return $comment;
     }
 
     public function reply(int $id)
     {
-        if (in_array($id, $this->getRecursiveIds())) {
+        $ids = $this->getRecursiveIds();
+
+        if (in_array($id, $ids)) {
             $this->state['parent_id'] = $id;
         }
     }
