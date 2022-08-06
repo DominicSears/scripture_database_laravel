@@ -26,6 +26,20 @@ class Comment extends Model implements Commentable
 
     public function mapToCommentArray(): array
     {
+        $replies = $this->relations['repliesWithEssentials'];
+
+        if (isset($replies) && $replies->isNotEmpty()) {
+            $arr = [];
+
+            foreach ($replies as $reply) {
+                $arr[$reply->getKey()] = $reply;
+            }
+
+            $replies = $arr;
+
+            unset($arr);
+        }
+
         return [
             'id' => $this->attributes['id'],
             'user_id' => $this->attributes['user_id'],
@@ -35,9 +49,7 @@ class Comment extends Model implements Commentable
             'updated_at' => $this->getAttribute('updated_at')?->diffForHumans(),
             'content' => $this->attributes['content'],
             'votes' => $this->relations['votes'],
-            'replies' => $this->relations['repliesWithEssentials']->mapWithKeys(function ($item) {
-                return [$item->getKey() => $item->mapToCommentArray];
-            }),
+            'replies' => $replies,
         ];
     }
 

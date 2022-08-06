@@ -14,7 +14,6 @@
     </div>
     <!-- Comments -->
     <div class="w-full flex flex-col space-y-4 overflow-y-auto">
-        {{-- TODO: Recursive threads will use a partial component --}}
         @include('partials.comments', ['comments' => $comments ?? []])
     </div>
     <!-- Add comment -->
@@ -31,7 +30,7 @@
                     <p class="text-md font-bold text-slate-600">Reply to: {{ $comment['created_by'] }}</p>
                     <p class="text-md font-semibold text-slate-400">{{ $comment['content'] }}</p>
                 </div>
-                <button wire:click="cancelReply" class="w-3 h-3 rounded-full p-1 flex justify-center items-center bg-white>
+                <button wire:click="cancelReply" class="w-3 h-3 rounded-full p-1 flex justify-center items-center bg-white">
                     <span class="font-semibold">X</span>
                 </button>
             </div>

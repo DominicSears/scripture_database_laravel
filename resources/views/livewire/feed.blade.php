@@ -23,10 +23,10 @@
             Following
         </button>
     </div>
-    <div class="flex flex-col space-y-6 pb-6">
+    <div class="flex flex-col space-y-12 pb-6">
         <!-- Feed Items -->
         @forelse ($feedItems as $item)
-            <div class="w-full h-auto border border-gray-300 rounded-xl flex flex-col p-8 space-y-4">
+            <div class="w-full h-auto bg-white rounded-2xl flex flex-col p-6 space-y-4">
                 <!-- Header -->
                 <div class="flex flex-col space-y-2">
                     <p class="font-semibold text-2xl text-sky-500">{{ $item['title'] }}</p>

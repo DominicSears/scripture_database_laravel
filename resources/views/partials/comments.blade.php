@@ -7,7 +7,6 @@
             ]) @if (isset($level)) style="margin-left: {{ 10 * $level }}px; @endif">
                 <!-- Header -->
                 <div class="flex flex-col space-y-2">
-                    <p>{{ $comment['created_by'] }}</p>
                     <p>{{ $comment['content'] }}</p>
                 </div>
                 <!-- Footer -->

@@ -90,17 +90,12 @@ class CommentModal extends ModalComponent
         $arr = [];
 
         foreach (($root ?? $this->comments) as $comment) {
-            if ($flat) {
-                $arr[$comment['id']] = [
-                    $comment['id'],
-                    ...$this->getRecursiveIds($comment['replies']),
-                ];
-            } else {
-                $arr[$comment['id']] = $this->getRecursiveIds($comment['replies'], $flat);
-            }
+            $arr[$comment->getKey()] = $comment->repliesWithEssentials->map(function ($item) use ($flat) {
+               return [$item->getKey() => $this->getRecursiveIds($item->repliesWithEssentials, $flat)];
+            });
         }
 
-        return $flat && ! empty($arr) ? array_values(...$arr) : $arr;
+        return $arr;
     }
 
     public function getComment($id)
@@ -109,27 +104,7 @@ class CommentModal extends ModalComponent
             return $this->comments[$id];
         }
 
-        $structure = $this->getRecursiveIds(flat: false);
-
-        $commentIds = [];
-
-        $commentIds[] = key($structure);
-
-        do {
-            $curr = current($structure);
-
-            if ($pass = ! empty($structure)) {
-                $commentIds[] = key($curr);
-            }
-
-            next($structure);
-        } while (! $pass);
-
-        $comment = null;
-
-        foreach ($commentIds as $id) {
-            $comment = $this->comments['replies'][$id];
-        }
+        // Search for structure
 
         return $comment;
     }
