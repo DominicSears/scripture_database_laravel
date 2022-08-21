@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Apologenetics</title>
+        <title>{{ env('APP_NAME', 'Laravel') }}</title>
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- Vite -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
             [x-cloak] {

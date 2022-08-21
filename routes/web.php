@@ -11,13 +11,19 @@ Route::get('/search', Controllers\SearchController::class)->name('search.results
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        $user = auth()->user();
+
+        $user->following()->take(5);
+
+        return view('dashboard', [
+            'following' => $user->following,
+        ]);
     })->name('dashboard');
 
     // Users
     Route::controller(Controllers\UserController::class)->group(function () {
         Route::get('/users', 'users')->name('users.index');
-        Route::get('users/{user}', 'show')->name('users.show');
+        Route::get('/users/{user}', 'show')->name('users.show');
         Route::get('/users/edit/{user?}/{faith_id?}', 'edit')->name('users.edit');
     });
 

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasComments;
+use App\Traits\HasUrlAttributes;
 use Illuminate\Support\Arr;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Nugget extends Model implements Votable, Commentable
 {
-    use HasFactory, HasComments;
+    use HasFactory, HasComments, HasUrlAttributes;
 
     public const NUGGET_TYPE_REFUTE = 0;
 

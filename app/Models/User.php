@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Vote\Votable;
+use App\Traits\HasUrlAttributes;
 use Laravel\Sanctum\HasApiTokens;
 use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Query\Builder;
@@ -29,6 +30,7 @@ class User extends Authenticatable implements Votable, Commentable
     use TwoFactorAuthenticatable;
     use SoftDeletes;
     use HasRolesAndAbilities;
+    use HasUrlAttributes;
 
     protected $guarded = false;
 

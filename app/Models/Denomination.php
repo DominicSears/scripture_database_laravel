@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasComments;
 use App\Contracts\Vote\Votable;
 use App\Contracts\Comment\Commentable;
+use App\Traits\HasUrlAttributes;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Denomination extends Model implements Votable, Commentable
 {
-    use HasFactory, HasComments;
+    use HasFactory, HasComments, HasUrlAttributes;
 
     protected $guarded = [];
 

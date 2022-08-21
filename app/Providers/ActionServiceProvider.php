@@ -35,5 +35,8 @@ class ActionServiceProvider extends ServiceProvider
         // Comments
         Contracts\Comment\CreatesComment::class => Actions\Comment\CreateComment::class,
         Contracts\Comment\ValidatesComment::class => Actions\Comment\ValidateComment::class,
+        // Nuggets
+        Contracts\Nuggets\ValidatesNugget::class => Actions\Nuggets\ValidateNugget::class,
+        Contracts\Nuggets\CreatesNugget::class => Actions\Nuggets\CreateNugget::class,
     ];
 }

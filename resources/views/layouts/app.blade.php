@@ -10,8 +10,8 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- Vite -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
 
         <style>
             [x-cloak] {
@@ -20,15 +20,12 @@
         </style>
 
         @livewireStyles
-
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased w-full h-screen bg-slate-100">
         <!-- Sidebar and Content -->
         <div class="flex flex-row h-full">
             <!-- Sidebar -->
-            <div class="h-full flex flex-col border-r border-slate-200 p-4 w-fit overflow-y-auto position-fixed items-center justify-start"
+            <div class="h-full flex flex-col p-4 w-fit overflow-y-auto position-fixed items-center justify-start bg-white"
                 id="sidebar" x-transition x-data="{
                     open: false,
                     opendSubMenu: false,
