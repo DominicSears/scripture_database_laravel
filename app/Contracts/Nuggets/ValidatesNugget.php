@@ -10,10 +10,11 @@ interface ValidatesNugget
     /**
      * Validate the array of data for Nugget model
      *
-     * @param array $data
-     * @param bool $update
-     * @throws ValidationException
+     * @param  array  $data
+     * @param  bool  $update
      * @return void
+     *
+     * @throws ValidationException
      */
     public function __invoke(array $data, bool $update = false): Validator;
 }

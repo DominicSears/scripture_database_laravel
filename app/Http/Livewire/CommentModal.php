@@ -91,7 +91,7 @@ class CommentModal extends ModalComponent
 
         foreach (($root ?? $this->comments) as $comment) {
             $arr[$comment->getKey()] = $comment->repliesWithEssentials->map(function ($item) use ($flat) {
-               return [$item->getKey() => $this->getRecursiveIds($item->repliesWithEssentials, $flat)];
+                return [$item->getKey() => $this->getRecursiveIds($item->repliesWithEssentials, $flat)];
             });
         }
 

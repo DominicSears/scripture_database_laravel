@@ -2,11 +2,11 @@
 
 namespace App\Http\Livewire\Denominations;
 
-use App\Contracts\Denomination\CreatesDenomination;
 use App\Models\Religion;
-use Illuminate\Validation\ValidationException;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Validation\ValidationException;
+use App\Contracts\Denomination\CreatesDenomination;
 
 class CreateDenomination extends ModalComponent
 {
@@ -35,8 +35,9 @@ class CreateDenomination extends ModalComponent
     }
 
     /**
-     * @param CreatesDenomination $createsDenomination
+     * @param  CreatesDenomination  $createsDenomination
      * @return void
+     *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function submit(CreatesDenomination $createsDenomination)

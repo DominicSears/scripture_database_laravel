@@ -28,7 +28,7 @@ trait HasUrlAttributes
 
         return [
             Str::plural($name).'.show',
-            [$name => $this->getKey()]
+            [$name => $this->getKey()],
         ];
     }
 }

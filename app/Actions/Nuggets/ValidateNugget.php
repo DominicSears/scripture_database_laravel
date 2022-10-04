@@ -2,13 +2,13 @@
 
 namespace App\Actions\Nuggets;
 
-use Illuminate\Contracts\Validation\Validator;
 use App\Contracts\Nuggets\ValidatesNugget;
+use Illuminate\Contracts\Validation\Validator;
 
 class ValidateNugget implements ValidatesNugget
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __invoke(array $data, bool $update = false): Validator
     {

@@ -4,8 +4,8 @@ namespace App\Models;
 
 use App\Traits\HasComments;
 use App\Contracts\Vote\Votable;
-use App\Contracts\Comment\Commentable;
 use App\Traits\HasUrlAttributes;
+use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;

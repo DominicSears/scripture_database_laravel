@@ -2,8 +2,8 @@
 
 namespace App\Actions\Nuggets;
 
-use App\Contracts\Nuggets\ValidatesNugget;
 use App\Models\Nugget;
+use App\Contracts\Nuggets\ValidatesNugget;
 
 class CreateNugget implements \App\Contracts\Nuggets\CreatesNugget
 {
@@ -12,7 +12,7 @@ class CreateNugget implements \App\Contracts\Nuggets\CreatesNugget
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function __invoke(array $data): void
     {
