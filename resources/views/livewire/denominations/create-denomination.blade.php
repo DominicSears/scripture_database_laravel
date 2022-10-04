@@ -1,4 +1,14 @@
 <div class="w-full h-auto p-8 bg-white flex flex-col space-y-4">
+    @if (! empty($message))
+        <div id="alert-create-denomination" x-data @class([
+            'ring-1 p-4 rounded-xl font-bold flex flex-row justify-between space-x-4 items-center w-full',
+            'bg-red-400 ring-red-500 text-red-700' => $alertType === 'danger',
+            'bg-green-400 ring-green-500 text-green-700' => $alertType === 'success'
+        ])>
+            <span>{{ $message ?? 'This is a message for the alert' }}</span>
+            <span x-on:click="$el.parentElement.style.display = 'none'" class="hover:cursor-pointer">x</span>
+        </div>
+    @endif
     <p class="font-bold text-3xl">Add denomination to: {{ $religion->name }}</p>
     <div class="flex flex-row space-x-4 w-full">
         <!-- Column 1 -->
@@ -10,11 +20,14 @@
             <div class="flex flex-col space-y-2 w-full">
                 <label for="parent">Parent ID (If applicable)</label>
                 <select id="parent" wire:model.defer="state.parent_id">
-                    @forelse ($religion?->denominations ?? [] as $denomination)
-                        <option value="{{ $denomination->getKey() }}">{{ $denomination->name }}</option>
-                    @empty
+                    @if ($religion?->denominations?->isNotEmpty() ?? false)
+                        <option selected value>None</option>
+                        @foreach ($religion->denominations as $denomination)
+                            <option value="{{ $denomination->getKey() }}">{{ $denomination->name }}</option>
+                        @endforeach
+                    @else
                         <option disabled>No denominations</option>
-                    @endforelse
+                    @endif
                 </select>
             </div>
         </div>

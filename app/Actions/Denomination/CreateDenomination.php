@@ -12,10 +12,16 @@ final class CreateDenomination implements CreatesDenomination
     {
     }
 
+    /**
+     * @inheritDoc
+     */
     public function __invoke(array $data): Denomination
     {
-        $validated = ($this->denominationValidator)($data, false)->validate();
+        $validated = ($this->denominationValidator)($data)->validate();
 
-        return Denomination::query()->create($validated);
+        $denomination = new Denomination($validated);
+        $denomination->save();
+
+        return $denomination;
     }
 }

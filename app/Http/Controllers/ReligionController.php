@@ -21,7 +21,7 @@ class ReligionController extends Model
 
     public function create()
     {
-        return view('religions.create');
+        return 'hi';
     }
 
     public function createDenomination(Religion $religion)

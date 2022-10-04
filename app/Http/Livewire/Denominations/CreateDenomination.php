@@ -2,7 +2,9 @@
 
 namespace App\Http\Livewire\Denominations;
 
+use App\Contracts\Denomination\CreatesDenomination;
 use App\Models\Religion;
+use Illuminate\Validation\ValidationException;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -13,6 +15,10 @@ class CreateDenomination extends ModalComponent
     public ?Religion $religion = null;
 
     public array $state = [];
+
+    public ?string $alertType = null;
+
+    public ?string $message = null;
 
     public function mount()
     {
@@ -25,8 +31,30 @@ class CreateDenomination extends ModalComponent
 
         $this->state = [
             'religion_id' => $this->religion->getKey(),
-            'approved' => false,
         ];
+    }
+
+    /**
+     * @param CreatesDenomination $createsDenomination
+     * @return void
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function submit(CreatesDenomination $createsDenomination)
+    {
+        try {
+            $createsDenomination(
+                array_merge($this->state, ['approved' => false, 'created_by' => auth()->id()])
+            );
+        } catch (ValidationException $e) {
+            $this->message = $e->getMessage();
+            $this->alertType = 'danger';
+            $this->state = ['religion_id' => $this->religions->first()->getKey()];
+
+            return;
+        }
+
+        $this->message = 'Denomination created!';
+        $this->alertType = 'success';
     }
 
     public function updatedStateReligionId()
