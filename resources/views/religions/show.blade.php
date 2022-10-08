@@ -20,9 +20,12 @@
             <!-- Doctrines -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
                 <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
-                <div class="flex flex-col space-y-6 items-start w-full">
+                <div class="flex flex-col items-start w-full">
                     @forelse ($religion->doctrines as $doctrine)
-                        <div class="flex flex-row items-center w-full">
+                        <div @class([
+                            'flex flex-row items-center w-full py-12',
+                            'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != `1`)
+                        ])>
                             <!-- Title & Description -->
                             <div class="w-3/5 flex flex-col space-y-2">
                                 <h3 class="text-xl font-semibold text-slate-600">{{ $doctrine->title }}</h3>
@@ -31,7 +34,12 @@
                             <!-- Author Information -->
                             <div class="w-2/5 flex flex-row space-x-6 items-center justify-center">
                                 <!-- Avatar -->
-                                <div class="w-16 h-16 rounded-full bg-gray-500"></div>
+                                @if (isset($doctrine->createdBy->profile_photo_path))
+                                    <img src="{{ $doctrine->createdBy->profile_photo_url }}"
+                                        class="w-16 h-16 rounded-full" alt="{{ $doctrine->createdBy->username }}">
+                                @else
+                                    <div class="w-16 h-16 rounded-full bg-gray-500"></div>
+                                @endif
                                 <!-- Post Author Information -->
                                 <div class="flex flex-col">
                                     <p class="text-lg font-semibold text-sky-800">
@@ -49,10 +57,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @if ($loop->even && ! $loop->last)
-                            <hr class="border border-sky-400">
-                        @endif
                     @empty
                         <div class="w-full h-full flex items-center justify-center">
                             <p class="text-2xl font-semibold">No doctrines available</p>
