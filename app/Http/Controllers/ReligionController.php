@@ -53,6 +53,7 @@ class ReligionController extends Model
             'doctrines.createdBy',
             'doctrines.createdBy.faith.religion',
             'doctrines.createdBy.faith.denomination',
+            'posts',
         ]);
 
         return view('religions.show', [

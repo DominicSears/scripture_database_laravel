@@ -36,7 +36,8 @@
                                 <!-- Avatar -->
                                 @if (isset($doctrine->createdBy->profile_photo_path))
                                     <img src="{{ $doctrine->createdBy->profile_photo_url }}"
-                                        class="w-16 h-16 rounded-full" alt="{{ $doctrine->createdBy->username }}">
+                                        class="w-16 h-16 rounded-full shadow-xl"
+                                         alt="{{ $doctrine->createdBy->username }}">
                                 @else
                                     <div class="w-16 h-16 rounded-full bg-gray-500"></div>
                                 @endif
@@ -155,6 +156,14 @@
                         <h2 class="text-xl font-bold text-sky-900">250k Followers</h2>
                     </div>
                 </div>
+            </div>
+            <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
+                <livewire:list-items :classType="\App\Models\Denomination::class"
+                    :items="$religion->allDenominations->take(10)" />
+            </div>
+            <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
+                <livewire:list-items :classType="\App\Models\Post::class"
+                    :items="$religion->posts->take(10)"/>
             </div>
         </div>
     </div>

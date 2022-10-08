@@ -93,6 +93,11 @@ class Religion extends Model implements Votable, Commentable
         return $this->morphMany(Vote::class, 'votable');
     }
 
+    public function posts(): MorphToMany
+    {
+        return $this->morphToMany(Post::class, 'postable');
+    }
+
     // Inverse Relationships
 
     public function religionParent(): BelongsTo
