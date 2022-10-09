@@ -63,7 +63,15 @@ class Feed extends Component
         foreach ($feedable as $feedItem) {
             /** @var Collection $feedModel */
             $feedModel = call_user_func([$feedItem, 'query'])
-                ->with(['createdBy', 'votes'])
+                ->with([
+                    'createdBy' => [
+                        'faith' => [
+                            'denomination',
+                            'religion'
+                        ]
+                    ],
+                    'votes'
+                ])
                 ->take($this->limit)
                 ->get()
                 ->collect();
@@ -78,12 +86,20 @@ class Feed extends Component
         foreach ($feedItems->sortByDesc('created_at') as $item) {
             $type = $this->mapToCodeName($item::class);
 
+            $faithTitle = $item->createdBy->faith->religion->name;
+
+            if (isset($item->createdBy->faith->denomination->name)) {
+                $faithTitle .= ' (' . $item->createdBy->faith->denomination->name . ')';
+            }
+
             $arr[] = [
                 'title' => $item->getAttribute('title'),
                 'description' => $item->getAttribute('description'),
                 'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
-                'created_at' => $item->getAttribute('created_at'),
-                'type' => $feedItemType = $item->getAttribute('feed_item_type') ?? ucfirst($type),
+                'created_by_avatar' => $item->getRelation('createdBy')->getAttribute('profile_photo_url'),
+                'faith_title' => $faithTitle,
+                'created_at' => $item->getAttribute('created_at')->diffForHumans(),
+                'type' => $item->getAttribute('feed_item_type') ?? ucfirst($type),
                 'content' => $item->getAttribute('description'),
                 'votes_number' => $item->getRelation('votes')->sum('amount'),
                 'comments_number' => $item->comments->count(),

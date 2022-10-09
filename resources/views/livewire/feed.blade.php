@@ -28,14 +28,37 @@
         @forelse ($feedItems as $item)
             <div class="w-full h-auto bg-white rounded-2xl flex flex-col p-6 space-y-4">
                 <!-- Header -->
-                <div class="flex flex-col space-y-2">
-                    <p class="font-semibold text-2xl text-sky-500">{{ $item['title'] }}</p>
-                    <small class="font-thin text-sm text-sky-400">Created By: {{ $item['created_by'] }} - {{ $item['created_at']->diffForHumans() }}</small>
-                    <small class="font-thin text-sm text-sky-400">Type: {{ $item['type'] }}</small>
+                <div class="w-2/5 flex flex-row space-x-6 items-center">
+                    <!-- Avatar -->
+                    @if (! empty($item['created_by_avatar']))
+                        <img src="{{ $item['created_by_avatar'] }}"
+                             class="w-16 h-16 rounded-full shadow-xl"
+                             alt="{{ $item['created_by'] }}">
+                    @else
+                        <div class="w-16 h-16 rounded-full bg-gray-500"></div>
+                    @endif
+                    <!-- Post Author Information -->
+                    <div class="flex flex-col">
+                        <p class="text-lg font-semibold text-sky-800">
+                            <span>{{ $item['created_by'] }}</span>
+                        </p>
+                        <p class="text-md text-slate-500">
+                            <span>{{ $item['faith_title'] }}</span>
+                        </p>
+                        <p class="text-sm font-semibold text-gray-700">
+                            <span>Type: {{ $item['type'] }} - {{ $item['created_at'] }}</span>
+                        </p>
+                    </div>
                 </div>
                 <!-- Body -->
                 <div>
-                     <p class="text-slate-500">{{ $item['content'] }}</p>
+                     @if (isset($item['title']))
+                        <p class="text-sky-900 font-bold text-2xl">{{ $item['title'] }}</p>
+                     @endif
+
+                    @if (isset($item['content']))
+                         <p class="text-slate-500">{{ $item['content'] }}</p>
+                     @endif
                 </div>
                 <!-- Footer -->
                 <div class="flex flex-row space-x-4 items-center">
