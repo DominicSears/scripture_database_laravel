@@ -97,6 +97,7 @@ class Feed extends Component
                 'description' => $item->getAttribute('description'),
                 'created_by' => $item->getRelation('createdBy')->getAttribute('username'),
                 'created_by_avatar' => $item->getRelation('createdBy')->getAttribute('profile_photo_url'),
+                'profile_url' => $item->getRelation('createdBy')->getAttribute('profile_url'),
                 'faith_title' => $faithTitle,
                 'created_at' => $item->getAttribute('created_at')->diffForHumans(),
                 'type' => $item->getAttribute('feed_item_type') ?? ucfirst($type),

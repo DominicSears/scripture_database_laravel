@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function show(User $user)
+    public function show(?string $username = null)
     {
+        $user = User::query()
+            ->with([]);
+
+        $identifier = is_numeric($username)
+            ? 'id' : 'username';
+
+        $user = $user->where($identifier, $username)
+            ->first();
+
         return view('users.show', [
             'user' => $user,
         ]);

@@ -39,9 +39,10 @@
                     @endif
                     <!-- Post Author Information -->
                     <div class="flex flex-col">
-                        <p class="text-lg font-semibold text-sky-800">
+                        <a href="{{ $item['profile_url'] }}"
+                           class="text-lg font-semibold text-sky-800 hover:underline hover:text-sky-600">
                             <span>{{ $item['created_by'] }}</span>
-                        </p>
+                        </a>
                         <p class="text-md text-slate-500">
                             <span>{{ $item['faith_title'] }}</span>
                         </p>

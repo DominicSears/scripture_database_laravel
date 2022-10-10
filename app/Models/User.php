@@ -72,7 +72,35 @@ class User extends Authenticatable implements Votable, Commentable
     public function name(): Attribute
     {
         return new Attribute(
-            get: fn () => $this->first_name.' '.$this->last_name
+            get: fn ($value, $attributes) => $attributes['first_name'].' '.$attributes['last_name']
+        );
+    }
+
+    public function profileUrl(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value, $attributes) => route('users.show', ['username' => $attributes['username']])
+        );
+    }
+
+    public function faithTitle(): Attribute
+    {
+        return new Attribute(
+            get: function ($value, $attributes) {
+                if (! $this->relationLoaded('faith')) {
+                    $this->load('faith');
+                }
+
+                $faith = $this->getRelation('faith');
+
+                $faithTitle = $faith->religion->name;
+
+                if (isset($faith->denomination->name)) {
+                    $faithTitle .= ' (' . $faith->denomination->name . ')';
+                }
+
+                return $faithTitle;
+            }
         );
     }
 

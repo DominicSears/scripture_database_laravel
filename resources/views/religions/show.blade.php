@@ -24,7 +24,7 @@
                     @forelse ($religion->doctrines as $doctrine)
                         <div @class([
                             'flex flex-row items-center w-full py-12',
-                            'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != `1`)
+                            'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != '1')
                         ])>
                             <!-- Title & Description -->
                             <div class="w-3/5 flex flex-col space-y-2">
@@ -97,10 +97,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @if ($loop->even && ! $loop->last)
-                            <hr class="border border-sky-400">
-                        @endif
                     @empty
                         <div class="w-full h-full flex items-center justify-center">
                             <p class="text-2xl font-semibold">No nuggets available</p>
