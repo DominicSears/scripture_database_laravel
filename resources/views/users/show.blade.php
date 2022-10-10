@@ -8,7 +8,7 @@
                 <!-- Profile section -->
                 <div class="flex flex-row space-x-4">
                     @if (empty($user->profile_photo_path))
-                        <div class="rounded-full h-52 w-52 -mt-14 ml-2 border-4 border-white shadow-xl bg-gray-700"
+                        <div class="rounded-full h-52 w-52 -mt-14 ml-2 border-4 border-white shadow-xl bg-gray-700"></div>
                     @else
                         <img class="rounded-full h-52 w-52 -mt-14 ml-2 border-4 border-white shadow-xl" src="{{ $user->profile_photo_url }}"
                              alt="{{ $user->username }}" />
