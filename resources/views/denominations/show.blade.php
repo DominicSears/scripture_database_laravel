@@ -8,7 +8,7 @@
                     <div class="w-32 h-32 rounded-full bg-gray-600"></div>
                 </div>
                 <div class="w-full h-full flex flex-col space-y-4">
-                    <h1 class="text-4xl font-bold text-sky-900">{{ $religion->title }}</h1>
+                    <h1 class="text-4xl font-bold text-sky-900">{{ $denomination->title }}</h1>
                     <p class="text-sm text-slate-400">
                         <span>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br><br>
@@ -21,7 +21,7 @@
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
                 <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
                 <div class="flex flex-col items-start w-full">
-                    @forelse ($religion->doctrines as $doctrine)
+                    @forelse ($denomination->doctrines as $doctrine)
                         <div @class([
                             'flex flex-row items-center w-full py-12',
                             'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != '1')
@@ -36,7 +36,7 @@
                                 <!-- Avatar -->
                                 @if (isset($doctrine->createdBy->profile_photo_path))
                                     <img src="{{ $doctrine->createdBy->profile_photo_url }}"
-                                        class="w-16 h-16 rounded-full shadow-xl"
+                                         class="w-16 h-16 rounded-full shadow-xl"
                                          alt="{{ $doctrine->createdBy->username }}">
                                 @else
                                     <div class="w-16 h-16 rounded-full bg-gray-500"></div>
@@ -84,7 +84,7 @@
                                 <!-- Post Author Information -->
                                 <div class="flex flex-col">
                                     <a href="{{ $doctrine->createdBy->profile_url }}"
-                                        class="text-lg font-semibold text-sky-800">
+                                       class="text-lg font-semibold text-sky-800">
                                         <span>{{ $doctrine->createdBy->username }}</span>
                                     </a>
                                     <p class="text-md text-slate-500">
@@ -156,12 +156,8 @@
                 </div>
             </div>
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
-                <livewire:list-items :classType="\App\Models\Denomination::class"
-                    :items="$religion->allDenominations->take(10)" />
-            </div>
-            <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
                 <livewire:list-items :classType="\App\Models\Post::class"
-                    :items="$religion->posts->take(10)"/>
+                                     :items="$denomination->posts->take(10)"/>
             </div>
         </div>
     </div>

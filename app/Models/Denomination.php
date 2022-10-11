@@ -38,6 +38,16 @@ class Denomination extends Model implements Votable, Commentable
         );
     }
 
+    public function url(): Attribute
+    {
+        return new Attribute(
+            get: fn ($value, $attributes) => route(
+                'denominations.show',
+                ['denomination' => $attributes['id']]
+            )
+        );
+    }
+
     // Scopes
 
     public function scopeSearch(Builder $query, string $search)
@@ -86,6 +96,11 @@ class Denomination extends Model implements Votable, Commentable
     public function follows(): MorphMany
     {
         return $this->morphMany(Follow::class, 'followable');
+    }
+
+    public function posts(): MorphToMany
+    {
+        return $this->morphToMany(Post::class, 'postable');
     }
 
     // Inverse Relationships

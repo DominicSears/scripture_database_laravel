@@ -7,7 +7,10 @@
     </div>
     @forelse ($items as $item)
         <div class="flex flex-row space-x-4 justify-between items-center">
-            <p class="font-semibold text-xl text-black">{{ $item->getAttribute('title') }}</p>
+            <a class="font-semibold text-xl text-black"
+                href="{{ $item->getAttribute('url') }}">
+                <span>{{ $item->getAttribute('title') }}</span>
+            </a>
         </div>
     @empty
         <div class="flex items-center justify-center">
