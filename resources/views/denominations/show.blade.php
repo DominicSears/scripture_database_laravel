@@ -157,7 +157,7 @@
             </div>
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
                 <livewire:list-items :classType="\App\Models\Post::class"
-                                     :items="$denomination->posts->take(10)"/>
+                    :items="$denomination->posts->take(10)"/>
             </div>
         </div>
     </div>

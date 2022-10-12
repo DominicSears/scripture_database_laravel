@@ -55,9 +55,13 @@ class ItemVotes extends Component
 
         $this->downvoted = $this->votesFromUser < 0;
 
-        $this->type ??= $this->mapToCodeName($votes->first()->votable_type);
+        $this->type ??= empty($votes->first())
+            ? 'N/A'
+            : $this->mapToCodeName($votes->first()->votable_type);
 
-        $this->modelId ??= $votes->first()->votable_id;
+        $this->modelId ??= empty($votes->first())
+            ? 0
+            : $votes->first()->votable_id;
     }
 
     protected function vote(bool $upvote)

@@ -36,9 +36,9 @@ class ItemComments extends Component
                     ->get() :
                 $commentable->comments()->get();
 
-            $this->modelId = $commentable['model_id'];
+            $this->modelId ??= $commentable['model_id'];
 
-            $this->type = $commentable['model_type'];
+            $this->type ??= $commentable['model_type'];
         }
 
         // Note: Comments can't be commentable types.
