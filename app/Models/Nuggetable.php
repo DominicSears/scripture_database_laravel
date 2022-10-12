@@ -12,7 +12,7 @@ class Nuggetable extends Model implements Commentable
 {
     use HasFactory, HasComments;
 
-    public function nuggetableNugget(): MorphTo
+    public function nugget(): MorphTo
     {
         return $this->morphTo();
     }
