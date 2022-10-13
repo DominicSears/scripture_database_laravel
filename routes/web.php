@@ -24,8 +24,8 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Users
     Route::controller(Controllers\UserController::class)->group(function () {
         Route::get('/users', 'users')->name('users.index');
-        Route::get('/users/{username?}', 'show')->name('users.show');
         Route::get('/users/edit/{user?}/{faith_id?}', 'edit')->name('users.edit');
+        Route::get('/users/{username?}', 'show')->name('users.show');
     });
 
     // Religion
