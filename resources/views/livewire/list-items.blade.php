@@ -1,9 +1,11 @@
 <div class="flex flex-col space-y-4">
     <div class="flex flex-row space-x-4 justify-between items-center">
         <h2 class="font-bold text-2xl text-sky-900">{{ $title }}</h2>
-        <button>
-            +
-        </button>
+        @if (isset($modalName))
+            <button wire:click="$emit('openModal', '{{ $modalName }}', {{ json_encode($modalParams) }})">
+                {{ $button ?? '+' }}
+            </button>
+        @endif
     </div>
     @forelse ($items as $item)
         <div class="flex flex-row space-x-4 justify-between items-center">

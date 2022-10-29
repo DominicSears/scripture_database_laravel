@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-row space-x-4 w-full h-full">
+    <div class="flex flex-row space-x-4 w-full h-full pt-8 pb-12 px-6">
         <!-- Column 1 -->
         <div class="flex flex-col space-y-4 w-3/4 h-full">
             <!-- Avatar, Name, and Description -->
@@ -19,46 +19,11 @@
             </div>
             <!-- Doctrines -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
-                <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
-                <div class="flex flex-col items-start w-full">
+                <h2 class="text-4xl font-bold text-sky-900">Doctrines</h2>
+                <div class="flex flex-col items-start w-full divide-y divide-sky-400">
                     @forelse ($religion->doctrines as $doctrine)
-                        <div @class([
-                            'flex flex-row items-center w-full py-12',
-                            'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != '1')
-                        ])>
-                            <!-- Title & Description -->
-                            <div class="w-3/5 flex flex-col space-y-2">
-                                <h3 class="text-xl font-semibold text-slate-600">{{ $doctrine->title }}</h3>
-                                <p class="text-sm text-gray-400">{{ $doctrine->description }}</p>
-                            </div>
-                            <!-- Author Information -->
-                            <div class="w-2/5 flex flex-row space-x-6 items-center justify-center">
-                                <!-- Avatar -->
-                                @if (isset($doctrine->createdBy->profile_photo_path))
-                                    <img src="{{ $doctrine->createdBy->profile_photo_url }}"
-                                        class="w-16 h-16 rounded-full shadow-xl"
-                                         alt="{{ $doctrine->createdBy->username }}">
-                                @else
-                                    <div class="w-16 h-16 rounded-full bg-gray-500"></div>
-                                @endif
-                                <!-- Post Author Information -->
-                                <div class="flex flex-col">
-                                    <a href="{{ $doctrine->createdBy->profile_url }}"
-                                       class="text-lg font-semibold text-sky-800">
-                                        <span>{{ $doctrine->createdBy->username }}</span>
-                                    </a>
-                                    <p class="text-md text-slate-500">
-                                        <span>{{ $doctrine->createdBy->faith->religion->name }}</span>
-                                        @if (isset($doctrine->createdBy->faith->denomination))
-                                            <span>({{ $doctrine->createdBy->faith->denomination->name }})</span>
-                                        @endif
-                                    </p>
-                                    <p class="text-sm font-semibold text-gray-700">
-                                        <span>Type: Doctrine - {{ $doctrine->created_at->diffForHumans() }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <livewire:item :item="$doctrine->withoutRelations()" :user="$doctrine->createdBy"
+                            padding="py-8"/>
                     @empty
                         <div class="w-full h-full flex items-center justify-center">
                             <p class="text-2xl font-semibold">No doctrines available</p>
@@ -68,7 +33,7 @@
             </div>
             <!-- Nuggets -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
-                <h2 class="text-3xl font-bold text-sky-900">Nuggets</h2>
+                <h2 class="text-4xl font-bold text-sky-900">Nuggets</h2>
                 <div class="flex flex-col space-y-6 items-start w-full">
                     @forelse ([] as $doctrine)
                         <div class="flex flex-row items-center w-full">
@@ -157,7 +122,9 @@
             </div>
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
                 <livewire:list-items :classType="\App\Models\Denomination::class"
-                    :items="$religion->allDenominations->take(10)" />
+                    :items="$religion->allDenominations->take(10)"
+                    modalName="denominations.create-denomination"
+                    :modalParams="['religionId' => $religion->getKey()]" />
             </div>
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
                 <livewire:list-items :classType="\App\Models\Post::class"

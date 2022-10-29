@@ -17,6 +17,12 @@ class ListItems extends Component
     /** @var Collection<Model> $items */
     public Collection $items;
 
+    public ?string $modalName = null;
+
+    public array $modalParams = [];
+
+    public ?string $button = null;
+
     public function mount()
     {
         $this->title ??= str($this->mapToCodeName($this->classType))

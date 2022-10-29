@@ -150,9 +150,9 @@
                 </div>
             </div>
             <!-- Header & Content -->
-            <div class="w-full overflow-y-auto px-6 h-full">
+            <div class="w-full overflow-y-auto h-full">
                 <!-- Header Bar -->
-                <div class="flex flex-row justify-between items-center w-full pt-2" style="height: 10%;">
+                <div class="flex flex-row justify-between items-center w-full pt-2 px-6" style="height: 10%;">
                     <livewire:search />
                     <div class="flex flex-row space-x-4 items-center">
                         <svg class="h-6 w-6 text-slate-500" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-full py-8" style="height: 90%;">
+                <div class="w-full" style="height: 90%;">
                     {{ $slot }}
                 </div>
             </div>

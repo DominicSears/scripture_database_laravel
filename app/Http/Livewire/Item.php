@@ -19,6 +19,8 @@ class Item extends Component
 
     public bool $hasControls = true;
 
+    public ?string $padding = null;
+
     public function mount()
     {
         if (! $this->user->relationLoaded('faith') ||

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-col w-full pb-8 space-y-6">
+    <div class="flex flex-col w-full pb-8 space-y-6 pb-12 pt-8 px-6">
         <div class="bg-white w-full rounded-2xl shadow-xl h-fit flex flex-col space-y-2">
             <!-- Header Image -->
             <div class="w-full rounded-2xl overflow-hidden bg-gray-400 h-72 w-full"></div>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="flex flex-row space-x-4 w-full h-full">
+    <div class="flex flex-row space-x-4 w-full h-full px-6 pb-12 pt-8">
         <!-- Column 1 -->
         <div class="flex flex-col space-y-4 w-3/4 h-full">
             <!-- Avatar, Name, and Description -->

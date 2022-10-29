@@ -1,9 +1,12 @@
-<div class="flex flex-row space-x-2 justify-between py-8">
+<div @class([
+        'flex flex-row space-x-2 justify-between',
+        $padding ?? 'py-4',
+    ])>
     <!-- Title & Description -->
     <div class="w-3/5 flex flex-col space-y-4">
         <div class="flex flex-col space-y-2">
-            <h3 class="text-xl font-semibold text-slate-600">{{ $item->title }}</h3>
-            <p class="text-sm text-gray-400">{{ $item->description }}</p>
+            <h3 class="text-2xl font-bold text-slate-700">{{ $item->title }}</h3>
+            <p class="text-sm text-gray-500">{{ $item->description }}</p>
         </div>
         @if ($hasControls)
             <div class="flex flex-row space-x-4 items-center">
@@ -27,7 +30,7 @@
         <!-- Post Author Information -->
         <div class="flex flex-col">
             <a href="{{ $user->profile_url }}"
-               class="text-lg font-semibold text-sky-800">
+               class="text-2xl font-bold text-sky-800 hover:underline">
                 <span>{{ $user->username }}</span>
             </a>
             <p class="text-md text-slate-500">

@@ -26,7 +26,7 @@
     <div class="flex flex-col space-y-12 pb-6">
         <!-- Feed Items -->
         @forelse ($feedItems as $item)
-            <div class="w-full h-auto bg-white rounded-2xl flex flex-col p-6 space-y-4">
+            <div class="w-full h-auto bg-white rounded-2xl flex flex-col p-6 space-y-4 shadow-xl">
                 <!-- Header -->
                 <div class="w-2/5 flex flex-row space-x-6 items-center">
                     <!-- Avatar -->
@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <!-- Body -->
-                <div>
+                <div class="flex flex-col space-y-4">
                      @if (isset($item['title']))
                         <p class="text-sky-900 font-bold text-2xl">{{ $item['title'] }}</p>
                      @endif

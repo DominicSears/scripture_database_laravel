@@ -20,14 +20,18 @@ class CreateDenomination extends ModalComponent
 
     public ?string $message = null;
 
-    public function mount()
+    public function mount(?int $religionId = null)
     {
         $this->religions ??= Religion::query()
             ->with('denominations')
             ->where('approved', true)
             ->get();
 
-        $this->religion ??= $this->religions->first();
+        $this->religion ??= (
+            isset($religionId) && $this->religions->contains($religionId)
+                ? $this->religions->where('id', $religionId)->first()
+                : $this->religions->first()
+        );
 
         $this->state = [
             'religion_id' => $this->religion->getKey(),
