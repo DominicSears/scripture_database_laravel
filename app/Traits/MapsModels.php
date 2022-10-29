@@ -2,19 +2,31 @@
 
 namespace App\Traits;
 
+use App\Models\Comment;
+use App\Models\Follow;
 use App\Models\Vote;
 
 trait MapsModels
 {
+    public function isClassName(string $name)
+    {
+        return str_contains($name, 'App\\Models\\');
+    }
+
     public function mapToCodeName(string $className): ?string
     {
         return empty($className) ?
-            null : substr(strrchr($className, '\\'), 1);
+            null : ($this->isClassName($className)
+                ? substr(strrchr($className, '\\'), 1)
+                : $className
+            );
     }
 
     public function mapToClassName(string $codeName): ?string
     {
-        return 'App\\Models\\'.$codeName;
+        return $this->isClassName($codeName)
+            ? $codeName
+            : 'App\\Models\\'.$codeName;
     }
 
     public function canMapToComment(string $name, bool $isCodeName): bool
