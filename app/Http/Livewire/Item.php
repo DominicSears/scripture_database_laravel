@@ -3,9 +3,10 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
-use App\Traits\MapsModels;
-use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
+use App\Traits\MapsModels;
+use Illuminate\Support\Arr;
+use Illuminate\Database\Eloquent\Model;
 
 class Item extends Component
 {
@@ -29,12 +30,23 @@ class Item extends Component
             $this->user->load([
                 'faith' => [
                     'religion',
-                    'denomination'
-                ]
+                    'denomination',
+                ],
             ]);
         }
 
         $this->itemType = $this->mapToCodeName($this->item::class);
+
+        $modelRelations = array_keys($this->item->getRelations());
+        $relationsToLoad = [
+            'nuggets',
+            'comments',
+            'votes',
+        ];
+
+        if (! Arr::has($modelRelations, $relationsToLoad)) {
+            $this->item->load($relationsToLoad);
+        }
     }
 
     public function render()

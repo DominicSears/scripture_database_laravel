@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Denomination;
 use App\Models\Religion;
+use App\Models\Denomination;
 
 class DenominationController extends Controller
 {
@@ -23,10 +23,10 @@ class DenominationController extends Controller
                 'createdBy' => [
                     'faith' => [
                         'denomination',
-                        'religion'
-                    ]
-                ]
-            ]
+                        'religion',
+                    ],
+                ],
+            ],
         ]);
 
         return view('denominations.show', [

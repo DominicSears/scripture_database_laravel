@@ -9,11 +9,15 @@
             <p class="text-sm text-gray-500">{{ $item->description }}</p>
         </div>
         @if ($hasControls)
-            <div class="flex flex-row space-x-4 items-center">
+            <div class="flex flex-row space-x-8 items-center">
                 <!-- Votes -->
                 <livewire:item-votes :votable="$item" :type="$item::class" :modelId="$item->getKey()" />
                 <!-- Comments -->
                 <livewire:item-comments :commentable="$item" :type="$item::class" :modelId="$item->getKey()" />
+                <!-- Supports -->
+                <livewire:item-nuggetable :item="$item" :nuggetableTypeId="\App\Models\Nugget::NUGGET_TYPE_SUPPORT" />
+                <!-- Refutes -->
+                <livewire:item-nuggetable :item="$item" :nuggetableTypeId="\App\Models\Nugget::NUGGET_TYPE_REFUTE" />
             </div>
         @endif
     </div>

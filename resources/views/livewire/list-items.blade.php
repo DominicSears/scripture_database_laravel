@@ -3,7 +3,7 @@
         <h2 class="font-bold text-2xl text-sky-900">{{ $title }}</h2>
         @if (isset($modalName))
             <button wire:click="$emit('openModal', '{{ $modalName }}', {{ json_encode($modalParams) }})">
-                {{ $button ?? '+' }}
+                {!! $button ?? '+' !!}
             </button>
         @endif
     </div>

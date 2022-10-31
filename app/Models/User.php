@@ -96,7 +96,7 @@ class User extends Authenticatable implements Votable, Commentable
                 $faithTitle = $faith->religion->name;
 
                 if (isset($faith->denomination->name)) {
-                    $faithTitle .= ' (' . $faith->denomination->name . ')';
+                    $faithTitle .= ' ('.$faith->denomination->name.')';
                 }
 
                 return $faithTitle;

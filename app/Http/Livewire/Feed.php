@@ -67,10 +67,10 @@ class Feed extends Component
                     'createdBy' => [
                         'faith' => [
                             'denomination',
-                            'religion'
-                        ]
+                            'religion',
+                        ],
                     ],
-                    'votes'
+                    'votes',
                 ])
                 ->take($this->limit)
                 ->get()
@@ -89,7 +89,7 @@ class Feed extends Component
             $faithTitle = $item->createdBy->faith->religion->name;
 
             if (isset($item->createdBy->faith->denomination->name)) {
-                $faithTitle .= ' (' . $item->createdBy->faith->denomination->name . ')';
+                $faithTitle .= ' ('.$item->createdBy->faith->denomination->name.')';
             }
 
             $arr[] = [

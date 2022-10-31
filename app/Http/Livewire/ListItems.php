@@ -2,19 +2,19 @@
 
 namespace App\Http\Livewire;
 
-use App\Traits\MapsModels;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 use Livewire\Component;
+use App\Traits\MapsModels;
+use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 class ListItems extends Component
 {
     use MapsModels;
 
-    /** @var class-string $classType */
+    /** @var class-string */
     public string $classType;
 
-    /** @var Collection<Model> $items */
+    /** @var Collection<Model> */
     public Collection $items;
 
     public ?string $modalName = null;

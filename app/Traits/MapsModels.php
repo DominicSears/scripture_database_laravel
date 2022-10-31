@@ -2,9 +2,9 @@
 
 namespace App\Traits;
 
-use App\Models\Comment;
-use App\Models\Follow;
 use App\Models\Vote;
+use App\Models\Follow;
+use App\Models\Comment;
 
 trait MapsModels
 {

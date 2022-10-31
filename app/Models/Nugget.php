@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
@@ -293,11 +292,6 @@ class Nugget extends Model implements Votable, Commentable
     public function follows(): MorphMany
     {
         return $this->morphMany(Follow::class, 'followable');
-    }
-
-    public function nuggetable(): HasMany
-    {
-        return $this->hasMany(Nuggetable::class, 'nugget_id');
     }
 
     // Inverse Relationships
