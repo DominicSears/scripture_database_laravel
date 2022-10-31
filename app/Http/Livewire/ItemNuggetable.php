@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Nuggets\NuggetableModal;
 use App\Models\Nugget;
 use Livewire\Component;
 use App\Traits\MapsModels;
@@ -30,6 +31,19 @@ class ItemNuggetable extends Component
             ->toArray();
 
         $this->nuggetableAmount = count($this->nuggetableArray);
+    }
+
+    public function openNuggetableModal()
+    {
+        $this->emit('openModal', NuggetableModal::getName(), [
+            'itemTitle' => $this->item->title,
+            'itemDescription' => $this->item->description,
+            'itemId' => $this->item->getKey(),
+            'nuggetIds' => array_map(
+                fn($n) => $n['id'],
+                $this->nuggetableArray
+            )
+        ]);
     }
 
     public function render()

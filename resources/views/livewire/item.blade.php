@@ -18,6 +18,8 @@
                 <livewire:item-nuggetable :item="$item" :nuggetableTypeId="\App\Models\Nugget::NUGGET_TYPE_SUPPORT" />
                 <!-- Refutes -->
                 <livewire:item-nuggetable :item="$item" :nuggetableTypeId="\App\Models\Nugget::NUGGET_TYPE_REFUTE" />
+                <!-- General -->
+                <livewire:item-nuggetable :item="$item" :nuggetableTypeId="\App\Models\Nugget::NUGGET_TYPE_GENERAL" />
             </div>
         @endif
     </div>
