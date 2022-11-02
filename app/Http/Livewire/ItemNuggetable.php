@@ -39,6 +39,7 @@ class ItemNuggetable extends Component
             'itemTitle' => $this->item->title,
             'itemDescription' => $this->item->description,
             'itemId' => $this->item->getKey(),
+            'nuggetTypeId' => $this->nuggetableTypeId,
             'nuggetIds' => array_map(
                 fn($n) => $n['id'],
                 $this->nuggetableArray

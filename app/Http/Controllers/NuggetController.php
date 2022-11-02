@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\Nuggets\CreatesNugget;
 use App\Models\User;
 use App\Models\Nugget;
 use App\Models\Religion;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class NuggetController extends Controller
@@ -25,18 +29,6 @@ class NuggetController extends Controller
         return view('nuggets.user', [
             'user' => $user->withoutRelations(),
             'nuggets' => $user->nuggets ?? [],
-        ]);
-    }
-
-    public function create(): View
-    {
-        // Search for doctrine, religion, denomination, etc. to attach to
-        $religions = Religion::query()
-            ->with(['denominations'])
-            ->get();
-
-        return view('nuggets.create', [
-            'religions' => $religions,
         ]);
     }
 }

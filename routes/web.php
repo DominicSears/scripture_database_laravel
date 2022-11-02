@@ -55,6 +55,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     // Nuggets
     Route::controller(Controllers\NuggetController::class)->group(function () {
         Route::get('/nuggets', 'list')->name('nuggets.list');
-        Route::get('/nuggets/create', 'create')->name('nuggets.create');
     });
 });

@@ -145,7 +145,6 @@
                         <p class="font-semibold icon-name" style="display: none;">Nuggets</p>
                         <x-slot:children x-show="subMenuOpen.nuggets">
                             <x-submenu-link :active="request()->is(route('nuggets.list'))" url="{{ route('nuggets.list') }}">Show Nuggets</x-submenu-link>
-                            <x-submenu-link :active="request()->is(route('nuggets.create'))" url="{{ route('nuggets.create') }}">Create Nugget</x-submenu-link>
                         </x-slot:children>
                     </x-menu-icon>
                 </div>

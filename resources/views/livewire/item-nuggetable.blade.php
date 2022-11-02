@@ -1,8 +1,5 @@
 @php use App\Models\Nugget @endphp
-<div @class([
-    'flex flex-row space-x-2 hover:text-sky-400',
-    'hover:cursor-pointer' => $nuggetableAmount > 0
-    ]) @if ($nuggetableAmount > 0) wire:click="openNuggetableModal" @endif>
+<div class="flex flex-row space-x-2 hover:text-sky-400 hover:cursor-pointer" wire:click="openNuggetableModal">
     @switch ($nuggetableTypeId)
         @case(Nugget::NUGGET_TYPE_SUPPORT)
             <!-- Supports icon -->
