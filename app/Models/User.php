@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\Vote\Votable;
+use App\Traits\HasNuggetRelation;
 use App\Traits\HasUrlAttributes;
 use Laravel\Sanctum\HasApiTokens;
 use App\Contracts\Comment\Commentable;
@@ -31,6 +32,7 @@ class User extends Authenticatable implements Votable, Commentable
     use SoftDeletes;
     use HasRolesAndAbilities;
     use HasUrlAttributes;
+    use HasNuggetRelation;
 
     protected $guarded = false;
 
@@ -161,11 +163,6 @@ class User extends Authenticatable implements Votable, Commentable
     public function updatedPosts(): HasMany
     {
         return $this->hasMany(Post::class, 'updated_by');
-    }
-
-    public function nuggets(): HasMany
-    {
-        return $this->hasMany(Nugget::class, 'created_by');
     }
 
     public function updatedNuggets(): HasMany

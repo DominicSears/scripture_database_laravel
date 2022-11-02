@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasComments;
 use App\Contracts\Vote\Votable;
+use App\Traits\HasNuggetRelation;
 use App\Traits\HasUrlAttributes;
 use App\Contracts\Comment\Commentable;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +19,7 @@ use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class Religion extends Model implements Votable, Commentable
 {
-    use HasFactory, HasComments, HasUrlAttributes;
+    use HasFactory, HasComments, HasUrlAttributes, HasNuggetRelation;
 
     protected $guarded = [];
 
@@ -60,11 +61,6 @@ class Religion extends Model implements Votable, Commentable
     public function tags(): MorphToMany
     {
         return $this->morphToMany(Tag::class, 'taggable');
-    }
-
-    public function nuggets(): MorphToMany
-    {
-        return $this->morphToMany(Nugget::class, 'nuggetable');
     }
 
     public function doctrines(): MorphToMany
