@@ -1,22 +1,29 @@
 @php use App\Models\Nugget @endphp
 
-<div class="flex flex-col justify-between space-y-4 p-8">
-    <div class="flex flex-col space-y-2">
-        <h2 class="text-3xl text-sky-900 font-bold">{{ $itemTitle }}</h2>
-        @if (isset($itemDescription))
-            <p class="text-md text-gray-500">{{ $itemDescription }}</p>
+<div class="flex flex-col p-4 space-y-4">
+    <h2 class="font-bold text-sky-900 text-2xl">{{ \Illuminate\Support\Str::plural(ucwords(Nugget::NUGGET_TYPES[$nuggetTypeId])) }}</h2>
+    <!-- Header -->
+    <div class="w-2/5 flex flex-row space-x-6 items-center">
+        <!-- Avatar -->
+        @if (! empty($item['created_by_avatar']))
+            <img src="{{ $item['created_by_avatar'] }}"
+                 class="w-16 h-16 rounded-full shadow-xl"
+                 alt="{{ $item['created_by'] }}">
+        @else
+            <div class="w-16 h-16 rounded-full bg-gray-500"></div>
         @endif
-    </div>
-    <div class="flex flex-col space-y-4">
-        @forelse ($nuggets as $nugget)
-            <div class="w-full p-8 bg-gray-400 rounded-xl">
-                <p class="text-black font-semibold">{{ $nugget['title'] }}</p>
-            </div>
-
-        @empty
-            <div class="w-full text-xl text-gray-500 text-center font-semibold">
-                <span>There are no {{ Nugget::NUGGET_TYPES[$nuggetTypeId] ?? 'Unknown' }} nuggets</span>
-            </div>
-        @endforelse
+        <!-- Post Author Information -->
+        <div class="flex flex-col">
+            <a href="{{ $item['profile_url'] }}"
+               class="text-lg font-semibold text-sky-800 hover:underline hover:text-sky-600">
+                <span>{{ $item['created_by'] }}</span>
+            </a>
+            <p class="text-md text-slate-500">
+                <span>{{ $item['faith_title'] }}</span>
+            </p>
+            <p class="text-sm font-semibold text-gray-700">
+                <span>Type: {{ $item['type'] }} - {{ $item['created_at'] }}</span>
+            </p>
+        </div>
     </div>
 </div>
