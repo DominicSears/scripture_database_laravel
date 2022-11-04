@@ -36,9 +36,8 @@ class ItemNuggetable extends Component
     public function openNuggetableModal()
     {
         $this->emit('openModal', NuggetableModal::getName(), [
-            'itemTitle' => $this->item->title,
-            'itemDescription' => $this->item->description,
             'itemId' => $this->item->getKey(),
+            'itemClass' => $this->item::class,
             'nuggetTypeId' => $this->nuggetableTypeId,
             'nuggetIds' => array_map(
                 fn($n) => $n['id'],
