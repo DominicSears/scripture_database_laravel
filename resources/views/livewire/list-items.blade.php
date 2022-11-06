@@ -13,6 +13,18 @@
                 href="{{ $item->getAttribute('url') }}">
                 <span>{{ $item->getAttribute('title') }}</span>
             </a>
+            @if ($item instanceof \App\Contracts\Approvable && (! $item->approved ?? false) && ! in_array($loop->index, $itemState['updated']))
+                <div class="flex flex-row space-x-2">
+                    <button class="px-4 py-2 text-white text-sm font-semibold bg-green-400 hover:bg-green-500 transition-all rounded-lg"
+                            wire:click="approve({{ $loop->index }})">
+                        <span>Approve</span>
+                    </button>
+                    <button class="px-4 py-2 text-white text-sm font-semibold bg-red-400 hover:bg-red-500 transition-all rounded-lg"
+                            wire:click="delete({{ $loop->index }})">
+                        <span>Delete</span>
+                    </button>
+                </div>
+            @endif
         </div>
     @empty
         <div class="flex items-center justify-center">

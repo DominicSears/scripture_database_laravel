@@ -17,9 +17,15 @@ class ShowDoctrines extends Component
 
     public bool $showChildren = true;
 
+    public bool $showTitle = true;
+
     protected const ALLOWED_CLASSES = [
         'App\Models\Religion',
         'App\Models\Denomination',
+    ];
+
+    protected $listeners = [
+        'update' => 'update'
     ];
 
     /**
@@ -43,11 +49,25 @@ class ShowDoctrines extends Component
             $this->entity->load('doctrines.nuggets');
         }
 
+        $this->checkChildren();
+    }
+
+    protected function checkChildren()
+    {
         if ($this->isReligion = $this->entity instanceof Religion) {
             $this->childrenHaveDoctrine = $this->entity->denominations
-                    ->filter(fn ($v) => $v->doctrines->isNotEmpty())
-                    ->isNotEmpty();
+                ->filter(fn ($v) => $v->doctrines->isNotEmpty())
+                ->isNotEmpty();
         }
+    }
+
+    public function update()
+    {
+        $this->entity->refresh();
+
+        $this->checkChildren();
+
+        $this->emit('closeModal');
     }
 
     public function render()

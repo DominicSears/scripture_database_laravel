@@ -19,52 +19,16 @@
             </div>
             <!-- Doctrines -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
-                <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
-                <div class="flex flex-col items-start w-full">
-                    @forelse ($denomination->doctrines as $doctrine)
-                        <div @class([
-                            'flex flex-row items-center w-full py-12',
-                            'border-t border-sky-300' => $loop->even || ($loop->last && $loop->count != '1')
-                        ])>
-                            <!-- Title & Description -->
-                            <div class="w-3/5 flex flex-col space-y-2">
-                                <h3 class="text-xl font-semibold text-slate-600">{{ $doctrine->title }}</h3>
-                                <p class="text-sm text-gray-400">{{ $doctrine->description }}</p>
-                            </div>
-                            <!-- Author Information -->
-                            <div class="w-2/5 flex flex-row space-x-6 items-center justify-center">
-                                <!-- Avatar -->
-                                @if (isset($doctrine->createdBy->profile_photo_path))
-                                    <img src="{{ $doctrine->createdBy->profile_photo_url }}"
-                                         class="w-16 h-16 rounded-full shadow-xl"
-                                         alt="{{ $doctrine->createdBy->username }}">
-                                @else
-                                    <div class="w-16 h-16 rounded-full bg-gray-500"></div>
-                                @endif
-                                <!-- Post Author Information -->
-                                <div class="flex flex-col">
-                                    <a href="{{ $doctrine->createdBy->profile_url }}"
-                                       class="text-lg font-semibold text-sky-800">
-                                        <span>{{ $doctrine->createdBy->username }}</span>
-                                    </a>
-                                    <p class="text-md text-slate-500">
-                                        <span>{{ $doctrine->createdBy->faith->religion->name }}</span>
-                                        @if (isset($doctrine->createdBy->faith->denomination))
-                                            <span>({{ $doctrine->createdBy->faith->denomination->name }})</span>
-                                        @endif
-                                    </p>
-                                    <p class="text-sm font-semibold text-gray-700">
-                                        <span>Type: Doctrine - {{ $doctrine->created_at->diffForHumans() }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    @empty
-                        <div class="w-full h-full flex items-center justify-center">
-                            <p class="text-2xl font-semibold">No doctrines available</p>
-                        </div>
-                    @endforelse
+                <div class="w-full flex flex-row justify-between">
+                    <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
+                    <button onclick="Livewire.emit('openModal', 'doctrines.create', {{ json_encode([
+                        'religionId' => $denomination->religion_id,
+                        'denominationId' => $denomination->getKey()
+                    ]) }})">
+                        <span>+</span>
+                    </button>
                 </div>
+                <livewire:doctrines.show-doctrines :entity="$denomination" :showTitle="false" />
             </div>
             <!-- Nuggets -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">

@@ -2,16 +2,16 @@
 
 namespace App\Http\Livewire\Doctrines;
 
-use Livewire\Component;
 use App\Models\Religion;
 use App\Models\Denomination;
 use App\Traits\ConvertEmptyArrayStrings;
 use App\Contracts\Doctrine\CreatesDoctrine;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use LivewireUI\Modal\ModalComponent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class Create extends Component
+class Create extends ModalComponent
 {
     use ConvertEmptyArrayStrings;
 
@@ -85,6 +85,8 @@ class Create extends Component
         );
 
         $this->state = ['religion_id' => $this->religions->first()->getKey(), 'denomination_id' => 0];
+
+        $this->emit('update');
     }
 
     public function updatedStateReligionId()

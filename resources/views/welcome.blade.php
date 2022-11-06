@@ -129,21 +129,36 @@
                     <!-- Login form -->
                     <form method="POST" action="{{ route('login') }}" class="w-full h-full flex flex-col space-y-4 items-center justify-center">
                         @csrf
+
+                        @if ($errors->any())
+                            <div class="flex flex-col space-y-2 w-1/4 text-center">
+                                <p class="text-md text-red-500">Username or password is incorrect</p>
+                            </div>
+                        @endif
+
                         <!-- Username -->
-                        <div class="flex flex-row w-1/4 py-2 px-4 space-x-4 rounded-xl ring-1 ring-slate-300 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                        <div @class([
+                            'flex flex-row w-1/4 py-2 px-4 space-x-4 rounded-xl ring-1 items-center text-slate-400',
+                            'ring-red-500 placeholder-red-500' => $errors->any(),
+                            'ring-slate-300 text-slate-400 placeholder-slate-400' => ! $errors->any()
+                        ])>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
                             </svg>
                             <input id="username" name="username" type="text" value="{{ old('username') }}" required placeholder="username"
-                                class="w-full px-2 placeholder-slate-400 focus:placeholder-transparent text-slate-400 focus:border-transparent focus:ring-0 outline-0 border-0" />
+                                class="w-full px-2 focus:placeholder-transparent focus:border-transparent focus:ring-0 outline-0 border-0" />
                         </div>
                         <!-- Password -->
-                        <div class="flex flex-row w-1/4 py-2 px-4 space-x-4 rounded-xl ring-1 ring-slate-300 items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
+                        <div @class([
+                            'flex flex-row w-1/4 py-2 px-4 space-x-4 rounded-xl ring-1 items-center text-slate-400',
+                            'ring-red-500 placeholder-red-500' => $errors->any(),
+                            'ring-slate-300 text-slate-400 placeholder-slate-400' => ! $errors->any()
+                        ])>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z" clip-rule="evenodd" />
                             </svg>
                             <input id="password" name="password" type="password" value="{{ old('password') }}" required placeholder="password"
-                                class="w-full px-2 placeholder-slate-400 focus:placeholder-transparent text-slate-400 focus:border-transparent focus:ring-0 outline-0 border-0" />
+                                class="w-full px-2 focus:placeholder-transparent focus:border-transparent focus:ring-0 outline-0 border-0" />
                         </div>
                         <!-- Forgot Password & Sign-in button -->
                         <div class="flex flex-row items-center justify-between w-1/4 space-x-2">

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Approvable;
 use App\Traits\HasComments;
 use App\Contracts\Vote\Votable;
 use App\Traits\HasNuggetRelation;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Denomination extends Model implements Votable, Commentable
+class Denomination extends Model implements Votable, Commentable, Approvable
 {
     use HasFactory, HasComments, HasUrlAttributes, HasNuggetRelation;
 
@@ -109,5 +110,21 @@ class Denomination extends Model implements Votable, Commentable
     public function religionDenomination(): BelongsTo
     {
         return $this->belongsTo(Religion::class, 'id', 'denomination_id');
+    }
+
+    // Interface/Implementations
+
+    public function approve()
+    {
+        $this->newQuery()
+            ->where('id', $this->getKey())
+            ->update(['approved' => true]);
+    }
+
+    public function deny()
+    {
+        $this->newQuery()
+            ->where('id', $this->getKey())
+            ->delete();
     }
 }

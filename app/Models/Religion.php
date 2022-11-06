@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\Approvable;
 use App\Traits\HasComments;
 use App\Contracts\Vote\Votable;
 use App\Traits\HasNuggetRelation;
@@ -17,7 +18,7 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class Religion extends Model implements Votable, Commentable
+class Religion extends Model implements Votable, Commentable, Approvable
 {
     use HasFactory, HasComments, HasUrlAttributes, HasNuggetRelation;
 
@@ -99,5 +100,19 @@ class Religion extends Model implements Votable, Commentable
     public function religionParent(): BelongsTo
     {
         return $this->belongsTo($this::class, 'id', 'parent_id');
+    }
+
+    public function approve()
+    {
+        $this->newQuery()
+            ->where('id', $this->getKey())
+            ->update(['approved' => true]);
+    }
+
+    public function deny()
+    {
+        $this->newQuery()
+            ->where('id', $this->getKey())
+            ->delete();
     }
 }

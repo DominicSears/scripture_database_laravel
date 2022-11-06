@@ -19,17 +19,15 @@
             </div>
             <!-- Doctrines -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
-                <h2 class="text-4xl font-bold text-sky-900">Doctrines</h2>
-                <div class="flex flex-col items-start w-full divide-y divide-sky-400">
-                    @forelse ($religion->doctrines as $doctrine)
-                        <livewire:item :item="$doctrine->withoutRelations()" :user="$doctrine->createdBy"
-                            padding="py-8"/>
-                    @empty
-                        <div class="w-full h-full flex items-center justify-center">
-                            <p class="text-2xl font-semibold">No doctrines available</p>
-                        </div>
-                    @endforelse
+                <div class="w-full flex flex-row justify-between">
+                    <h2 class="text-3xl font-bold text-sky-900">Doctrines</h2>
+                    <button onclick="Livewire.emit('openModal', 'doctrines.create', {{ json_encode([
+                        'religionId' => $religion->getKey()
+                    ]) }})">
+                        <span>+</span>
+                    </button>
                 </div>
+                <livewire:doctrines.show-doctrines :entity="$religion" :showTitle="false" />
             </div>
             <!-- Nuggets -->
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col space-y-2 p-8">
