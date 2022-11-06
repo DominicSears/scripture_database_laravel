@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Denominations;
 
+use App\Http\Livewire\ListItems;
 use App\Models\Religion;
 use LivewireUI\Modal\ModalComponent;
 use Illuminate\Database\Eloquent\Collection;
@@ -60,6 +61,8 @@ class CreateDenomination extends ModalComponent
 
         $this->message = 'Denomination created!';
         $this->alertType = 'success';
+
+        $this->emitTo(ListItems::getName(), 'update');
     }
 
     public function updatedStateReligionId()

@@ -122,7 +122,12 @@
                 <livewire:list-items :classType="\App\Models\Denomination::class"
                     :items="$religion->allDenominations->take(10)"
                     modalName="denominations.create-denomination"
-                    :modalParams="['religionId' => $religion->getKey()]" />
+                    :modalParams="['religionId' => $religion->getKey()]"
+                    :params="[
+                        'parentClass' => $religion::class,
+                        'relation' => 'allDenominations',
+                        'id' => $religion->getKey()
+                    ]" />
             </div>
             <div class="w-full h-fit rounded-2xl shadow-xl bg-white flex flex-col p-8">
                 <livewire:list-items :classType="\App\Models\Post::class"

@@ -22,6 +22,10 @@ class Item extends Component
 
     public ?string $padding = null;
 
+    protected $listeners = [
+        'updateItem' => 'update'
+    ];
+
     public function mount()
     {
         if (! $this->user->relationLoaded('faith') ||
@@ -47,6 +51,11 @@ class Item extends Component
         if (! Arr::has($modelRelations, $relationsToLoad)) {
             $this->item->load($relationsToLoad);
         }
+    }
+
+    protected function update()
+    {
+        $this->item->refresh();
     }
 
     public function render()
